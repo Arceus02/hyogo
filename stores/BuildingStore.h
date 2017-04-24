@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "../building/Building.h"
 #include "Store.h"
 

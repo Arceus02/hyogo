@@ -9,7 +9,3 @@ class Store {
 private:
 	vector<T> list;
 };
-
-
-
-
