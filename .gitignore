@@ -1,7 +1,10 @@
 #CMake
+CMakeFiles/
+.idea/
 CMakeCache.txt
 CmakeLists.txt.user
 Cmake_install.cmake
 Hyogo.cbp
 launch_visual.bat
 Makefile
+Hyogo.exe
