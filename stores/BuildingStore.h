@@ -1,12 +1,7 @@
 #pragma once
 
-#include "../building/Building.h"
 #include "Store.h"
+#include "../entities/building/Building.h"
 
-class BuildingStore : Store<Building> {
-
+class BuildingStore : public Store<Building> {
 };
-
-
-
-

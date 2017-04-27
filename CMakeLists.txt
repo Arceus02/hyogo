@@ -6,13 +6,9 @@ find_package(Imagine REQUIRED)
 
 project(Hyogo)
 set(SOURCE_FILES main.cpp)
-add_executable(Hyogo main.cpp Game.cpp Game.h stores/UnitStore.cpp stores/UnitStore.h units/Unit.cpp units/Unit.h
-                units/Worker.cpp units/Worker.h units/FightingUnits/FightingUnit.cpp units/FightingUnits/FightingUnit.h
-                units/FightingUnits/Scout.cpp units/FightingUnits/Scout.h units/FightingUnits/InfanteryMelee.cpp
-                units/FightingUnits/InfanteryMelee.h units/FightingUnits/Heavy.cpp units/FightingUnits/Heavy.h
-                units/FightingUnits/InfanteryShooting.cpp units/FightingUnits/InfanteryShooting.h
-                units/FightingUnits/Cavalry.cpp units/FightingUnits/Cavalry.h units/FightingUnits/Ballistic.cpp
-                units/FightingUnits/Ballistic.h stores/Store.cpp stores/Store.cpp stores/Store.h building/Building.cpp
-                building/Building.h stores/BuildingStore.cpp stores/BuildingStore.h map/Map.cpp map/Map.h map/Field.cpp
-                map/Field.h util/const.h util/Buffer.cpp util/Buffer.h map/MapGen.cpp map/MapGen.h)
+add_executable(Hyogo main.cpp Game.cpp Game.h stores/UnitStore.cpp stores/UnitStore.h entities/units/Unit.cpp entities/units/Unit.h
+		entities/units/buildingUnits/Worker.cpp entities/units/buildingUnits/Worker.h entities/units/fightingUnits/FightingUnit.cpp entities/units/fightingUnits/FightingUnit.h
+		stores/Store.cpp stores/Store.cpp stores/Store.h entities/building/Building.cpp
+		entities/building/Building.h stores/BuildingStore.cpp stores/BuildingStore.h map/Map.cpp map/Map.h map/Field.cpp
+		map/Field.h util/const.h util/Buffer.cpp util/Buffer.h map/MapGen.cpp map/MapGen.h util/Vect2D.cpp util/Vect2D.h entities/Entity.cpp entities/Entity.h entities/BuyableEntity.cpp entities/BuyableEntity.h)
 ImagineUseModules(Hyogo Graphics)

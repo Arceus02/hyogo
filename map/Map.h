@@ -4,6 +4,7 @@
 #include <vector>
 #include "../util/const.h"
 #include "../util/Buffer.h"
+#include "../util/Vect2D.h"
 #include <Imagine/Graphics.h>
 
 enum TerrainType {
@@ -15,13 +16,10 @@ Imagine::AlphaColor getTerrainTypeColor(TerrainType terrainType);
 class Map {
 private:
 	int width, height;
-	int viewOffsetX, viewOffsetY;
 	std::vector<TerrainType> terrainType;
 	std::vector<Field> fields;
 public:
 	Map(int width, int height);
-
-	void addViewOffset(int x, int y);
 
 	void setTerrainType(int x, int y, TerrainType terrainType);
 
@@ -33,5 +31,9 @@ public:
 
 	Field getField(int x, int y);
 
-	void draw(Buffer &buffer);
+	void draw(Buffer &buffer, Vect2D viewOffsetY, Vect2D minXRender, Vect2D maxXRender);
+
+	const int getWidth();
+
+	const int getHeight();
 };

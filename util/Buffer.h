@@ -1,7 +1,7 @@
 #pragma once
 
-#include<vector>
 #include<Imagine/Graphics.h>
+#include<vector>
 #include "../util/const.h"
 
 class Buffer {

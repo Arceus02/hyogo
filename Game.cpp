@@ -1,8 +1,20 @@
 #include "Game.h"
 
-Game::Game() : map(MapGen::uniformRandomMapGenerator(50, 50)) {
+Game::Game() : map(MapGen::uniformRandomMapGenerator(50, 50)), viewOffset(Vect2D(0, 0)) {
 	this->window = openWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Hyogo");
 	// TODO change map generation
+}
+
+void Game::addViewOffset(Vect2D v) {
+	this->viewOffset += v;
+	if (this->viewOffset.x > 0)
+		this->viewOffset.x = 0;
+	if (this->viewOffset.y > 0)
+		this->viewOffset.y = 0;
+	if (this->viewOffset.x + map.getWidth() * MAP_SQUARE_PIXEL_SIZE < WINDOW_WIDTH)
+		this->viewOffset.x = -map.getWidth() * MAP_SQUARE_PIXEL_SIZE + WINDOW_WIDTH;
+	if (this->viewOffset.y + map.getHeight() * MAP_SQUARE_PIXEL_SIZE < WINDOW_HEIGHT)
+		this->viewOffset.y = -map.getHeight() * MAP_SQUARE_PIXEL_SIZE + WINDOW_HEIGHT;
 }
 
 void Game::play() {
@@ -15,7 +27,6 @@ void Game::play() {
 }
 
 void Game::logic() {
-	// TODO get event
 	/*
 	 * Events :
 	 * 	keyboard :
@@ -28,22 +39,23 @@ void Game::logic() {
 			case EVT_KEY_ON:
 				switch (ev.key) {
 					case KEY_UP:
-						map.addViewOffset(0, 16);
+						addViewOffset(Vect2D(0, 16));
 						break;
 					case KEY_DOWN:
-						map.addViewOffset(0, -16);
+						addViewOffset(Vect2D(0, -16));
 						break;
 					case KEY_LEFT:
-						map.addViewOffset(16, 0);
+						addViewOffset(Vect2D(16, 0));
 						break;
 					case KEY_RIGHT:
-						map.addViewOffset(-16, 0);
+						addViewOffset(Vect2D(-16, 0));
 						break;
 					default:
 						break;
 				}
 				break;
 			case EVT_BUT_ON: {
+				// TODO handle mouse
 				int x = ev.pix.x();
 				int y = ev.pix.y();
 				cout << "Click " << x << " " << y << endl;
@@ -59,10 +71,24 @@ void Game::logic() {
 
 void Game::draw() {
 	Buffer buffer(WINDOW_WIDTH, WINDOW_HEIGHT);
+	// calculate render range
+	int minXRender = -viewOffset.x / MAP_SQUARE_PIXEL_SIZE;
+	int maxXRender = WINDOW_WIDTH / MAP_SQUARE_PIXEL_SIZE + minXRender + 2;
+	int minYRender = -viewOffset.y / MAP_SQUARE_PIXEL_SIZE;
+	int maxYRender = WINDOW_HEIGHT / MAP_SQUARE_PIXEL_SIZE + minYRender + 2;
+	minXRender = (minXRender < 0) ? 0 : minXRender;
+	minYRender = (minYRender < 0) ? 0 : minYRender;
+	maxXRender = (maxXRender > map.getWidth()) ? map.getWidth() : maxXRender;
+	maxYRender = (maxYRender > map.getHeight()) ? map.getHeight() : maxYRender;
+	Vect2D minRender(minXRender, minYRender), maxRender(maxXRender, maxYRender);
 	// draw map
-	this->map.draw(buffer);
+	this->map.draw(buffer, viewOffset, minRender, maxRender);
+	// draw units
+	this->unitStore.draw(buffer, viewOffset, minRender, maxRender);
+	// draw buildings
+	this->buildingStore.draw(buffer, viewOffset, minRender, maxRender);
 	// TODO draw UI
-	// draw buffer
+	// draw buffer on screen
 	Imagine::noRefreshBegin();
 	Imagine::fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, Imagine::AWHITE);
 	buffer.drawOnScreen();

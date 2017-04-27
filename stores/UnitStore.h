@@ -1,14 +1,12 @@
 #pragma once
 
-#include <c++/vector>
-#include "../units/Unit.h"
 #include "Store.h"
+#include "../entities/units/Unit.h"
 
 using namespace std;
 
-class UnitStore : Store<Unit> {
-public:
-private:
+class UnitStore : public Store<Unit> {
+
 };
 
 
