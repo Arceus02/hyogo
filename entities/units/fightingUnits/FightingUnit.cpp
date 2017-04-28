@@ -1,18 +1,13 @@
 #include "FightingUnit.h"
 
-FightingUnit::FightingUnit(std::string pathToAsset,
-						   int maxHp,
-						   int viewRange,
-						   int speed,
-						   int damage,
-						   int attackRange,
-						   Vect2D position)
-		: Unit(pathToAsset,
-			   maxHp,
-			   viewRange,
-			   speed),
-		  damage(damage),
-		  attackRange(attackRange) {
+
+FightingUnit::FightingUnit(FightingUnitData unitData, Vect2D position)
+		: Unit(unitData.pathToAsset,
+			   unitData.maxHp,
+			   unitData.viewRange,
+			   unitData.speed),
+		  damage(unitData.damage),
+		  attackRange(unitData.attackRange) {
 	this->position = position;
 }
 
