@@ -18,6 +18,8 @@ private:
 	UnitStore unitStore;
 	Map map;
 	bool playing;
+    int mineralQuantity[2];
+    int gasQuantity[2];
 
 	void addViewOffset(Vect2D v);
 

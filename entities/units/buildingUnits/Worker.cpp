@@ -1,6 +1,6 @@
 #include "Worker.h"
 
 Worker::Worker(Vect2D position)
-		: Unit("yolo", 2, 6, 4) {
+        : Unit("\assets\units\worker.png", "Worker", 2) {
 	this->position = position;
 }

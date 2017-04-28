@@ -1,9 +1,10 @@
 #include "Entity.h"
 
-Entity::Entity(std::string pathToAsset,
-			   int maxHp,
-			   int viewRange)
+Entity::Entity(std::string pathToAsset, std::string name,
+               int maxHp,
+               int viewRange)
 		: pathToAsset(pathToAsset),
+          name(name),
 		  maxHp(maxHp),
 		  hp(maxHp),
 		  viewRange(viewRange),

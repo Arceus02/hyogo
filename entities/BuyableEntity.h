@@ -5,5 +5,5 @@
 
 class BuyableEntity : public Entity {
 public:
-	BuyableEntity(std::string pathToAsset, int maxHp, int viewRange);
+    BuyableEntity(std::string pathToAsset, std::string name, int maxHp, int viewRange);
 };

@@ -3,8 +3,14 @@
 
 #include "../Entity.h"
 
+
 class Building : public Entity {
-// TODO buildings
+private:
+    int level;
+
 public :
-	Building();
+    Building(std::string pathToAsset,std::string name, int maxHp);
+    virtual bool canLevelUp();
+    void levelUp();
+    int getLevel();
 };

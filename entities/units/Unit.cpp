@@ -1,10 +1,12 @@
 #include "Unit.h"
 
 Unit::Unit(std::string pathToAsset,
+           std::string name,
 		   int maxHp,
 		   int viewRange,
 		   int speed)
 		: BuyableEntity(pathToAsset,
+                        name,
 						maxHp,
 						viewRange),
 		  speed(speed) {}

@@ -9,7 +9,7 @@ protected:
 	int speed;
 	bool canWalkThroughRiver = false;
 public:
-	Unit(std::string pathToAsset, int maxHp, int viewRange, int speed);
+    Unit(std::string pathToAsset,std::string name, int maxHp, int viewRange, int speed);
 
 	// TODO verify movement
 	void move(Vect2D movement);
