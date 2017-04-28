@@ -66,7 +66,7 @@ void Game::logic() {
 		}
 	} while (ev.type != EVT_NONE);
 	// TODO update UI
-	// TODO update game state
+	// TODO update game state : entity store, building store
 }
 
 void Game::draw() {

@@ -25,9 +25,16 @@ private:
 
 	void draw();
 
+	// TODO manage click
+	// TODO click on UI
+	// TODO click on Unit
+	// TODO click on Map
+	// TODO click on Building
+	// TODO end turn
+	// TODO update fog of war
+
 public:
 	Game();
 
-	// TODO main menu
 	void play();
 };

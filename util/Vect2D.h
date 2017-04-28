@@ -1,6 +1,6 @@
 #pragma once
 
-
+// TODO change to Imagine++ vector
 struct Vect2D {
 	int x, y;
 
