@@ -13,6 +13,7 @@ private:
 public:
 	void draw(Buffer &buffer, Vect2D viewOffset, Vect2D minXRender, Vect2D maxXRender);
 	// TODO add entity
+	void add(T a);
 	// TODO remove dead entities
 	// TODO update entities' logic
 };
@@ -24,4 +25,9 @@ void Store<T>::draw(Buffer &buffer, Vect2D viewOffset, Vect2D minRender, Vect2D 
 			(*k).draw(buffer, viewOffset);
 		}
 	}
+}
+
+template<typename T>
+void Store<T>::add(T a) {
+	list.push_back(a);
 }

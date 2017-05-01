@@ -3,6 +3,9 @@
 Game::Game() : map(MapGen::uniformRandomMapGenerator(50, 50)), viewOffset(Vect2D(0, 0)) {
 	this->window = openWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Hyogo");
 	// TODO change map generation
+	// TODO REMOVE
+	FightingUnit scoutTest(FightingUnits::SCOUT, Vect2D(1, 1));
+	this->unitStore.add(scoutTest);
 }
 
 void Game::addViewOffset(Vect2D v) {

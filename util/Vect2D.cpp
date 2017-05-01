@@ -43,5 +43,5 @@ bool Vect2D::inside(Vect2D p1, Vect2D p2) {
 	int x2 = (p1.x > p2.x) ? p1.x : p2.x;
 	int y1 = (p1.y < p2.y) ? p1.y : p2.y;
 	int y2 = (p1.y > p2.y) ? p1.y : p2.y;
-	return x1 < x && x < x2 && y1 < y && y < y2;
+	return x1 <= x && x < x2 && y1 <= y && y < y2;
 }

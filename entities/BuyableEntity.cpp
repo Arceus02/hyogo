@@ -1,10 +1,10 @@
 #include "BuyableEntity.h"
 
-BuyableEntity::BuyableEntity(std::string pathToAsset,
-                             std::string name,
+BuyableEntity::BuyableEntity(const Asset &asset,
+							 std::string name,
 							 int maxHp,
 							 int viewRange)
-		: Entity(pathToAsset,
-                 name,
+		: Entity(asset,
+				 name,
 				 maxHp,
 				 viewRange) {}

@@ -5,9 +5,8 @@
 
 
 class Building : public Entity {
-private:
+protected:
     int level;
-
 public :
     Building(std::string pathToAsset,std::string name, int maxHp);
     virtual bool canLevelUp();

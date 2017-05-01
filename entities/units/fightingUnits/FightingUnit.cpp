@@ -1,8 +1,9 @@
 #include "FightingUnit.h"
 
 
-FightingUnit::FightingUnit(FightingUnitData unitData, Vect2D position)
-		: Unit(unitData.pathToAsset,
+FightingUnit::FightingUnit(const FightingUnitData &unitData, Vect2D position)
+		: Unit(unitData.asset,
+			   unitData.name,
 			   unitData.maxHp,
 			   unitData.viewRange,
 			   unitData.speed),

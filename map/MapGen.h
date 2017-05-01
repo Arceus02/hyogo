@@ -8,4 +8,5 @@ namespace MapGen {
 
 	Map uniformRandomMapGenerator(int width, int height);
 
+	// TODO random noised map
 }

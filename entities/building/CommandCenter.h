@@ -5,6 +5,7 @@
 class CommandCenter : public Building{
 public:
     CommandCenter();
-    virtual canLevelUp();
+
+	virtual bool canLevelUp();
     bool winGame();
 };

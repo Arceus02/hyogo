@@ -10,10 +10,10 @@ add_executable(Hyogo main.cpp Game.cpp Game.h stores/UnitStore.cpp stores/UnitSt
 		entities/units/buildingUnits/Worker.cpp entities/units/buildingUnits/Worker.h entities/units/fightingUnits/FightingUnit.cpp entities/units/fightingUnits/FightingUnit.h
 		stores/Store.cpp stores/Store.cpp stores/Store.h entities/building/Building.cpp
 		entities/building/Building.h stores/BuildingStore.cpp stores/BuildingStore.h map/Map.cpp map/Map.h map/Field.cpp
-                map/Field.h util/const.h util/Buffer.cpp util/Buffer.h map/MapGen.cpp map/MapGen.h util/Vect2D.cpp util/Vect2D.h entities/Entity.cpp entities/Entity.h entities/BuyableEntity.cpp entities/BuyableEntity.h
-                entities/building/CommandCenter.cpp entities/building/CommandCenter.h entities/building/Barrack.cpp
-                entities/building/Barrack.h entities/building/DefenseTurret.cpp entities/building/DefenseTurret.h
-                entities/building/Drill.cpp entities/building/Drill.h entities/building/Extractor.cpp
-                entities/building/Extractor.h entities/building/Bridge.cpp entities/building/Bridge.h)
-
+		map/Field.h util/const.h util/Buffer.cpp util/Buffer.h map/MapGen.cpp map/MapGen.h util/Vect2D.cpp util/Vect2D.h entities/Entity.cpp entities/Entity.h entities/BuyableEntity.cpp entities/BuyableEntity.h
+		entities/building/CommandCenter.cpp entities/building/CommandCenter.h entities/building/Barrack.cpp
+		entities/building/Barrack.h entities/building/DefenseTurret.cpp entities/building/DefenseTurret.h
+		entities/building/Drill.cpp entities/building/Drill.h entities/building/Extractor.cpp
+		entities/building/Extractor.h entities/building/Bridge.cpp entities/building/Bridge.h
+		map/Field.h util/const.h util/Buffer.cpp util/Buffer.h map/MapGen.cpp map/MapGen.h util/Vect2D.cpp util/Vect2D.h entities/Entity.cpp entities/Entity.h entities/BuyableEntity.cpp entities/BuyableEntity.h util/Asset.h util/Asset.cpp)
 ImagineUseModules(Hyogo Graphics)

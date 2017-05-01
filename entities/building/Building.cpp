@@ -11,3 +11,6 @@ int Building::getLevel(){
     return level;
 }
 
+bool Building::canLevelUp() {
+	return false;
+}

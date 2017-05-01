@@ -1,12 +1,12 @@
 #include "Unit.h"
 
-Unit::Unit(std::string pathToAsset,
-           std::string name,
+Unit::Unit(const Asset &asset,
+		   std::string name,
 		   int maxHp,
 		   int viewRange,
 		   int speed)
-		: BuyableEntity(pathToAsset,
-                        name,
+		: BuyableEntity(asset,
+						name,
 						maxHp,
 						viewRange),
 		  speed(speed) {}
