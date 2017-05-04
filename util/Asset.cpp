@@ -11,7 +11,7 @@ Asset::Asset(const std::string &pathToAsset) : pathToAsset(pathToAsset) {
 }
 
 void Asset::draw(const Vect2D &position) const {
-	Imagine::putAlphaColorImage(position.x, position.y, map, w, h);
+    Imagine::putAlphaColorImage(position.x(), position.y(), map, w, h);
 }
 
 Asset::~Asset() {

@@ -15,7 +15,7 @@ using namespace Imagine;
 class Game {
 private:
 	Window window;
-	Vect2D viewOffset;
+    Vect2D viewOffset;
 	ResourceManager resourceManager;
 	UIManager uiManager;
 	BuildingStore buildingStore;

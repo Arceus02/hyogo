@@ -21,7 +21,7 @@ template<typename T>
 void Store<T>::draw(const ResourceManager &resourceManager, const Vect2D &viewOffset, const Vect2D &minRender,
 					const Vect2D &maxRender) const {
 	for (typename vector<T>::const_iterator k = list.begin(); k != list.end(); k++) {
-		if ((*k).getPosition().inside(minRender, maxRender)) {
+        if (inside((*k).getPosition(),minRender, maxRender)) {
 			(*k).draw(resourceManager, viewOffset);
 		}
 	}

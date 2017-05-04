@@ -11,14 +11,14 @@ Game::Game() : map(MapGen::uniformRandomMapGenerator(50, 50)), viewOffset(Vect2D
 
 void Game::addViewOffset(const Vect2D &v) {
 	viewOffset += v;
-	if (viewOffset.x > 0)
-		viewOffset.x = 0;
-	if (viewOffset.y > 0)
-		viewOffset.y = 0;
-	if (viewOffset.x + map.getWidth() * MAP_SQUARE_PIXEL_SIZE < MAP_VIEW_WIDTH)
-		viewOffset.x = -map.getWidth() * MAP_SQUARE_PIXEL_SIZE + MAP_VIEW_WIDTH;
-	if (viewOffset.y + map.getHeight() * MAP_SQUARE_PIXEL_SIZE < MAP_VIEW_HEIGHT)
-		viewOffset.y = -map.getHeight() * MAP_SQUARE_PIXEL_SIZE + MAP_VIEW_HEIGHT;
+    if (viewOffset.x() > 0)
+        viewOffset.x() = 0;
+    if (viewOffset.y() > 0)
+        viewOffset.y() = 0;
+    if (viewOffset.x() + map.getWidth() * MAP_SQUARE_PIXEL_SIZE < MAP_VIEW_WIDTH)
+        viewOffset.x() = -map.getWidth() * MAP_SQUARE_PIXEL_SIZE + MAP_VIEW_WIDTH;
+    if (viewOffset.y() + map.getHeight() * MAP_SQUARE_PIXEL_SIZE < MAP_VIEW_HEIGHT)
+        viewOffset.y() = -map.getHeight() * MAP_SQUARE_PIXEL_SIZE + MAP_VIEW_HEIGHT;
 }
 
 void Game::play() {
@@ -75,9 +75,9 @@ void Game::logic() {
 
 void Game::draw(const ResourceManager &resourceManager) const {
 	// calculate render range
-	int minXRender = -viewOffset.x / MAP_SQUARE_PIXEL_SIZE;
+    int minXRender = -viewOffset.x() / MAP_SQUARE_PIXEL_SIZE;
 	int maxXRender = MAP_VIEW_WIDTH / MAP_SQUARE_PIXEL_SIZE + minXRender + 2;
-	int minYRender = -viewOffset.y / MAP_SQUARE_PIXEL_SIZE;
+    int minYRender = -viewOffset.y() / MAP_SQUARE_PIXEL_SIZE;
 	int maxYRender = MAP_VIEW_HEIGHT / MAP_SQUARE_PIXEL_SIZE + minYRender + 2;
 	minXRender = (minXRender < 0) ? 0 : minXRender;
 	minYRender = (minYRender < 0) ? 0 : minYRender;

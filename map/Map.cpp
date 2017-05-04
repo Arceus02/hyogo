@@ -47,10 +47,10 @@ Field &Map::getField(int x, int y) {
 void Map::draw(const ResourceManager &resourceManager, const Vect2D &viewOffset, const Vect2D &minRender,
 			   const Vect2D &maxRender) const {
 	// draw terrain
-	for (int x = minRender.x; x < maxRender.x; x++) {
-		for (int y = minRender.y; y < maxRender.y; y++) {
-			Vect2D rPos = {(x - minRender.x) * MAP_SQUARE_PIXEL_SIZE + viewOffset.x % MAP_SQUARE_PIXEL_SIZE,
-						   (y - minRender.y) * MAP_SQUARE_PIXEL_SIZE + viewOffset.y % MAP_SQUARE_PIXEL_SIZE};
+    for (int x = minRender.x(); x < maxRender.x(); x++) {
+        for (int y = minRender.y(); y < maxRender.y(); y++) {
+            Vect2D rPos = {(x - minRender.x()) * MAP_SQUARE_PIXEL_SIZE + viewOffset.x() % MAP_SQUARE_PIXEL_SIZE,
+                           (y - minRender.y()) * MAP_SQUARE_PIXEL_SIZE + viewOffset.y() % MAP_SQUARE_PIXEL_SIZE};
 			TerrainType tempTerrainType = getTerrainType(x, y);
 			AssetId tempAssetId = getTerrainTypeAssetId(tempTerrainType);
 			resourceManager.getResource(tempAssetId).draw(rPos);
