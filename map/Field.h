@@ -8,13 +8,13 @@ class Field {
 public:
 	Field(int x, int y, FieldType fieldType, int amount);
 
-	int getX();
+	const int getX() const;
 
-	int getY();
+	const int getY() const;
 
-	FieldType getFieldType();
+	const FieldType getFieldType() const;
 
-	int getAmount();
+	const int getAmount() const;
 
 	void extract(int amount);
 

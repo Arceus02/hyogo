@@ -7,19 +7,19 @@ Field::Field(int x, int y, FieldType fieldType, int amount) {
 	this->amount = amount;
 }
 
-int Field::getX() {
+const int Field::getX() const {
 	return x;
 }
 
-int Field::getY() {
+const int Field::getY() const {
 	return y;
 }
 
-FieldType Field::getFieldType() {
+const FieldType Field::getFieldType() const {
 	return fieldType;
 }
 
-int Field::getAmount() {
+const int Field::getAmount() const {
 	return amount;
 }
 

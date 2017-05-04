@@ -5,5 +5,4 @@
 class Bridge : public Building{
 public:
     Bridge();
-    virtual bool canLevelUp();
 };

@@ -1,11 +1,8 @@
 #include "Asset.h"
 
-Asset::Asset(std::string pathToAsset)
-		: pathToAsset(pathToAsset) {
-	load();
-}
+Asset::Asset() : pathToAsset("NONE") {}
 
-void Asset::load() {
+Asset::Asset(const std::string &pathToAsset) : pathToAsset(pathToAsset) {
 	if (Imagine::loadAlphaColorImage(pathToAsset, map, w, h)) {
 		std::cout << "Loaded : " << pathToAsset << std::endl;
 	} else {
@@ -13,23 +10,10 @@ void Asset::load() {
 	}
 }
 
-void Asset::draw(Buffer &buffer, Vect2D position) const {
-	for (int x = 0; x < w; x++) {
-		for (int y = 0; y < h; y++) {
-			int rX = position.x + x;
-			int rY = position.y + y;
-			if (0 <= rX && rX < buffer.getWidth() && 0 <= rY && rY < buffer.getHeight()) {
-				Imagine::AlphaColor c = map[x + y * w];
-				buffer.set(rX, rY, c);
-			}
-		}
-	}
+void Asset::draw(const Vect2D &position) const {
+	Imagine::putAlphaColorImage(position.x, position.y, map, w, h);
 }
 
 Asset::~Asset() {
 	delete[] map;
-}
-
-std::string Asset::getPathToAsset() {
-	return pathToAsset;
 }

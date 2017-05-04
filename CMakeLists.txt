@@ -6,14 +6,18 @@ find_package(Imagine REQUIRED)
 
 project(Hyogo)
 set(SOURCE_FILES main.cpp)
-add_executable(Hyogo main.cpp Game.cpp Game.h stores/UnitStore.cpp stores/UnitStore.h entities/units/Unit.cpp entities/units/Unit.h
-		entities/units/buildingUnits/Worker.cpp entities/units/buildingUnits/Worker.h entities/units/fightingUnits/FightingUnit.cpp entities/units/fightingUnits/FightingUnit.h
-		stores/Store.cpp stores/Store.cpp stores/Store.h entities/building/Building.cpp
-		entities/building/Building.h stores/BuildingStore.cpp stores/BuildingStore.h map/Map.cpp map/Map.h map/Field.cpp
-		map/Field.h util/const.h util/Buffer.cpp util/Buffer.h map/MapGen.cpp map/MapGen.h util/Vect2D.cpp util/Vect2D.h entities/Entity.cpp entities/Entity.h entities/BuyableEntity.cpp entities/BuyableEntity.h
-		entities/building/CommandCenter.cpp entities/building/CommandCenter.h entities/building/Barrack.cpp
-		entities/building/Barrack.h entities/building/DefenseTurret.cpp entities/building/DefenseTurret.h
-		entities/building/Drill.cpp entities/building/Drill.h entities/building/Extractor.cpp
-		entities/building/Extractor.h entities/building/Bridge.cpp entities/building/Bridge.h
-		map/Field.h util/const.h util/Buffer.cpp util/Buffer.h map/MapGen.cpp map/MapGen.h util/Vect2D.cpp util/Vect2D.h entities/Entity.cpp entities/Entity.h entities/BuyableEntity.cpp entities/BuyableEntity.h util/Asset.h util/Asset.cpp)
+add_executable(Hyogo main.cpp Game.h Game.cpp
+		entities/Entity.h entities/Entity.cpp
+		entities/buildings/Building.h entities/buildings/Building.cpp
+		entities/buildings/Barrack.h entities/buildings/Barrack.cpp entities/buildings/Bridge.h entities/buildings/Bridge.cpp
+		entities/buildings/CommandCenter.h entities/buildings/CommandCenter.cpp entities/buildings/DefenseTurret.h entities/buildings/DefenseTurret.cpp
+		entities/buildings/Drill.h entities/buildings/Drill.cpp entities/buildings/Extractor.h entities/buildings/Extractor.cpp
+		entities/units/Unit.h entities/units/Unit.cpp
+		entities/units/buildingUnits/Worker.h entities/units/buildingUnits/Worker.cpp
+		entities/units/fightingUnits/FightingUnit.h entities/units/fightingUnits/FightingUnit.cpp
+		map/Map.h map/Map.cpp map/Field.h map/Field.cpp map/MapGen.h map/MapGen.cpp
+		stores/Store.h
+		stores/BuildingStore.h stores/BuildingStore.cpp stores/UnitStore.h stores/UnitStore.cpp
+		ui/UIManager.h ui/UIManager.cpp ui/UIComponent.h ui/UIComponent.cpp
+		util/const.h util/Asset.h util/Asset.cpp util/Vect2D.h util/Vect2D.cpp util/ResourceManager.cpp util/ResourceManager.h)
 ImagineUseModules(Hyogo Graphics)

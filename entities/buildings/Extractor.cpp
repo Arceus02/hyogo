@@ -1,11 +1,7 @@
 #include "extractor.h"
 
 Extractor::Extractor() :
-		Building("/assets/buildings/extractor.png", "Extractor", 20) {}
-
-bool Extractor::canLevelUp() {
-	return level <= 2;
-}
+		Building(BUILDING_EXTRACTOR, "Extractor", 20, 3) {}
 
 int Extractor::getProduction() {
 	switch (level) {

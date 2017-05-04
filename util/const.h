@@ -1,4 +1,5 @@
 #pragma once
 
 const int MAP_SQUARE_PIXEL_SIZE = 32;
-const int WINDOW_WIDTH = 960, WINDOW_HEIGHT = 544;
+const int WINDOW_WIDTH = 960, WINDOW_HEIGHT = 744;
+const int MAP_VIEW_WIDTH = 960, MAP_VIEW_HEIGHT = 544;

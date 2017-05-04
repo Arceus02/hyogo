@@ -1,25 +1,22 @@
 #include "Entity.h"
 
-Entity::Entity(const Asset &asset,
-			   std::string name,
-			   int maxHp,
-			   int viewRange)
-		: asset(&asset),
+Entity::Entity(AssetId assetId, const std::string &name, int maxHp, int viewRange)
+		: assetId(assetId),
 		  name(name),
 		  maxHp(maxHp),
 		  hp(maxHp),
 		  viewRange(viewRange),
 		  position(Vect2D(0, 0)) {}
 
-void Entity::draw(Buffer &buffer, Vect2D viewOffset) {
+void Entity::draw(const ResourceManager &resourceManager, const Vect2D &viewOffset) const {
 	Vect2D renderPosition = position * MAP_SQUARE_PIXEL_SIZE + viewOffset;
-	asset->draw(buffer, renderPosition);
+	resourceManager.getResource(assetId).draw(renderPosition);
 }
 
-void Entity::setPosition(Vect2D position) {
+void Entity::setPosition(const Vect2D &position) {
 	this->position = position;
 }
 
-Vect2D Entity::getPosition() {
+const Vect2D &Entity::getPosition() const {
 	return position;
 }

@@ -5,7 +5,4 @@
 class DefenseTurret: public Building{
 public :
     DefenseTurret();
-    virtual bool canLevelUp();
-
-
 };

@@ -5,6 +5,5 @@
 class Drill : public Building{
 public:
     Drill();
-    virtual bool canLevelUp();
     int getProduction();
 };

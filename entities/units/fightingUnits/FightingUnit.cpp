@@ -1,8 +1,8 @@
 #include "FightingUnit.h"
 
 
-FightingUnit::FightingUnit(const FightingUnitData &unitData, Vect2D position)
-		: Unit(unitData.asset,
+FightingUnit::FightingUnit(const FightingUnitData &unitData, const Vect2D &position)
+		: Unit(unitData.assetId,
 			   unitData.name,
 			   unitData.maxHp,
 			   unitData.viewRange,
@@ -12,10 +12,10 @@ FightingUnit::FightingUnit(const FightingUnitData &unitData, Vect2D position)
 	this->position = position;
 }
 
-int FightingUnit::getDamage() {
+const int FightingUnit::getDamage() const {
 	return damage;
 }
 
-int FightingUnit::getAttackRange() {
+const int FightingUnit::getAttackRange() const {
 	return attackRange;
 }

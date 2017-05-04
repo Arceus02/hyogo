@@ -1,8 +1,8 @@
 #pragma once
 
 #include <vector>
-#include "../util/Buffer.h"
 #include "../util/Vect2D.h"
+#include "../util/ResourceManager.h"
 
 using namespace std;
 
@@ -11,23 +11,23 @@ class Store {
 private:
 	vector<T> list;
 public:
-	void draw(Buffer &buffer, Vect2D viewOffset, Vect2D minXRender, Vect2D maxXRender);
-	// TODO add entity
-	void add(T a);
-	// TODO remove dead entities
-	// TODO update entities' logic
+	void draw(const ResourceManager &resourceManager, const Vect2D &viewOffset, const Vect2D &minXRender,
+			  const Vect2D &maxXRender) const;
+
+	void add(T &a);
 };
 
 template<typename T>
-void Store<T>::draw(Buffer &buffer, Vect2D viewOffset, Vect2D minRender, Vect2D maxRender) {
-	for (typename vector<T>::iterator k = list.begin(); k != list.end(); k++) {
+void Store<T>::draw(const ResourceManager &resourceManager, const Vect2D &viewOffset, const Vect2D &minRender,
+					const Vect2D &maxRender) const {
+	for (typename vector<T>::const_iterator k = list.begin(); k != list.end(); k++) {
 		if ((*k).getPosition().inside(minRender, maxRender)) {
-			(*k).draw(buffer, viewOffset);
+			(*k).draw(resourceManager, viewOffset);
 		}
 	}
 }
 
 template<typename T>
-void Store<T>::add(T a) {
+void Store<T>::add(T &a) {
 	list.push_back(a);
 }

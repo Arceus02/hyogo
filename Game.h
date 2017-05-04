@@ -7,6 +7,8 @@
 #include "stores/UnitStore.h"
 #include "map/Map.h"
 #include "map/MapGen.h"
+#include "ui/UIManager.h"
+#include "util/ResourceManager.h"
 
 using namespace Imagine;
 
@@ -14,18 +16,21 @@ class Game {
 private:
 	Window window;
 	Vect2D viewOffset;
+	ResourceManager resourceManager;
+	UIManager uiManager;
 	BuildingStore buildingStore;
 	UnitStore unitStore;
 	Map map;
 	bool playing;
+	int playerTurn = 1;
     int mineralQuantity[2];
     int gasQuantity[2];
 
-	void addViewOffset(Vect2D v);
+	void addViewOffset(const Vect2D &v);
 
 	void logic();
 
-	void draw();
+	void draw(const ResourceManager &resourceManager) const;
 
 	// TODO manage click
 	// TODO click on UI

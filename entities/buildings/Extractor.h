@@ -7,6 +7,5 @@ private:
     int gasProduction;
 public:
     Extractor();
-    virtual bool canLevelUp();
     int getProduction();
 };

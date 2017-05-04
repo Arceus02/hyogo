@@ -1,11 +1,6 @@
 #include "drill.h"
 
-Drill::Drill() :
-		Building("/assets/buildings/drill.png", "Drill", 20) {}
-
-bool Drill::canLevelUp() {
-	return level <= 2;
-}
+Drill::Drill() : Building(BUILDING_DRILL, "Drill", 20, 3) {}
 
 int Drill::getProduction() {
 	switch (level) {

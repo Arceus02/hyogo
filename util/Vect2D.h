@@ -6,21 +6,21 @@ struct Vect2D {
 
 	Vect2D(int x, int y);
 
-	Vect2D operator+(Vect2D v);
+	Vect2D operator+(const Vect2D &v) const;
 
-	Vect2D operator-(Vect2D v);
+	Vect2D operator-(const Vect2D &v) const;
 
-	Vect2D operator*(int a);
+	Vect2D operator*(int a) const;
 
-	Vect2D operator/(int a);
+	Vect2D operator/(int a) const;
 
-	void operator+=(Vect2D v);
+	void operator+=(const Vect2D &v);
 
-	void operator-=(Vect2D v);
+	void operator-=(const Vect2D &v);
 
 	void operator*=(int a);
 
 	void operator/=(int a);
 
-	bool inside(Vect2D p1, Vect2D p2);
+	bool inside(const Vect2D &p1, const Vect2D &p2) const;
 };

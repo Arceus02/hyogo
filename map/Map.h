@@ -3,15 +3,16 @@
 #include "Field.h"
 #include <vector>
 #include "../util/const.h"
-#include "../util/Buffer.h"
 #include "../util/Vect2D.h"
+#include "../util/Asset.h"
+#include "../util/ResourceManager.h"
 #include <Imagine/Graphics.h>
 
 enum TerrainType {
-	TERRAIN_MEADOW, TERRAIN_FOREST, TERRAIN_RIVER
+	MEADOW, FOREST, RIVER
 };
 
-Imagine::AlphaColor getTerrainTypeColor(TerrainType terrainType);
+AssetId getTerrainTypeAssetId(TerrainType terrainType);
 
 class Map {
 private:
@@ -23,17 +24,18 @@ public:
 
 	void setTerrainType(int x, int y, TerrainType terrainType);
 
-	TerrainType getTerrainType(int x, int y);
+	TerrainType getTerrainType(int x, int y) const;
 
-	void addField(Field field);
+	void addField(Field &field);
 
 	bool isField(int x, int y);
 
-	Field getField(int x, int y);
+	Field &getField(int x, int y);
 
-	void draw(Buffer &buffer, Vect2D viewOffsetY, Vect2D minXRender, Vect2D maxXRender);
+	void draw(const ResourceManager &resourceManager, const Vect2D &viewOffset, const Vect2D &minRender,
+			  const Vect2D &maxRender) const;
 
-	const int getWidth();
+	const int getWidth() const;
 
-	const int getHeight();
+	const int getHeight() const;
 };

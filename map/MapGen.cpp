@@ -6,11 +6,11 @@ Map MapGen::testMapGenerator(int width, int height) {
 		for (int y = 0; y < height; y++) {
 			TerrainType terrainType;
 			if (y < height / 3)
-				terrainType = TERRAIN_MEADOW;
+				terrainType = MEADOW;
 			else if (y < height / 2)
-				terrainType = TERRAIN_FOREST;
+				terrainType = FOREST;
 			else
-				terrainType = TERRAIN_RIVER;
+				terrainType = RIVER;
 			map.setTerrainType(x, y, terrainType);
 		}
 	}
@@ -24,11 +24,11 @@ Map MapGen::uniformRandomMapGenerator(int width, int height) {
 			int rNum = rand() % 10;
 			TerrainType terrainType;
 			if (rNum < 3)
-				terrainType = TERRAIN_MEADOW;
+				terrainType = MEADOW;
 			else if (rNum < 8)
-				terrainType = TERRAIN_FOREST;
+				terrainType = FOREST;
 			else
-				terrainType = TERRAIN_RIVER;
+				terrainType = RIVER;
 			map.setTerrainType(x, y, terrainType);
 		}
 	}

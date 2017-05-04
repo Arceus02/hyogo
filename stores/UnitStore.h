@@ -6,7 +6,16 @@
 
 using namespace std;
 
-class UnitStore : public Store<Unit> {
+class UnitStore {
+private:
+	Store<Unit> player1Units, player2Units;
+public:
+	void draw(int player, const ResourceManager &resourceManager, const Vect2D &viewOffset, const Vect2D &minRender,
+			  const Vect2D &maxRender) const;
+
+	void add(int player, Unit &unit);
+	// TODO remove dead entities
+	// TODO update entities' logic
 };
 
 
