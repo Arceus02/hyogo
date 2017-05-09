@@ -66,3 +66,4 @@ const int Map::getWidth() const {
 const int Map::getHeight() const {
 	return this->height;
 }
+

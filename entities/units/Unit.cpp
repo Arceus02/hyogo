@@ -1,12 +1,14 @@
 #include "Unit.h"
 
 Unit::Unit(AssetId assetId,
-		   std::string name,
-		   int maxHp,
-		   int viewRange,
-		   int speed)
+           std::string name,
+           EntityType type,
+           int maxHp,
+           int viewRange,
+           int speed)
 		: Entity(assetId,
 				 name,
+                 type,
 				 maxHp,
 				 viewRange),
 		  speed(speed) {}

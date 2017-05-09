@@ -11,6 +11,8 @@ public:
 			  const Vect2D &maxRender) const;
 
 	void add(int player, Building &building);
+
+    bool isBuilding(const Vect2D &position, Player player,Entity *&selectedEntity);
 	// TODO remove dead entities
 	// TODO update entities' logic
 };

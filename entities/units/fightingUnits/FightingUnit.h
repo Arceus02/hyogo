@@ -5,6 +5,7 @@
 // Fighting units
 struct FightingUnitData {
 	std::string name;
+    EntityType type;
 	AssetId assetId;
 	int maxHp, viewRange, speed, damage, attackRange;
 

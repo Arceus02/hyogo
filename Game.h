@@ -9,6 +9,7 @@
 #include "map/MapGen.h"
 #include "ui/UIManager.h"
 #include "util/ResourceManager.h"
+#include "actions/ActionManager.h"
 
 using namespace Imagine;
 
@@ -18,17 +19,23 @@ private:
     Vect2D viewOffset;
 	ResourceManager resourceManager;
 	UIManager uiManager;
+    ActionManager actionManager;
 	BuildingStore buildingStore;
 	UnitStore unitStore;
 	Map map;
 	bool playing;
-	int playerTurn = 1;
+    Player playerTurn = PLAYER1;
+    bool isEntitySelected=false;
+    Entity* selectedEntity;
+    Action currentAction = NONE;
     int mineralQuantity[2];
     int gasQuantity[2];
 
 	void addViewOffset(const Vect2D &v);
 
 	void logic();
+
+    void clickManager(const Vect2D &position);
 
 	void draw(const ResourceManager &resourceManager) const;
 

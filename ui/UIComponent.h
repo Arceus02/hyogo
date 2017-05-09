@@ -2,17 +2,22 @@
 
 
 #include <Imagine/Graphics.h>
+#include "../util/const.h"
 #include "../util/Vect2D.h"
+#include "../util/ResourceManager.h"
 
 class UIComponent {
-private:
+protected:
 	Vect2D position;
 	int width, height;
+    bool activated;
 	Imagine::AlphaColor borderColor = Imagine::ABLACK, fillColor = Imagine::AWHITE;
 public:
-	UIComponent(int width, int height);
+    UIComponent(const int width, const int height, const Vect2D &position);
 
-	virtual void draw() const;
+    virtual void draw(const ResourceManager &resourceManager) const;
+
+    virtual Action getAction() const;
 
 	void setPosition(const Vect2D &position);
 
@@ -29,6 +34,10 @@ public:
 	void setBorderColor(const Imagine::AlphaColor &color);
 
 	void setFillColor(const Imagine::AlphaColor &color);
+
+    bool isActivated ()const;
+
+    void setActivated(bool activate);
 };
 
 

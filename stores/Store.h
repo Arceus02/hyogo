@@ -15,6 +15,10 @@ public:
 			  const Vect2D &maxXRender) const;
 
 	void add(T &a);
+
+    vector<T> &getList();
+
+
 };
 
 template<typename T>
@@ -31,3 +35,9 @@ template<typename T>
 void Store<T>::add(T &a) {
 	list.push_back(a);
 }
+
+template<typename T>
+vector<T> &Store<T>::getList(){
+    return list;
+}
+

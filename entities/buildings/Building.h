@@ -10,7 +10,7 @@ protected:
 public :
 	Building(AssetId assetId, std::string name, int maxHp, int maxLevel);
 
-	virtual bool canLevelUp();
+    bool canLevelUp();
 
 	void levelUp();
 

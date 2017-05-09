@@ -6,7 +6,7 @@ Game::Game() : map(MapGen::uniformRandomMapGenerator(50, 50)), viewOffset(Vect2D
 	// TODO REMOVE
 	resourceManager.initResources();
 	FightingUnit scoutTest(FightingUnits::SCOUT, Vect2D(1, 1));
-	unitStore.add(1, scoutTest);
+    unitStore.add(PLAYER1, scoutTest);
 }
 
 void Game::addViewOffset(const Vect2D &v) {
@@ -59,10 +59,10 @@ void Game::logic() {
 				}
 				break;
 			case EVT_BUT_ON: {
-				// TODO handle mouse
-				int x = ev.pix.x();
-				int y = ev.pix.y();
-				cout << "Click " << x << " " << y << endl;
+                // TODO handle mouse
+
+                clickManager(ev.pix);
+
 				break;
 			}
 			default:
@@ -71,6 +71,24 @@ void Game::logic() {
 	} while (ev.type != EVT_NONE);
 	// TODO update UI
 	// TODO update game state : entity store, buildings store
+}
+
+void Game::clickManager(const Vect2D &position){
+    if(position.y()<MAP_VIEW_HEIGHT){
+        if(isEntitySelected)
+            actionManager.clickMap(position,currentAction,playerTurn, selectedEntity, unitStore, buildingStore, uiManager);
+
+        else{
+            isEntitySelected = unitStore.isUnit(position,playerTurn,selectedEntity)
+                    || buildingStore.isBuilding(position,playerTurn,selectedEntity);
+            if(isEntitySelected)
+                uiManager.displayButton(selectedEntity->getType());
+        }
+    }
+    else{
+        uiManager.clickActionButton(position,currentAction);
+    }
+
 }
 
 void Game::draw(const ResourceManager &resourceManager) const {

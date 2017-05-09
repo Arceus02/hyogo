@@ -16,8 +16,9 @@ add_executable(Hyogo main.cpp Game.h Game.cpp
 		entities/units/buildingUnits/Worker.h entities/units/buildingUnits/Worker.cpp
 		entities/units/fightingUnits/FightingUnit.h entities/units/fightingUnits/FightingUnit.cpp
 		map/Map.h map/Map.cpp map/Field.h map/Field.cpp map/MapGen.h map/MapGen.cpp
-		stores/Store.h
+                stores/Store.h actions/ActionManager.h actions/ActionManager.cpp
 		stores/BuildingStore.h stores/BuildingStore.cpp stores/UnitStore.h stores/UnitStore.cpp
-		ui/UIManager.h ui/UIManager.cpp ui/UIComponent.h ui/UIComponent.cpp
+                ui/UIManager.h ui/UIManager.cpp ui/UIComponent.h ui/UIComponent.cpp ui/buttons/MoveButton.cpp ui/buttons/MoveButton.h
+                ui/buttons/AttackButton.cpp ui/buttons/AttackButton.h ui/buttons/BuildButton.cpp ui/buttons/BuildButton.h
 		util/const.h util/Asset.h util/Asset.cpp util/Vect2D.h util/Vect2D.cpp util/ResourceManager.cpp util/ResourceManager.h)
 ImagineUseModules(Hyogo Graphics)

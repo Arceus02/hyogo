@@ -4,6 +4,7 @@
 FightingUnit::FightingUnit(const FightingUnitData &unitData, const Vect2D &position)
 		: Unit(unitData.assetId,
 			   unitData.name,
+               FIGHTINGUNIT,
 			   unitData.maxHp,
 			   unitData.viewRange,
 			   unitData.speed),

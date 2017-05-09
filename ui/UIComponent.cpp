@@ -1,7 +1,8 @@
 #include "UIComponent.h"
 
 
-UIComponent::UIComponent(int width, int height) : width(width), height(height), position(Vect2D(0, 0)) {
+UIComponent::UIComponent(const int width,const int height,const Vect2D &position) :
+    width(width), height(height), position(position), activated(false){
 }
 
 void UIComponent::setPosition(const Vect2D &position) {
@@ -27,9 +28,11 @@ int UIComponent::getWidth() {
 int UIComponent::getHeight() {
 	return height;
 }
+void UIComponent::draw(const ResourceManager &resourceManager) const{
 
-void UIComponent::draw() const {
-	return;
+}
+Action UIComponent::getAction()const{
+
 }
 
 void UIComponent::setBorderColor(const Imagine::AlphaColor &color) {
@@ -38,4 +41,10 @@ void UIComponent::setBorderColor(const Imagine::AlphaColor &color) {
 
 void UIComponent::setFillColor(const Imagine::AlphaColor &color) {
 	fillColor = color;
+}
+bool UIComponent::isActivated()const{
+    return activated;
+}
+void UIComponent::setActivated(bool activate){
+    activated = activate;
 }

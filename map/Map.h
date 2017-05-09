@@ -8,6 +8,8 @@
 #include "../util/ResourceManager.h"
 #include <Imagine/Graphics.h>
 
+
+
 enum TerrainType {
 	MEADOW, FOREST, RIVER
 };
