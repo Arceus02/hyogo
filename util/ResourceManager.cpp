@@ -13,11 +13,17 @@ void ResourceManager::initResources() {
 	loadResource(UNIT_CAVALRY, srcPath("assets/units/cavalry.png"));
 	loadResource(UNIT_HEAVY, srcPath("assets/units/heavy.png"));
 	loadResource(UNIT_BALLISTIC, srcPath("assets/units/ballistic.png"));
+    loadResource(UNIT_WORKER, srcPath("assets/units/worker.png"));
 	// TODO building resources
 	loadResource(UI_PANEL_BOTTOM, srcPath("assets/ui/background_bottom_panel.png"));
     loadResource(UI_ATTACK_BUTTON, srcPath("assets/ui/AttackButton.png"));
     loadResource(UI_MOVE_BUTTON, srcPath("assets/ui/MoveButton.png"));
     loadResource(UI_BUILD_BUTTON, srcPath("assets/ui/BuildButton.png"));
+    loadResource(UI_BUILD_BARRACK, srcPath("assets/ui/BuildBarrack.png"));
+    loadResource(UI_BUILD_DEFENSETURRET, srcPath("assets/ui/BuildDefenseTurret.png"));
+    loadResource(UI_BUILD_DRILL, srcPath("assets/ui/BuildDrill.png"));
+    loadResource(UI_BUILD_EXTRACTOR, srcPath("assets/ui/BuildExtractor.png"));
+    loadResource(UI_BUILD_BRIDGE, srcPath("assets/ui/BuildBridge.png"));
 }
 
 const Asset &ResourceManager::getResource(AssetId assetId) const {

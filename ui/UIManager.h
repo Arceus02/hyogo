@@ -6,6 +6,11 @@
 #include "buttons/AttackButton.h"
 #include "buttons/BuildButton.h"
 #include "buttons/MoveButton.h"
+#include "buttons/BuildBarrackButton.h"
+#include "buttons/BuildDrillButton.h"
+#include "buttons/BuildExtractorButton.h"
+#include "buttons/BuildDefenseTurretButton.h"
+#include "buttons/BuildBridgeButton.h"
 #include "../util/const.h"
 #include "../util/ResourceManager.h"
 #include "../stores/BuildingStore.h"
@@ -26,4 +31,5 @@ public:
     void displayButton(EntityType type);
 
     void clearUi();
+
 };

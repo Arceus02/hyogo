@@ -10,6 +10,12 @@ UIManager::UIManager() {
     components[ATTACK] = new AttackButton();
     components[BUILD] = new BuildButton();
     components[MOVE] = new MoveButton();
+    components[BUILD_BARRACK] = new BuildBarrackButton();
+    components[BUILD_BRIDGE] = new BuildBridgeButton();
+    components[BUILD_DEFENSE_TURRET] = new BuildDefenseTurretButton();
+    components[BUILD_DRILL] = new BuildDrillButton();
+    components[BUILD_EXTRACTOR] = new BuildExtractorButton();
+
 }
 
 void UIManager::draw(const ResourceManager &resourceManager) const {
@@ -25,9 +31,17 @@ void UIManager::clickActionButton(const Vect2D position, Action &action){
     for(std::map<Action,UIComponent*>::iterator it = components.begin(); it !=components.end();++it){
         if(it->second->isActivated()){
         Vect2D leftCornerButton = it->second->getPosition();
-        Vect2D rightCornerButton = it->second->getPosition()+ Vect2D(BUTTON_WIDTH,BUTTON_HEIGHT);
+        Vect2D rightCornerButton = it->second->getPosition()+ Vect2D(it->second->getWidth(),it->second->getHeight());
             if(inside(position,leftCornerButton,rightCornerButton)){
                 action = it->first;
+                if(action == BUILD){
+                    components[MOVE]->setActivated(false);
+                    components[BUILD]->setActivated(false);
+                    Action buildableBuildings[5] =  {BUILD_BARRACK, BUILD_DEFENSE_TURRET, BUILD_BRIDGE, BUILD_DRILL, BUILD_EXTRACTOR};
+                    for(int i=0;i<5;i++){
+                        components[buildableBuildings[i]]->setActivated(true);
+                    }
+                }
             }
         }
     }

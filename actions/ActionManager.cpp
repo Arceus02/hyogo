@@ -27,8 +27,5 @@ void ActionManager::clickMap(const Vect2D &position, Action &currentAction, cons
                uiManager.clearUi();
            }
         break;
-
-
-
    }
 }

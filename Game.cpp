@@ -5,8 +5,10 @@ Game::Game() : map(MapGen::uniformRandomMapGenerator(50, 50)), viewOffset(Vect2D
 	// TODO change map generation
 	// TODO REMOVE
 	resourceManager.initResources();
-	FightingUnit scoutTest(FightingUnits::SCOUT, Vect2D(1, 1));
-    unitStore.add(PLAYER1, scoutTest);
+//	FightingUnit scoutTest(FightingUnits::SCOUT, Vect2D(1, 1));
+//    unitStore.add(PLAYER1, scoutTest);
+    Worker workerTest(Vect2D(1,1));
+    unitStore.add(PLAYER1, workerTest);
 }
 
 void Game::addViewOffset(const Vect2D &v) {

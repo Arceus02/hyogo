@@ -3,9 +3,9 @@
 #include "../UIComponent.h"
 #include "../../util/const.h"
 
-class BuildButton : public UIComponent{
+class BuildDefenseTurretButton : public UIComponent{
 protected:
     void draw(const ResourceManager &resourceManager) const;
 public:
-    BuildButton();
+    BuildDefenseTurretButton();
 };

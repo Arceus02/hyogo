@@ -8,5 +8,4 @@ protected:
     void draw(const ResourceManager &resourceManager) const;
 public:
     MoveButton();
-    Action getAction()const;
 };
