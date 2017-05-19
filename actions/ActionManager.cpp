@@ -1,56 +1,13 @@
 #include "ActionManager.h"
-#include "../util/fastMarching/fastMarching.h"
 
 bool ActionManager::move(const Vect2D &position, Player player, Unit *&unitToMove, UnitStore &unitStore,
                          BuildingStore &buildingStore, const Map &map) {
-    // Apply fast marching
-    int maxDistance = unitToMove->getSpeed();
-
-    int minXPos = (unitToMove->getPosition().x() - maxDistance > 0) ? unitToMove->getPosition().x() - maxDistance : 0;
-    int minYPos = (unitToMove->getPosition().y() - maxDistance > 0) ? unitToMove->getPosition().y() - maxDistance : 0;
-    int maxXPos = (unitToMove->getPosition().x() + maxDistance < map.getWidth()) ? unitToMove->getPosition().x() +
-                                                                                   maxDistance : map.getWidth();
-    int maxYPos = (unitToMove->getPosition().y() + maxDistance < map.getHeight()) ? unitToMove->getPosition().y() +
-                                                                                    maxDistance : map.getHeight();
-
-    Vect2D minPos(minXPos, minYPos), maxPos(maxXPos, maxYPos);
-    if (!inside(position, minPos, maxPos))
-        return false;
-
-    int w = maxXPos - minXPos, h = maxYPos - minYPos;
-    Image<float> W(w, h);
-    W.fill(1);
-    for (int x = 0; x < w; x++) {
-        for (int y = 0; y < h; y++) {
-            Vect2D pos(x + minXPos, y + minYPos);
-            if (buildingStore.isBuilding(pos)) {
-                Player buildingOwner;
-                Building &building = buildingStore.getBuilding(pos, buildingOwner);
-                if (player != buildingOwner) {
-                    W(x, y) = INF;
-                } else {
-                    if (building.getGarnisonUnit() != NULL) {
-                        W(x, y) = INF;
-                    }
-                }
-            } else if (unitStore.isUnit(pos)) {
-                Player unitOwner;
-                Unit &unit = unitStore.getUnit(pos, unitOwner);
-                if (player != unitOwner) {
-                    W(x, y) = INF;
-                }
-            }
-            if (map.getTerrainType(x, y) == RIVER && !unitToMove->getCanWalkThroughRiver()) {
-                W(x, y) = INF;
-            }
-        }
+    if (unitToMove->isPossibleMove(position)) {
+        unitToMove->setPosition(position);
+        unitToMove->setFinishedTurn(true);
+        return true;
     }
-    vector<PointDist> niv0;
-    PointDist p0(unitToMove->getPosition().x() - minXPos, unitToMove->getPosition().y() - minYPos, 0);
-    niv0.push_back(p0);
-    Image<float> D = fastMarching(W, niv0);
-    Vect2D moveVect = position - unitToMove->getPosition();
-    return norm2(moveVect) <= D(position.x() - minXPos, position.y() - minYPos);
+    return false;
 }
 
 void ActionManager::attack(const Vect2D &position, const Player player, FightingUnit *&selectedFU, UnitStore &unitStore,
@@ -77,6 +34,7 @@ ActionManager::clickMap(const Vect2D &coordPos, Action &currentAction, const Pla
                 selectedUnit->setFinishedTurn(true);
                 currentAction = NONE;
                 uiManager.clearUi();
+                selectedEntity = NULL;
             }
         }
             break;

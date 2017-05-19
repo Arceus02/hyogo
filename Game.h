@@ -26,7 +26,7 @@ private:
     bool playing;
     Player playerTurn = PLAYER1;
     bool isEntitySelected = false;
-    Entity *selectedEntity;
+    Entity *selectedEntity = NULL;
     Action currentAction = NONE;
     int mineralQuantity[2];
     int gasQuantity[2];

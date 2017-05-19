@@ -15,13 +15,15 @@ protected:
     int maxHp, hp;
     int viewRange;
     Vect2D position;
-
+    bool finishedTurn = false;
 public:
     Entity(AssetId assetId, const std::string &name, EntityType type, int maxHp, int viewRange);
 
-    void draw(const ResourceManager &resourceManager, const Vect2D &viewOffset) const;
+    virtual void draw(const ResourceManager &resourceManager, const Vect2D &viewOffset) const;
 
     void drawSelectionBox(const Vect2D &viewOffset) const;
+
+    void drawIsFinishedTurnBox(const Vect2D &viewOffset) const;
 
     void setPosition(const Vect2D &position);
 
@@ -29,4 +31,7 @@ public:
 
     EntityType getType() const;
 
+    void setFinishedTurn(bool finishedTurn);
+
+    const bool isFinishedTurn() const;
 };

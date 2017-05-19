@@ -5,11 +5,10 @@ Game::Game() : map(MapGen::uniformRandomMapGenerator(50, 50)), viewOffset(Vect2D
     resourceManager.initResources();
     // TODO change map generation
     // TODO REMOVE
-    FightingUnit scoutTest(FightingUnits::SCOUT, Vect2D(1, 10));
+    FightingUnit scoutTest(FightingUnits::SCOUT, Vect2D(9, 9));
     unitStore.add(PLAYER1, scoutTest);
-    Worker workerTest(Vect2D(1, 1));
-    unitStore.add(PLAYER1, workerTest);
     // end REMOVE
+    unitStore.updatePossibleMoves(map, buildingStore, PLAYER1);
 }
 
 void Game::addViewOffset(const Vect2D &v) {
@@ -107,6 +106,9 @@ void Game::draw(const ResourceManager &resourceManager) const {
     if (selectedEntity != NULL) {
         if (inside(selectedEntity->getPosition(), minRender, maxRender)) {
             selectedEntity->drawSelectionBox(viewOffset);
+        }
+        if (const Unit *selectedUnit = dynamic_cast<const Unit *>(selectedEntity)) {
+            selectedUnit->drawPossibleMoves(viewOffset, minRender, maxRender);
         }
     }
     // draw units
