@@ -119,7 +119,7 @@ void UnitStore::updatePossibleMoves(const Map &map, BuildingStore &buildingStore
         }
 
         vector<PointDist> niv0;
-        PointDist p0(unitToMove.getPosition().x() - minXPos, unitToMove.getPosition().y() - minYPos, 0);
+        PointDist p0(unitToMove.getPosition().y() - minYPos, unitToMove.getPosition().x() - minXPos, 0);
         niv0.push_back(p0);
         Image<float> D = fastMarching(W, niv0);
 
@@ -128,6 +128,11 @@ void UnitStore::updatePossibleMoves(const Map &map, BuildingStore &buildingStore
             for (int y = 0; y < h; y++) {
                 // no move needed to keep the same position
                 if (minXPos + x == unitToMove.getPosition().x() && minYPos + y == unitToMove.getPosition().y()) {
+                    continue;
+                }
+                // no move on cells occupied by another unit
+                Vect2D pos(minXPos + x, minYPos + y);
+                if (isUnit(pos)) {
                     continue;
                 }
                 if (D(x, y) <= maxDistance) {

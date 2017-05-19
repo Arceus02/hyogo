@@ -5,8 +5,12 @@ Game::Game() : map(MapGen::uniformRandomMapGenerator(50, 50)), viewOffset(Vect2D
     resourceManager.initResources();
     // TODO change map generation
     // TODO REMOVE
-    FightingUnit scoutTest(FightingUnits::SCOUT, Vect2D(9, 9));
-    unitStore.add(PLAYER1, scoutTest);
+    FightingUnit scoutTest0(FightingUnits::INFANTRY_MELEE, Vect2D(3, 5));
+    unitStore.add(PLAYER1, scoutTest0);
+    FightingUnit scoutTest1(FightingUnits::SCOUT, Vect2D(5, 3));
+    unitStore.add(PLAYER1, scoutTest1);
+    FightingUnit scoutTest2(FightingUnits::INFANTRY_MELEE, Vect2D(2, 1));
+    unitStore.add(PLAYER1, scoutTest2);
     // end REMOVE
     unitStore.updatePossibleMoves(map, buildingStore, PLAYER1);
 }
