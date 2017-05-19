@@ -46,9 +46,10 @@ void UIManager::clickActionButton(const Vect2D position, Action &action) {
                     // build barrack if possible
                     // if(success) :
                     action = tempAction;
+                } else if (tempAction == MOVE) {
+                    action = tempAction;
                 }
                 // TODO build building buttons
-                // TODO unit move
                 // TODO fighting unit attack
             }
         }

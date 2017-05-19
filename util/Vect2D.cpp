@@ -1,6 +1,10 @@
 #include "Vect2D.h"
 
-
+///
+/// \param p1 Vector checked
+/// \param p2 First bound of rectangle
+/// \param p3 Second bound of rectangle
+/// \return
 bool inside(const Vect2D &p1, const Vect2D &p2, const Vect2D &p3) {
     int x1 = (p2.x() < p3.x()) ? p2.x() : p3.x();
     int x2 = (p2.x() > p3.x()) ? p2.x() : p3.x();
