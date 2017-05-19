@@ -1,8 +1,9 @@
 #pragma once
 
+
 #include "Building.h"
 
-class Bridge : public Building{
+class Bridge : public Building {
 public:
     Bridge();
 };

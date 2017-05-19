@@ -19,15 +19,21 @@
 
 class UIManager {
 private:
-    std::map<Action,UIComponent*> components;
+    std::map<Action, UIComponent *> components;
 public:
-	UIManager();
+    UIManager();
 
-	void draw(const ResourceManager &resourceManager) const;
+    /// Draw UI
+    /// \param resourceManager
+    void draw(const ResourceManager &resourceManager) const;
 
-
+    /// Handle click on an action button
+    /// \param position
+    /// \param action
     void clickActionButton(const Vect2D position, Action &action);
 
+    /// Activate right buttons depending on entity clicked
+    /// \param type of clicked entity
     void displayButton(EntityType type);
 
     void clearUi();

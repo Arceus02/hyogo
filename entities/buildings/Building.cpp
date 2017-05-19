@@ -14,3 +14,7 @@ int Building::getLevel() {
 bool Building::canLevelUp() {
 	return level < maxLevel;
 }
+
+Unit *Building::getGarnisonUnit() {
+	return garnison;
+}

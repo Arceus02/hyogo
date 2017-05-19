@@ -6,15 +6,15 @@
 
 class Asset {
 private:
-	std::string pathToAsset;
-	int w, h;
-	Imagine::AlphaColor *map;
+    std::string pathToAsset;
+    int w, h;
+    Imagine::AlphaColor *map;
 public:
-	Asset();
+    /// Load asset from path
+    Asset(const std::string &pathToAsset);
 
-	Asset(const std::string &pathToAsset);
+    /// Draw asset to position
+    void draw(const Vect2D &position) const;
 
-	void draw(const Vect2D &position) const;
-
-	~Asset();
+    ~Asset();
 };

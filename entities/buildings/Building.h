@@ -2,17 +2,20 @@
 
 
 #include "../Entity.h"
-
+#include "../units/Unit.h"
 
 class Building : public Entity {
 protected:
-	int level, maxLevel;
+    int level, maxLevel;
+    Unit *garnison;
 public :
-	Building(AssetId assetId, std::string name, int maxHp, int maxLevel);
+    Building(AssetId assetId, std::string name, int maxHp, int maxLevel);
 
     bool canLevelUp();
 
-	void levelUp();
+    void levelUp();
 
-	int getLevel();
+    int getLevel();
+
+    Unit *getGarnisonUnit();
 };

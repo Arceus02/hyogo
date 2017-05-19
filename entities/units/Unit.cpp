@@ -13,14 +13,22 @@ Unit::Unit(AssetId assetId,
 				 viewRange),
 		  speed(speed) {}
 
-void Unit::move(Vect2D movement) {
-	this->position += movement;
-}
-
 void Unit::setCanWalkThroughRiver(bool canWalkThroughRiver) {
 	this->canWalkThroughRiver = canWalkThroughRiver;
 }
 
 bool Unit::getCanWalkThroughRiver() {
 	return canWalkThroughRiver;
+}
+
+const int Unit::getSpeed() const {
+    return speed;
+}
+
+void Unit::setFinishedTurn(bool setFinishedTurn) {
+    this->finishedTurn = finishedTurn;
+}
+
+const bool Unit::getFinishedTurn() const {
+    return finishedTurn;
 }

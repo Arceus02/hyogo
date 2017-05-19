@@ -8,38 +8,24 @@
 
 class UIComponent {
 protected:
-	Vect2D position;
-	int width, height;
+    Vect2D position;
+    int width, height;
     bool activated;
-	Imagine::AlphaColor borderColor = Imagine::ABLACK, fillColor = Imagine::AWHITE;
 public:
     UIComponent(const int width, const int height, const Vect2D &position);
 
-    virtual void draw(const ResourceManager &resourceManager) const;
+    /// Draw component in place
+    virtual void draw(const ResourceManager &resourceManager) const = 0;
 
-    virtual Action getAction() const;
+    /// Get component position
+    /// \return component position on windows
+    Vect2D getPosition() const;
 
-	void setPosition(const Vect2D &position);
+    /// Get if the component is active (showing and can interact)
+    /// \return is activated
+    const bool isActivated() const;
 
-	Vect2D getPosition() const;
-
-	void setWidth(int width);
-
-	void setHeight(int height);
-
-	int getWidth();
-
-	int getHeight();
-
-	void setBorderColor(const Imagine::AlphaColor &color);
-
-	void setFillColor(const Imagine::AlphaColor &color);
-
-    bool isActivated ()const;
-
+    /// Set if the component should be drawn and handle clicks
+    /// \param activate
     void setActivated(bool activate);
 };
-
-
-
-

@@ -7,8 +7,9 @@
  */
 #include "Game.h"
 
+/// Main program entry point
 int main() {
-	Game game;
-	game.play();
-	return 0;
+    Game game;
+    game.play();
+    return 0;
 }

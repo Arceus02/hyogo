@@ -1,4 +1,4 @@
-#include "buildbutton.h"
+#include "BuildButton.h"
 
 BuildButton::BuildButton():UIComponent(157,41,
                                        Vect2D(MAP_VIEW_WIDTH - 157 -10, MAP_VIEW_HEIGHT + 12 + 41)){}

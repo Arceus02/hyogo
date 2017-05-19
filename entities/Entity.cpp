@@ -14,13 +14,19 @@ void Entity::draw(const ResourceManager &resourceManager, const Vect2D &viewOffs
 	resourceManager.getResource(assetId).draw(renderPosition);
 }
 
+void Entity::drawSelectionBox(const Vect2D &viewOffset) const {
+    AlphaColor c(0, 0, 0, 100);
+    Vect2D renderPosition = position * MAP_SQUARE_PIXEL_SIZE + viewOffset;
+    Imagine::fillRect(renderPosition.x(), renderPosition.y(), MAP_SQUARE_PIXEL_SIZE, MAP_SQUARE_PIXEL_SIZE, c);
+}
+
 void Entity::setPosition(const Vect2D &position) {
 	this->position = position;
 }
-
 const Vect2D &Entity::getPosition() const {
 	return position;
 }
+
 EntityType Entity::getType()const{
     return type;
 }

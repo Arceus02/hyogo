@@ -1,4 +1,4 @@
-#include "builddefenseturretbutton.h"
+#include "BuildDefenseTurretButton.h"
 
 BuildDefenseTurretButton::BuildDefenseTurretButton():UIComponent(96,25,
                                                                  Vect2D(MAP_VIEW_WIDTH-10-96,MAP_VIEW_HEIGHT+20)){}

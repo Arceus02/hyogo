@@ -6,15 +6,19 @@
 
 class Unit : public Entity {
 protected:
-	int speed;
-	bool canWalkThroughRiver = false;
+    int speed;
+    bool canWalkThroughRiver = false;
+    bool finishedTurn;
 public:
-    Unit(AssetId assetId, std::string name,EntityType type, int maxHp, int viewRange, int speed);
+    Unit(AssetId assetId, std::string name, EntityType type, int maxHp, int viewRange, int speed);
 
-	// TODO verify movement
-	void move(Vect2D movement);
+    void setCanWalkThroughRiver(bool canWalkThroughRiver);
 
-	void setCanWalkThroughRiver(bool canWalkThroughRiver);
+    bool getCanWalkThroughRiver();
 
-	bool getCanWalkThroughRiver();
+    const int getSpeed() const;
+
+    void setFinishedTurn(bool finishedTurn);
+
+    const bool getFinishedTurn() const;
 };

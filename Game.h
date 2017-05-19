@@ -15,40 +15,43 @@ using namespace Imagine;
 
 class Game {
 private:
-	Window window;
+    Window window;
     Vect2D viewOffset;
-	ResourceManager resourceManager;
-	UIManager uiManager;
+    ResourceManager resourceManager;
+    UIManager uiManager;
     ActionManager actionManager;
-	BuildingStore buildingStore;
-	UnitStore unitStore;
-	Map map;
-	bool playing;
+    BuildingStore buildingStore;
+    UnitStore unitStore;
+    Map map;
+    bool playing;
     Player playerTurn = PLAYER1;
-    bool isEntitySelected=false;
-    Entity* selectedEntity;
+    bool isEntitySelected = false;
+    Entity *selectedEntity;
     Action currentAction = NONE;
     int mineralQuantity[2];
     int gasQuantity[2];
 
-	void addViewOffset(const Vect2D &v);
+    /// Move map view offset
+    /// \param v deplacement vector
+    void addViewOffset(const Vect2D &v);
 
-	void logic();
+    /// Logic handler for the game (event handling and animation)
+    void logic();
+    // TODO update fog of war
 
+    /// Handle click
+    /// \param position pixel position
     void clickManager(const Vect2D &position);
 
-	void draw(const ResourceManager &resourceManager) const;
+    /// Draw map, ui and everything on screen
+    /// \param resourceManager
+    void draw(const ResourceManager &resourceManager) const;
 
-	// TODO manage click
-	// TODO click on UI
-	// TODO click on Unit
-	// TODO click on Map
-	// TODO click on Building
-	// TODO end turn
-	// TODO update fog of war
+    // TODO end turn
 
 public:
-	Game();
+    Game();
 
-	void play();
+    /// Main function to call once
+    void play();
 };

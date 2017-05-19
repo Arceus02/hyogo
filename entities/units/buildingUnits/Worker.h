@@ -5,5 +5,4 @@
 class Worker : public Unit {
 public:
 	Worker(const Vect2D &position);
-	// TODO add construction ability
 };

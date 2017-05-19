@@ -9,35 +9,57 @@
 #include <Imagine/Graphics.h>
 
 
-
 enum TerrainType {
-	MEADOW, FOREST, RIVER
+    MEADOW, FOREST, RIVER
 };
 
 AssetId getTerrainTypeAssetId(TerrainType terrainType);
 
 class Map {
 private:
-	int width, height;
-	std::vector<TerrainType> terrainType;
-	std::vector<Field> fields;
+    int width, height;
+    std::vector<TerrainType> terrainType;
+    std::vector<Field> fields;
 public:
-	Map(int width, int height);
+    Map(int width, int height);
 
-	void setTerrainType(int x, int y, TerrainType terrainType);
+    /// Set map terrain type at specified coordinates
+    /// \param x
+    /// \param y
+    /// \param terrainType
+    void setTerrainType(int x, int y, TerrainType terrainType);
 
-	TerrainType getTerrainType(int x, int y) const;
+    /// Get map terrain type at specified coordinates
+    /// \param x
+    /// \param y
+    /// \return
+    TerrainType getTerrainType(int x, int y) const;
 
-	void addField(Field &field);
+    /// Add field to map
+    /// \param field
+    void addField(Field &field);
 
-	bool isField(int x, int y);
+    /// Is there a field at coordinates
+    /// \param x
+    /// \param y
+    /// \return
+    bool isField(int x, int y);
 
-	Field &getField(int x, int y);
+    /// Get field on map at coordinates
+    /// \param x
+    /// \param y
+    /// \return
+    Field &getField(int x, int y);
 
-	void draw(const ResourceManager &resourceManager, const Vect2D &viewOffset, const Vect2D &minRender,
-			  const Vect2D &maxRender) const;
+    /// Draw fields on map
+    /// \param resourceManager
+    /// \param viewOffset
+    /// \param minRender
+    /// \param maxRender
+    void draw(const ResourceManager &resourceManager, const Vect2D &viewOffset, const Vect2D &minRender,
+              const Vect2D &maxRender) const;
 
-	const int getWidth() const;
+    const int getWidth() const;
 
-	const int getHeight() const;
+    const int getHeight() const;
 };

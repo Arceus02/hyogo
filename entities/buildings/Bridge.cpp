@@ -1,3 +1,5 @@
-#include "bridge.h"
+#include "Bridge.h"
 
-Bridge::Bridge() : Building(BUILDING_BRIDGE, "Bridge", 10, 1) {}
+Bridge::Bridge() : Building(BUILDING_BRIDGE, "Bridge", 10, 1) {
+
+}

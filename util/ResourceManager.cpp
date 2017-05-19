@@ -16,9 +16,9 @@ void ResourceManager::initResources() {
     loadResource(UNIT_WORKER, srcPath("assets/units/worker.png"));
 	// TODO building resources
 	loadResource(UI_PANEL_BOTTOM, srcPath("assets/ui/background_bottom_panel.png"));
-    loadResource(UI_ATTACK_BUTTON, srcPath("assets/ui/AttackButton.png"));
-    loadResource(UI_MOVE_BUTTON, srcPath("assets/ui/MoveButton.png"));
-    loadResource(UI_BUILD_BUTTON, srcPath("assets/ui/BuildButton.png"));
+    loadResource(UI_ATTACK_BUTTON, srcPath("assets/ui/buttons/AttackButton.png"));
+    loadResource(UI_MOVE_BUTTON, srcPath("assets/ui/buttons/MoveButton.png"));
+    loadResource(UI_BUILD_BUTTON, srcPath("assets/ui/buttons/BuildButton.png"));
     loadResource(UI_BUILD_BARRACK, srcPath("assets/ui/BuildBarrack.png"));
     loadResource(UI_BUILD_DEFENSETURRET, srcPath("assets/ui/BuildDefenseTurret.png"));
     loadResource(UI_BUILD_DRILL, srcPath("assets/ui/BuildDrill.png"));

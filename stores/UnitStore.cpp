@@ -17,17 +17,48 @@ void UnitStore::add(Player player, Unit &unit) {
 	}
 
 }
-bool UnitStore::isUnit(const Vect2D &position, Player player,Entity *&selectedEntity){
-    Vect2D coordCase;
-    coordCase.x() = (position.x()-position.x()%MAP_SQUARE_PIXEL_SIZE)/MAP_SQUARE_PIXEL_SIZE ;
-    coordCase.y() = (position.y()-position.y()%MAP_SQUARE_PIXEL_SIZE)/MAP_SQUARE_PIXEL_SIZE;
+
+bool UnitStore::selectUnit(const Vect2D &coordCase, Player player, Entity *&selectedEntity) {
     Store <Unit> *unitVector = (player == PLAYER1)?&player1Units:&player2Units;
     for(std::vector<Unit>::iterator it=unitVector->getList().begin();it!=unitVector->getList().end();++it){
         if((*it).getPosition().x() == coordCase.x() && (*it).getPosition().y() == coordCase.y()){
-
             selectedEntity = &(*it);
             return true;
         }
     }
     return false;
+}
+
+bool UnitStore::isUnit(const Vect2D &coordCase) {
+    for (std::vector<Unit>::iterator it = player1Units.getList().begin();
+         it != player1Units.getList().end(); ++it) {
+        if ((*it).getPosition().x() == coordCase.x() && (*it).getPosition().y() == coordCase.y()) {
+            return true;
+        }
+    }
+    for (std::vector<Unit>::iterator it = player2Units.getList().begin();
+         it != player2Units.getList().end(); ++it) {
+        if ((*it).getPosition().x() == coordCase.x() && (*it).getPosition().y() == coordCase.y()) {
+            return true;
+        }
+    }
+    return false;
+}
+
+Unit &UnitStore::getUnit(const Vect2D coordCase, Player &player) {
+    assert(isUnit(coordCase));
+    for (std::vector<Unit>::iterator it = player1Units.getList().begin();
+         it != player1Units.getList().end(); ++it) {
+        if ((*it).getPosition().x() == coordCase.x() && (*it).getPosition().y() == coordCase.y()) {
+            player = PLAYER1;
+            return (*it);
+        }
+    }
+    for (std::vector<Unit>::iterator it = player2Units.getList().begin();
+         it != player2Units.getList().end(); ++it) {
+        if ((*it).getPosition().x() == coordCase.x() && (*it).getPosition().y() == coordCase.y()) {
+            player = PLAYER2;
+            return (*it);
+        }
+    }
 }
