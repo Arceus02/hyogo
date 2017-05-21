@@ -21,6 +21,8 @@ public:
     /// \return component position on windows
     Vect2D getPosition() const;
 
+    Vect2D getSize() const;
+
     /// Get if the component is active (showing and can interact)
     /// \return is activated
     const bool isActivated() const;

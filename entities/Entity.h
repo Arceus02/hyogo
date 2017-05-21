@@ -16,6 +16,7 @@ protected:
     int viewRange;
     Vect2D position;
     bool finishedTurn = false;
+    Player owner;
 public:
     Entity(AssetId assetId, const std::string &name, EntityType type, int maxHp, int viewRange);
 
@@ -34,4 +35,8 @@ public:
     void setFinishedTurn(bool finishedTurn);
 
     const bool isFinishedTurn() const;
+
+    void setOwner(Player player);
+
+    const Player getOwner() const;
 };

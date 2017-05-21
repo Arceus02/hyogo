@@ -16,12 +16,12 @@ void UnitStore::draw(Player player, const ResourceManager &resourceManager, cons
 }
 
 void UnitStore::add(Player player, Unit &unit) {
-    if (player == PLAYER1) {
+    unit.setOwner(player);
+    if (unit.getOwner() == PLAYER1) {
         player1Units.add(unit);
-    } else if (player == PLAYER2) {
+    } else {
         player2Units.add(unit);
     }
-
 }
 
 bool UnitStore::selectUnit(const Vect2D &coordCase, Player player, Entity *&selectedEntity) {
@@ -142,5 +142,16 @@ void UnitStore::updatePossibleMoves(const Map &map, BuildingStore &buildingStore
             }
         }
         unitToMove.setPossibleMoves(possibleMoves);
+    }
+}
+
+void UnitStore::clearFinishedTurn() {
+    for (std::vector<Unit>::iterator it = player1Units.getList().begin();
+         it != player1Units.getList().end(); ++it) {
+        (*it).setFinishedTurn(false);
+    }
+    for (std::vector<Unit>::iterator it = player2Units.getList().begin();
+         it != player2Units.getList().end(); ++it) {
+        (*it).setFinishedTurn(false);
     }
 }

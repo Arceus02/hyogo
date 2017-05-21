@@ -5,12 +5,12 @@ Game::Game() : map(MapGen::uniformRandomMapGenerator(50, 50)), viewOffset(Vect2D
     resourceManager.initResources();
     // TODO change map generation
     // TODO REMOVE
-    FightingUnit scoutTest0(FightingUnits::INFANTRY_MELEE, Vect2D(3, 5));
-    unitStore.add(PLAYER1, scoutTest0);
-    FightingUnit scoutTest1(FightingUnits::SCOUT, Vect2D(5, 3));
-    unitStore.add(PLAYER1, scoutTest1);
-    FightingUnit scoutTest2(FightingUnits::INFANTRY_MELEE, Vect2D(2, 1));
-    unitStore.add(PLAYER1, scoutTest2);
+    FightingUnit unitTest0(FightingUnits::INFANTRY_MELEE, Vect2D(3, 5));
+    unitStore.add(PLAYER1, unitTest0);
+    FightingUnit unitTest1(FightingUnits::SCOUT, Vect2D(5, 3));
+    unitStore.add(PLAYER1, unitTest1);
+    FightingUnit unitTest2(FightingUnits::INFANTRY_MELEE, Vect2D(2, 1));
+    unitStore.add(PLAYER2, unitTest2);
     // end REMOVE
     unitStore.updatePossibleMoves(map, buildingStore, PLAYER1);
 }
@@ -37,11 +37,7 @@ void Game::play() {
 }
 
 void Game::logic() {
-    /*
-     * Events :
-     * 	keyboard :
-     * 		up/down/left/right : move camera
-     */
+    // Event handler
     Event ev;
     do {
         getEvent(1, ev); // ev becomes the next event
@@ -72,6 +68,19 @@ void Game::logic() {
                 break;
         }
     } while (ev.type != EVT_NONE);
+
+    // End turn handler
+    if (currentAction == ENDTURN) {
+        viewOffset -= viewOffset;
+        playerTurn = (playerTurn == PLAYER1) ? PLAYER2 : PLAYER1;
+        currentAction = NONE;
+        unitStore.clearFinishedTurn();
+        unitStore.updatePossibleMoves(map, buildingStore, playerTurn);
+        Imagine::fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, ABLACK);
+        string msg = (playerTurn == PLAYER1) ? "Player 1 turn" : "Player 2 turn";
+        Imagine::drawString(WINDOW_WIDTH / 2 - 35, WINDOW_HEIGHT / 2, msg, AWHITE);
+        Imagine::click();
+    }
 }
 
 void Game::clickManager(const Vect2D &position) {
@@ -111,7 +120,8 @@ void Game::draw(const ResourceManager &resourceManager) const {
         if (inside(selectedEntity->getPosition(), minRender, maxRender)) {
             selectedEntity->drawSelectionBox(viewOffset);
         }
-        if (const Unit *selectedUnit = dynamic_cast<const Unit *>(selectedEntity)) {
+        if (currentAction == MOVE) {
+            const Unit *selectedUnit = dynamic_cast<const Unit *>(selectedEntity);
             selectedUnit->drawPossibleMoves(viewOffset, minRender, maxRender);
         }
     }

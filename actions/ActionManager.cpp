@@ -43,18 +43,6 @@ ActionManager::clickMap(const Vect2D &coordPos, Action &currentAction, const Pla
             attack(coordPos, playerTurn, selectedFightingUnit, unitStore, buildingStore);
         }
             break;
-        case BUILD:
-            break;
-        case BUILD_BARRACK:
-            break;
-        case BUILD_DEFENSE_TURRET:
-            break;
-        case BUILD_BRIDGE:
-            break;
-        case BUILD_DRILL:
-            break;
-        case BUILD_EXTRACTOR:
-            break;
         case NONE: {
             if (unitStore.selectUnit(coordPos, playerTurn, selectedEntity) ||
                 buildingStore.selectBuilding(coordPos, playerTurn, selectedEntity)) {
@@ -65,6 +53,8 @@ ActionManager::clickMap(const Vect2D &coordPos, Action &currentAction, const Pla
                 selectedEntity = NULL;
             }
         }
+            break;
+        default:
             break;
     }
 

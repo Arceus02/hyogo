@@ -15,11 +15,13 @@
 #include "../util/ResourceManager.h"
 #include "../stores/BuildingStore.h"
 #include "../stores/UnitStore.h"
+#include "buttons/EndTurnButton.h"
 
 
 class UIManager {
 private:
     std::map<Action, UIComponent *> components;
+    EndTurnButton endTurnButton;
 public:
     UIManager();
 

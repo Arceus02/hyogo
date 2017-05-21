@@ -2,9 +2,6 @@
 
 
 const Vect2D PANEL_BOTTOM_POSITION = {0, MAP_VIEW_HEIGHT + 1};
-const Vect2D MOVE_BUTTON_POSITION = {MAP_VIEW_WIDTH - BUTTON_WIDTH - 10, MAP_VIEW_HEIGHT + 6};
-const Vect2D ATTACK_BUTTON_POSITION = {MAP_VIEW_WIDTH - BUTTON_WIDTH - 10, MAP_VIEW_HEIGHT + 6 + BUTTON_HEIGHT};
-
 
 UIManager::UIManager() {
     components[ATTACK] = new AttackButton();
@@ -20,6 +17,9 @@ UIManager::UIManager() {
 
 void UIManager::draw(const ResourceManager &resourceManager) const {
     resourceManager.getResource(UI_PANEL_BOTTOM).draw(PANEL_BOTTOM_POSITION);
+
+    endTurnButton.draw(resourceManager);
+
     for (std::map<Action, UIComponent *>::const_iterator k = components.begin(); k != components.end(); k++) {
         if (k->second->isActivated())
             k->second->draw(resourceManager);
@@ -28,10 +28,15 @@ void UIManager::draw(const ResourceManager &resourceManager) const {
 
 
 void UIManager::clickActionButton(const Vect2D position, Action &action) {
+    // End turn button
+    if (inside(position, endTurnButton.getPosition(), endTurnButton.getPosition() + endTurnButton.getSize())) {
+        action = ENDTURN;
+    }
+    // Other components
     for (std::map<Action, UIComponent *>::iterator it = components.begin(); it != components.end(); ++it) {
         if (it->second->isActivated()) {
             Vect2D leftCornerButton = it->second->getPosition();
-            Vect2D rightCornerButton = it->second->getPosition() + Vect2D(BUTTON_WIDTH, BUTTON_HEIGHT);
+            Vect2D rightCornerButton = it->second->getPosition() + it->second->getSize();
             if (inside(position, leftCornerButton, rightCornerButton)) {
                 Action tempAction = it->first;
                 if (tempAction == BUILD) {
@@ -51,6 +56,7 @@ void UIManager::clickActionButton(const Vect2D position, Action &action) {
                 }
                 // TODO build building buttons
                 // TODO fighting unit attack
+                return;
             }
         }
     }

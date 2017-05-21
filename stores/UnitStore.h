@@ -46,6 +46,8 @@ public:
 
     void updatePossibleMoves(const Map &map, BuildingStore &buildingStore, Player player);
 
+    void clearFinishedTurn();
+
     // TODO remove dead entities
     // TODO update entities' logic
 };
