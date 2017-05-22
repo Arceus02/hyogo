@@ -47,8 +47,6 @@ private:
     /// \param resourceManager
     void draw(const ResourceManager &resourceManager) const;
 
-    // TODO end turn
-
 public:
     Game();
 

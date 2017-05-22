@@ -12,12 +12,12 @@ bool ActionManager::move(const Vect2D &position, Player player, Unit *&unitToMov
 
 void ActionManager::attack(const Vect2D &position, const Player player, FightingUnit *&selectedFU, UnitStore &unitStore,
                            BuildingStore &buildingStore) {
-    // TODO
+    // TODO attack implmentation
 }
 
 void
 ActionManager::build(const Vect2D &position, const Player player, Entity *&selectedFU, BuildingStore &buildingStore) {
-    // TODO
+    // TODO build implmentation
 }
 
 void
