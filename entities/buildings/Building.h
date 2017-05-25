@@ -8,6 +8,7 @@ class Building : public Entity {
 protected:
     int level, maxLevel;
     Unit *garnison;
+    bool isUnderConstruction;
 public :
     Building(AssetId assetId, std::string name, int maxHp, int maxLevel);
 
@@ -17,5 +18,9 @@ public :
 
     int getLevel();
 
-    Unit *getGarnisonUnit();
+    Unit *getGarnisonUnit() const;
+
+    void setGarnisonUnit(Unit *garnison);
+
+    virtual void build();
 };

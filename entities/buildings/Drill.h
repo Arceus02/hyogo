@@ -6,4 +6,5 @@ class Drill : public Building{
 public:
     Drill();
     int getProduction();
+    void build();
 };

@@ -28,8 +28,8 @@ private:
     bool isEntitySelected = false;
     Entity *selectedEntity;
     Action currentAction = NONE;
-    int mineralQuantity[2];
-    int gasQuantity[2];
+    std::map<Player,int> mineralQuantity;
+    std::map<Player,int> gasQuantity;
 
     /// Move map view offset
     /// \param v deplacement vector

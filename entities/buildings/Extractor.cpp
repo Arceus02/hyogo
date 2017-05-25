@@ -1,7 +1,7 @@
 #include "Extractor.h"
 
 Extractor::Extractor() :
-		Building(BUILDING_EXTRACTOR, "Extractor", 20, 3) {}
+        Building(INCONSTRUCTION_EXTRACTOR, "Extractor", 20, 3) {}
 
 int Extractor::getProduction() {
 	switch (level) {
@@ -12,4 +12,9 @@ int Extractor::getProduction() {
 		default:
 			return 5;
 	}
+}
+
+void Extractor::build(){
+    isUnderConstruction = false;
+    assetId = BUILDING_EXTRACTOR;
 }

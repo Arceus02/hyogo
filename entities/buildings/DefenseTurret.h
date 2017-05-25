@@ -5,4 +5,5 @@
 class DefenseTurret: public Building{
 public :
     DefenseTurret();
+    void build();
 };

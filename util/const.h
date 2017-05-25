@@ -1,5 +1,6 @@
 #pragma once
 
+#include <map>
 const int MAP_SQUARE_PIXEL_SIZE = 64;
 const int WINDOW_WIDTH = 640, WINDOW_HEIGHT = 496;
 const int ACTION_BAR_HEIGHT = 100;
@@ -9,6 +10,29 @@ const int BUTTON_HEIGHT = 41;
 
 enum Player {PLAYER1, PLAYER2};
 
-enum Action {NONE, MOVE, ATTACK, BUILD, BUILD_BARRACK, BUILD_DEFENSE_TURRET, BUILD_BRIDGE, BUILD_DRILL, BUILD_EXTRACTOR};
+enum Action {NONE, MOVE, ATTACK, BUILD, BUILD_BARRACK, BUILD_DEFENSE_TURRET, BUILD_BRIDGE, BUILD_DRILL, BUILD_EXTRACTOR,
+            RECRUIT_SCOUT,RECRUIT_INFANTRY_MELEE,RECRUIT_INFRANTRY_DISTANCE,RECRUIT_CAVALRY,RECRUIT_HEAVY,RECRUIT_BALISTIC,
+            RECRUIT_WORKER};
 
 enum EntityType {BUILDING, FIGHTINGUNIT, BUILDINGUNIT};
+
+const std::map<Action,int> BUILDING_MINERAL_COST = {{BUILD_DRILL,1000},{BUILD_EXTRACTOR,3000},
+                                                   {BUILD_BARRACK,2000},{BUILD_BRIDGE,500},
+                                                    {BUILD_DEFENSE_TURRET,1500}};
+const std::map<Action,int> BUILDING_GAS_COST = {{BUILD_DRILL,0},{BUILD_EXTRACTOR,0},
+                                                {BUILD_BARRACK,0},{BUILD_BRIDGE,0},
+                                                 {BUILD_DEFENSE_TURRET,5}};
+
+const std::map<Action, int> UNIT_MINERAL_COST = {{RECRUIT_SCOUT,50},{RECRUIT_INFANTRY_MELEE,100},{RECRUIT_INFRANTRY_DISTANCE,150},
+                                                 {RECRUIT_CAVALRY,200},{RECRUIT_HEAVY,250},{RECRUIT_BALISTIC,300}};
+const std::map<Action, int> UNIT_GAS_COST = {{RECRUIT_SCOUT,0},{RECRUIT_INFANTRY_MELEE,0},{RECRUIT_INFRANTRY_DISTANCE,0},
+                                                 {RECRUIT_CAVALRY,0},{RECRUIT_HEAVY,50},{RECRUIT_BALISTIC,10}};
+//const int MINERAL_COST_SCOUT = 50; const int GAS_COST_SCOUT = 0;
+//const int MINERAL_COST_INFANTRY_MELEE = 100; const int GAS_COST_INFANTRY_MELEE =0;
+//const int MINERAL_COST_INFANTRY_DISTANCE = 150; const int GAS_COST_INFANTRY_DISTANCE =0;
+//const int MINERAL_COST_CAVALRY = 200; const int GAS_COST_CAVALRY = 0;
+//const int MINERAL_COST_HEAVY = 250; const int GAS_COST_HEAVY = 50;
+//const int MINERAL_COST_BALISTIC = 300; const int GAS_COST_BALISTIC = 10;
+
+
+

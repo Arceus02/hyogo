@@ -77,7 +77,7 @@ void Game::clickManager(const Vect2D &position) {
         Vect2D coordPos = ((position - viewOffset) - modulo(position - viewOffset, MAP_SQUARE_PIXEL_SIZE)) /
                           MAP_SQUARE_PIXEL_SIZE;
         actionManager.clickMap(coordPos, currentAction, playerTurn, selectedEntity, unitStore, buildingStore, map,
-                               uiManager);
+                               uiManager,mineralQuantity[playerTurn],gasQuantity[playerTurn]);
     }
         // click on ui panel
     else {

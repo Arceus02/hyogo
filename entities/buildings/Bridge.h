@@ -6,4 +6,5 @@
 class Bridge : public Building {
 public:
     Bridge();
+    void build();
 };

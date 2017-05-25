@@ -33,8 +33,8 @@ void UIManager::clickActionButton(const Vect2D position, Action &action) {
             Vect2D leftCornerButton = it->second->getPosition();
             Vect2D rightCornerButton = it->second->getPosition() + Vect2D(BUTTON_WIDTH, BUTTON_HEIGHT);
             if (inside(position, leftCornerButton, rightCornerButton)) {
-                Action tempAction = it->first;
-                if (tempAction == BUILD) {
+                Action action = it->first;
+                if (action == BUILD) {
                     components[MOVE]->setActivated(false);
                     components[BUILD]->setActivated(false);
                     components[BUILD_BARRACK]->setActivated(true);
@@ -42,13 +42,8 @@ void UIManager::clickActionButton(const Vect2D position, Action &action) {
                     components[BUILD_BRIDGE]->setActivated(true);
                     components[BUILD_DRILL]->setActivated(true);
                     components[BUILD_EXTRACTOR]->setActivated(true);
-                } else if (tempAction == BUILD_BARRACK) {
-                    // build barrack if possible
-                    // if(success) :
-                    action = tempAction;
-                } else if (tempAction == MOVE) {
-                    action = tempAction;
                 }
+
                 // TODO build building buttons
                 // TODO fighting unit attack
             }
