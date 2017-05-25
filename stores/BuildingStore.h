@@ -38,6 +38,5 @@ public:
     /// \param player
     /// \return
     Building &getBuilding(const Vect2D &coordCase, Player &player);
-    // TODO remove dead entities
-    // TODO update entities' logic;
+    // TODO remove dead buildings
 };

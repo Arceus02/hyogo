@@ -26,7 +26,7 @@ private:
     bool playing;
     Player playerTurn = PLAYER1;
     bool isEntitySelected = false;
-    Entity *selectedEntity;
+    Entity *selectedEntity = NULL;
     Action currentAction = NONE;
     std::map<Player,int> mineralQuantity;
     std::map<Player,int> gasQuantity;
@@ -46,8 +46,6 @@ private:
     /// Draw map, ui and everything on screen
     /// \param resourceManager
     void draw(const ResourceManager &resourceManager) const;
-
-    // TODO end turn
 
 public:
     Game();

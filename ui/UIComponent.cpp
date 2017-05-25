@@ -16,3 +16,7 @@ const bool UIComponent::isActivated() const {
 void UIComponent::setActivated(bool activate) {
     activated = activate;
 }
+
+Vect2D UIComponent::getSize() const {
+    return Vect2D(width, height);
+}

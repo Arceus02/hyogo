@@ -4,6 +4,7 @@
 #include "../entities/units/Unit.h"
 #include "../entities/units/fightingUnits/FightingUnit.h"
 #include "../entities/units/buildingUnits/Worker.h"
+#include "BuildingStore.h"
 
 using namespace std;
 
@@ -42,6 +43,10 @@ public:
     /// \param player modified to the selected unit owner id
     /// \return reference to unit at specified coordinates
     Unit &getUnit(const Vect2D coordCase, Player &player);
+
+    void updatePossibleMoves(const Map &map, BuildingStore &buildingStore, Player player);
+
+    void clearFinishedTurn();
 
     // TODO remove dead entities
     // TODO update entities' logic
