@@ -5,6 +5,5 @@
 class Extractor : public Building{
 public:
     Extractor();
-    int getProduction();
-    void build();
+    int getProduction()const;
 };

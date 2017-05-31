@@ -10,8 +10,13 @@ protected:
     int speed;
     bool canWalkThroughRiver = false;
     std::vector<Vect2D> possibleMoves;
+    bool isInGarrison = false;
 public:
     Unit(AssetId assetId, std::string name, EntityType type, int maxHp, int viewRange, int speed);
+
+    virtual ~Unit();
+
+    void draw(const ResourceManager &resourceManager, const Vect2D &viewOffset) const;
 
     void drawPossibleMoves(Vect2D viewOffset, Vect2D minRender, Vect2D maxRender) const;
 
@@ -24,4 +29,8 @@ public:
     void setPossibleMoves(std::vector<Vect2D> &possibleMoves);
 
     const bool isPossibleMove(const Vect2D &position) const;
+
+    void setInGarrison(bool inGarrison);
+
+    bool getIsInGarrison() const;
 };

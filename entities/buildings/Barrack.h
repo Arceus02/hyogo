@@ -5,5 +5,4 @@
 class Barrack : public Building {
 public:
     Barrack();
-    void build();
 };

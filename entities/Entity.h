@@ -20,7 +20,9 @@ protected:
 public:
     Entity(AssetId assetId, const std::string &name, EntityType type, int maxHp, int viewRange);
 
-    virtual void draw(const ResourceManager &resourceManager, const Vect2D &viewOffset) const;
+    virtual ~Entity();
+
+    virtual void draw(const ResourceManager &resourceManager, const Vect2D &viewOffset) const = 0;
 
     void drawSelectionBox(const Vect2D &viewOffset) const;
 
@@ -39,4 +41,10 @@ public:
     void setOwner(Player player);
 
     const Player getOwner() const;
+
+    const std::string getName() const;
+
+    const int getHP() const;
+
+    const AssetId getAssetId()const;
 };

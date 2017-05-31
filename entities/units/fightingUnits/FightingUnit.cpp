@@ -11,7 +11,11 @@ FightingUnit::FightingUnit(const FightingUnitData &unitData, const Vect2D &posit
 		  damage(unitData.damage),
 		  attackRange(unitData.attackRange) {
 	this->position = position;
+    if(unitData.assetId == UNIT_SCOUT){
+        setCanWalkThroughRiver(true);
+    }
 }
+FightingUnit::~FightingUnit(){}
 
 const int FightingUnit::getDamage() const {
 	return damage;

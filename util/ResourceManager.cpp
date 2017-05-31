@@ -34,6 +34,46 @@ void ResourceManager::initResources() {
     loadResource(UI_BUILD_DRILL, srcPath("assets/ui/buttons/builddrill.png"));
     loadResource(UI_BUILD_EXTRACTOR, srcPath("assets/ui/buttons/buildextractor.png"));
     loadResource(UI_BUILD_BRIDGE, srcPath("assets/ui/buttons/buildbridge.png"));
+    loadResource(UI_SCOUT, srcPath("assets/units/scout_icon.png"));
+    loadResource(UI_INFANTRY_MELEE, srcPath("assets/units/infantry_melee_icon.png"));
+    loadResource(UI_CAVALRY, srcPath("assets/units/cavalry_icon.png"));
+    loadResource(UI_HEAVY, srcPath("assets/units/heavy_icon.png"));
+    loadResource(UI_BALLISTIC, srcPath("assets/units/ballistic_icon.png"));
+    loadResource(UI_WORKER, srcPath("assets/units/worker_icon.png"));
+    loadResource(UI_RECRUIT_BUTTON, srcPath("assets/ui/buttons/recruit.png"));
+    loadResource(UI_UPGRADE_BUTTON, srcPath("assets/ui/buttons/upgrade.png"));
+    loadResource(UI_RECRUIT_WORKER, srcPath("assets/ui/buttons/recruitworker.png"));
+    loadResource(UI_RECRUIT_SCOUT, srcPath("assets/ui/buttons/recruitscout.png"));
+    loadResource(UI_RECRUIT_CAVALRY, srcPath("assets/ui/buttons/recruitcavalry.png"));
+    loadResource(UI_RECRUIT_HEAVY, srcPath("assets/ui/buttons/recruitheavy.png"));
+    loadResource(UI_RECRUIT_BALISTIC, srcPath("assets/ui/buttons/recruitbalistic.png"));
+    loadResource(UI_RECRUIT_INFANTRYDISTANCE, srcPath("assets/ui/buttons/recruitinfantrydistance.png"));
+    loadResource(UI_RECRUIT_INFANTRYMELEE, srcPath("assets/ui/buttons/recruitinfantrymelee.png"));
+}
+AssetId ResourceManager::correspondingIcon(AssetId assetId)const{
+    switch(assetId){
+    case UNIT_BALLISTIC:
+        return UI_BALLISTIC;
+        break;
+    case UNIT_CAVALRY:
+        return UI_CAVALRY;
+        break;
+    case UNIT_HEAVY:
+        return UI_HEAVY;
+        break;
+    case UNIT_INFANTRY_DISTANCE:
+        return UI_INFANTRY_DISTANCE;
+        break;
+    case UNIT_INFANTRY_MELEE:
+        return UI_INFANTRY_MELEE;
+        break;
+    case UNIT_SCOUT:
+        return UI_SCOUT;
+        break;
+    case UNIT_WORKER:
+        return UI_WORKER;
+        break;
+    }
 }
 
 const Asset &ResourceManager::getResource(AssetId assetId) const {

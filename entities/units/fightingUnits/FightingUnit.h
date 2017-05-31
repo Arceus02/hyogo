@@ -42,7 +42,10 @@ private:
 	int damage;
 	int attackRange;
 public:
+
 	FightingUnit(const FightingUnitData &unitData, const Vect2D &position);
+
+    ~FightingUnit();
 
 	const int getDamage() const;
 

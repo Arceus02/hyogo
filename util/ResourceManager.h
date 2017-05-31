@@ -18,11 +18,6 @@ enum AssetId {
     UNIT_CAVALRY,
     UNIT_HEAVY,
     UNIT_BALLISTIC,
-    INCONSTRUCTION_BARRACK,
-    INCONSTRUCTION_BRIDGE,
-    INCONSTRUCTION_TURRET,
-    INCONSTRUCTION_DRILL,
-    INCONSTRUCTION_EXTRACTOR,
     BUILDING_BARRACK,
     BUILDING_BRIDGE,
     BUILDING_COMMAND_CENTER,
@@ -38,7 +33,23 @@ enum AssetId {
     UI_BUILD_BRIDGE,
     UI_BUILD_DRILL,
     UI_BUILD_EXTRACTOR,
-    UI_BUILD_DEFENSETURRET
+    UI_BUILD_DEFENSETURRET,
+    UI_WORKER,
+    UI_SCOUT,
+    UI_INFANTRY_MELEE,
+    UI_INFANTRY_DISTANCE,
+    UI_CAVALRY,
+    UI_HEAVY,
+    UI_BALLISTIC,
+    UI_UPGRADE_BUTTON,
+    UI_RECRUIT_BUTTON,
+    UI_RECRUIT_WORKER,
+    UI_RECRUIT_SCOUT,
+    UI_RECRUIT_CAVALRY,
+    UI_RECRUIT_HEAVY,
+    UI_RECRUIT_BALISTIC,
+    UI_RECRUIT_INFANTRYMELEE,
+    UI_RECRUIT_INFANTRYDISTANCE,
 };
 
 class ResourceManager {
@@ -51,6 +62,7 @@ public:
     /// Call once to load all assets
     void initResources();
 
+    AssetId correspondingIcon(AssetId assetId) const;
     /// Get an asset
     /// \param assetId
     /// \return Corresponding asset to assetId

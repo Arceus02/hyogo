@@ -7,20 +7,38 @@
 class Building : public Entity {
 protected:
     int level, maxLevel;
-    Unit *garnison;
-    bool isUnderConstruction;
+    int maxGarrison;
+    std::vector<Unit*> garrison;
+    int turnNumberToBeBuilt;
 public :
-    Building(AssetId assetId, std::string name, int maxHp, int maxLevel);
+    Building(AssetId assetId, std::string name, int maxHp, int maxLevel, int turnNumberToBeBuilt, int maxGarrison);
 
-    bool canLevelUp();
+    virtual ~Building();
+
+    void draw(const ResourceManager &resourceManager, const Vect2D &viewOffset) const;
+
+    bool canLevelUp()const;
 
     void levelUp();
 
-    int getLevel();
+    const int getLevel()const;
 
-    Unit *getGarnisonUnit() const;
+    const int getMaxlevel()const;
 
-    void setGarnisonUnit(Unit *garnison);
+    Unit *getGarrisonUnit(int number) const;
 
-    virtual void build();
+    void addGarrisonUnit(Unit *garrison);
+
+    void removeUnitGarrison(AssetId assetId);
+
+    const std::vector<Unit*> getGarrison()const;
+
+    const int getMaxGarrison()const;
+
+    const int getGarrisonSize()const;
+
+    const int getTurnNumberToBeBuilt()const;
+
+    void build();
+
 };

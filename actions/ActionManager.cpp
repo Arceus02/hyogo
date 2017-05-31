@@ -1,9 +1,18 @@
 #include "ActionManager.h"
 
-bool ActionManager::move(const Vect2D &position, Player player, Unit *&unitToMove, UnitStore &unitStore,
-                         BuildingStore &buildingStore, const Map &map) {
+bool ActionManager::move(const Vect2D &position,Unit *&unitToMove, BuildingStore &buildingStore) {
     if (unitToMove->isPossibleMove(position)) {
+        if(unitToMove->getIsInGarrison()){//if the unit was in garrison in a building we get it out
+            unitToMove->setInGarrison(false);
+            Player unitOwner = unitToMove->getOwner();
+            buildingStore.getBuilding(unitToMove->getPosition(),unitOwner).removeUnitGarrison(unitToMove->getAssetId());
+        }
         unitToMove->setPosition(position);
+        if(buildingStore.isBuilding(position)){
+            unitToMove->setInGarrison(true);
+            Player unitOwner = unitToMove->getOwner();
+            buildingStore.getBuilding(unitToMove->getPosition(),unitOwner).addGarrisonUnit(unitToMove);
+        }
         unitToMove->setFinishedTurn(true);
         return true;
     }
@@ -12,7 +21,7 @@ bool ActionManager::move(const Vect2D &position, Player player, Unit *&unitToMov
 
 void ActionManager::attack(const Vect2D &position, const Player player, FightingUnit *&selectedFU, UnitStore &unitStore,
                            BuildingStore &buildingStore) {
-    // TODO attack implmentation
+
 }
 
 
@@ -20,35 +29,48 @@ bool
 ActionManager::build(const Vect2D &position, const Player player, Entity *&selectedFU, BuildingStore &buildingStore,
                      Action &action, const Map &map, int &mineralQuantity, int &gasQuantity) {
     if(!buildingStore.isBuilding(position)){ //check if the worker isn't already in a building
-        Building* buildingToBuild = 0;
+        Building* buildingToBuild=0;
         switch(map.getTerrainType(position.x(),position.y())){
         case RIVER://we can only build a bridge on a river
             if(action == BUILD_BRIDGE){
-                buildingToBuild = static_cast<Bridge*>(buildingToBuild);
+                Bridge* bridge = new Bridge();
+                buildingToBuild = bridge;
             }
             break;
         case MEADOW:
             switch(action){
             case BUILD_BARRACK:
-                buildingToBuild = static_cast<Barrack*>(buildingToBuild);
+            {
+                Barrack* barrack = new Barrack();
+                buildingToBuild = barrack;
                 break;
+            }
             case BUILD_DEFENSE_TURRET:
-                buildingToBuild = static_cast<DefenseTurret*>(buildingToBuild);
+            {
+                DefenseTurret* defenseTurret = new DefenseTurret();
+                buildingToBuild = defenseTurret;
                 break;
+            }
             case BUILD_DRILL:
-                buildingToBuild = static_cast<Drill*>(buildingToBuild);
+            {
+                Drill* drill = new Drill();
+                buildingToBuild = drill;
                 break;
+            }
             case BUILD_EXTRACTOR:
-                buildingToBuild = static_cast<Extractor*>(buildingToBuild);
+            {
+                Extractor* extractor = new Extractor();
+                buildingToBuild = extractor;
                 break;
+            }
             }
         default://we can't build on a FOREST
             break;
 
         }
-        if(buildingToBuild !=0 && mineralQuantity >= BUILDING_MINERAL_COST.at(action)
+        if(buildingToBuild!=0 && mineralQuantity >= BUILDING_MINERAL_COST.at(action)
                 && gasQuantity >=BUILDING_GAS_COST.at(action)){//if the construction has been possible
-            buildingToBuild->setGarnisonUnit(static_cast<Worker*>(selectedFU));
+            buildingToBuild->addGarrisonUnit(static_cast<Worker*>(selectedFU));
             buildingToBuild->setPosition(position);
             buildingStore.add(player,*buildingToBuild);
             mineralQuantity -= BUILDING_MINERAL_COST.at(action);
@@ -67,7 +89,7 @@ ActionManager::clickMap(const Vect2D &coordPos, Action &currentAction, const Pla
     switch (currentAction) {
         case MOVE: {
             Unit *selectedUnit = static_cast<Unit *>(selectedEntity);
-            bool successfulMove = move(coordPos, playerTurn, selectedUnit, unitStore, buildingStore, map);
+            bool successfulMove = move(coordPos,selectedUnit,buildingStore);
             if (successfulMove) {
                 uiManager.clearUi();
                 selectedUnit->setPosition(coordPos);
@@ -85,12 +107,29 @@ ActionManager::clickMap(const Vect2D &coordPos, Action &currentAction, const Pla
             break;
         case BUILD:
             break;
-
+        case SELECT_UNIT_1:case SELECT_UNIT_2:case SELECT_UNIT_3:case SELECT_UNIT_4:
+        {
+            Building *currentBuilding = static_cast<Building*>(selectedEntity);
+            int unitIndex;
+            for (std::map<int, Action>::const_iterator k = selectUnit.begin(); k != selectUnit.end(); k++) {
+                if (k->second == currentAction)
+                    unitIndex = k->first;
+            }
+            selectedEntity = currentBuilding->getGarrisonUnit(unitIndex);
+            uiManager.clearUi();
+            uiManager.displayButton(selectedEntity);
+            break;
+        }
+        case UPGRADE:
+        {
+            Building *currentBuilding = static_cast<Building*>(selectedEntity);
+            currentBuilding->levelUp();
+        }
         case NONE: {
             if (unitStore.selectUnit(coordPos, playerTurn, selectedEntity) ||
                 buildingStore.selectBuilding(coordPos, playerTurn, selectedEntity)) {
                 uiManager.clearUi();
-                uiManager.displayButton(selectedEntity->getType());
+                uiManager.displayButton(selectedEntity);
             } else {
                 uiManager.clearUi();
                 selectedEntity = NULL;
@@ -101,6 +140,7 @@ ActionManager::clickMap(const Vect2D &coordPos, Action &currentAction, const Pla
             bool successfulBuild = build(coordPos,playerTurn,selectedEntity,buildingStore,currentAction,map,mineralQuantity,gasQuantity);
             if(successfulBuild){
                 currentAction = NONE;
+                selectedEntity->setFinishedTurn(true);
                 uiManager.clearUi();
             }
         break;

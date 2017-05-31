@@ -28,7 +28,7 @@ bool UnitStore::selectUnit(const Vect2D &coordCase, Player player, Entity *&sele
     Store<Unit> *unitVector = (player == PLAYER1) ? &player1Units : &player2Units;
     for (std::vector<Unit>::iterator it = unitVector->getList().begin(); it != unitVector->getList().end(); ++it) {
         if ((*it).getPosition().x() == coordCase.x() && (*it).getPosition().y() == coordCase.y()) {
-            if ((*it).isFinishedTurn()) {
+            if ((*it).isFinishedTurn() || (*it).getIsInGarrison()) {
                 return false;
             }
             selectedEntity = &(*it);
@@ -41,13 +41,13 @@ bool UnitStore::selectUnit(const Vect2D &coordCase, Player player, Entity *&sele
 bool UnitStore::isUnit(const Vect2D &coordCase) {
     for (std::vector<Unit>::iterator it = player1Units.getList().begin();
          it != player1Units.getList().end(); ++it) {
-        if ((*it).getPosition().x() == coordCase.x() && (*it).getPosition().y() == coordCase.y()) {
+        if ((*it).getPosition().x() == coordCase.x() && (*it).getPosition().y() == coordCase.y() && !(*it).getIsInGarrison()) {
             return true;
         }
     }
     for (std::vector<Unit>::iterator it = player2Units.getList().begin();
          it != player2Units.getList().end(); ++it) {
-        if ((*it).getPosition().x() == coordCase.x() && (*it).getPosition().y() == coordCase.y()) {
+        if ((*it).getPosition().x() == coordCase.x() && (*it).getPosition().y() == coordCase.y() && !(*it).getIsInGarrison()) {
             return true;
         }
     }
@@ -101,7 +101,7 @@ void UnitStore::updatePossibleMoves(const Map &map, BuildingStore &buildingStore
                     if (player != buildingOwner) {
                         W(x, y) = INF;
                     } else {
-                        if (building.getGarnisonUnit() != NULL) {
+                        if (building.getMaxGarrison() == building.getGarrisonSize()) {
                             W(x, y) = INF;
                         }
                     }

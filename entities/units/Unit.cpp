@@ -13,6 +13,17 @@ Unit::Unit(AssetId assetId,
                  viewRange),
           speed(speed) {}
 
+Unit::~Unit(){}
+
+void Unit::draw(const ResourceManager &resourceManager, const Vect2D &viewOffset) const {
+    if(!isInGarrison){
+        Vect2D renderPosition = position * MAP_SQUARE_PIXEL_SIZE + viewOffset;
+        resourceManager.getResource(assetId).draw(renderPosition);
+        AlphaColor c = (owner == PLAYER1) ? ACYAN : AMAGENTA;
+        Imagine::drawRect(renderPosition, MAP_SQUARE_PIXEL_SIZE - 1, MAP_SQUARE_PIXEL_SIZE - 1, c);
+    }
+}
+
 void Unit::drawPossibleMoves(Vect2D viewOffset, Vect2D minRender, Vect2D maxRender) const {
     AlphaColor c(0, 0, 255, 50);
     for (std::vector<Vect2D>::const_iterator k = possibleMoves.begin(); k != possibleMoves.end(); k++) {
@@ -48,4 +59,10 @@ const bool Unit::isPossibleMove(const Vect2D &position) const {
         }
     }
     return false;
+}
+void Unit::setInGarrison(bool inGarrison){
+    isInGarrison = inGarrison;
+}
+bool Unit::getIsInGarrison() const{
+    return isInGarrison;
 }

@@ -11,6 +11,12 @@ Game::Game() : map(MapGen::uniformRandomMapGenerator(50, 50)), viewOffset(Vect2D
     unitStore.add(PLAYER1, unitTest1);
     FightingUnit unitTest2(FightingUnits::INFANTRY_MELEE, Vect2D(2, 1));
     unitStore.add(PLAYER2, unitTest2);
+    Worker unitTest3(Vect2D(2,3));
+    unitStore.add(PLAYER1,unitTest3);
+    mineralQuantity[PLAYER1] = 5000;
+    gasQuantity[PLAYER1] = 0;
+    mineralQuantity[PLAYER2] = 5000;
+    gasQuantity[PLAYER2] = 0;
     // end REMOVE
     unitStore.updatePossibleMoves(map, buildingStore, PLAYER1);
 }
@@ -74,8 +80,11 @@ void Game::logic() {
         viewOffset -= viewOffset;
         playerTurn = (playerTurn == PLAYER1) ? PLAYER2 : PLAYER1;
         currentAction = NONE;
+        uiManager.clearUi();
         unitStore.clearFinishedTurn();
         unitStore.updatePossibleMoves(map, buildingStore, playerTurn);
+        buildingStore.collectRessources(playerTurn,mineralQuantity[playerTurn],gasQuantity[playerTurn]);
+        buildingStore.buildBuildingUnderConstruction(playerTurn);
         Imagine::fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, ABLACK);
         string msg = (playerTurn == PLAYER1) ? "Player 1 turn" : "Player 2 turn";
         Imagine::drawString(WINDOW_WIDTH / 2 - 35, WINDOW_HEIGHT / 2, msg, AWHITE);
@@ -94,6 +103,15 @@ void Game::clickManager(const Vect2D &position) {
         // click on ui panel
     else {
         uiManager.clickActionButton(position, currentAction);
+        if(currentAction == BUILD_BARRACK || currentAction == BUILD_BRIDGE || currentAction == BUILD_DEFENSE_TURRET
+                || currentAction == BUILD_DRILL || currentAction == BUILD_EXTRACTOR || currentAction == SELECT_UNIT_1
+                || currentAction == SELECT_UNIT_2 || currentAction == SELECT_UNIT_3 || currentAction == SELECT_UNIT_4
+                || currentAction == UPGRADE){
+            //we don't need to click on map to build a building or to select a unit thanks to the ui
+            actionManager.clickMap(selectedEntity->getPosition(),currentAction,playerTurn,selectedEntity,unitStore,
+                                   buildingStore, map,uiManager,mineralQuantity[playerTurn],gasQuantity[playerTurn]);
+        }
+
     }
 
 }
@@ -130,7 +148,7 @@ void Game::draw(const ResourceManager &resourceManager) const {
     // draw buildings
     buildingStore.draw(playerTurn, resourceManager, viewOffset, minRender, maxRender);
     // draw UI
-    uiManager.draw(resourceManager);
+    uiManager.draw(resourceManager,mineralQuantity.at(playerTurn),gasQuantity.at(playerTurn),playerTurn, selectedEntity);
     // draw on screen
     Imagine::noRefreshEnd();
 }

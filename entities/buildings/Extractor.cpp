@@ -1,9 +1,9 @@
 #include "Extractor.h"
 
 Extractor::Extractor() :
-        Building(INCONSTRUCTION_EXTRACTOR, "Extractor", 20, 3) {}
+        Building(BUILDING_EXTRACTOR, "Extractor", 20, 3,2,1) {}
 
-int Extractor::getProduction() {
+int Extractor::getProduction() const{
 	switch (level) {
 		case 2:
 			return 10;
@@ -12,9 +12,4 @@ int Extractor::getProduction() {
 		default:
 			return 5;
 	}
-}
-
-void Extractor::build(){
-    isUnderConstruction = false;
-    assetId = BUILDING_EXTRACTOR;
 }

@@ -9,12 +9,7 @@ Entity::Entity(AssetId assetId, const std::string &name, EntityType type, int ma
           viewRange(viewRange),
           position(Vect2D(0, 0)) {}
 
-void Entity::draw(const ResourceManager &resourceManager, const Vect2D &viewOffset) const {
-    Vect2D renderPosition = position * MAP_SQUARE_PIXEL_SIZE + viewOffset;
-    resourceManager.getResource(assetId).draw(renderPosition);
-    AlphaColor c = (owner == PLAYER1) ? ACYAN : AMAGENTA;
-    Imagine::drawRect(renderPosition, MAP_SQUARE_PIXEL_SIZE - 1, MAP_SQUARE_PIXEL_SIZE - 1, c);
-}
+Entity::~Entity(){}
 
 void Entity::drawSelectionBox(const Vect2D &viewOffset) const {
     AlphaColor c(0, 0, 255, 100);
@@ -54,4 +49,13 @@ void Entity::setOwner(Player player) {
 
 const Player Entity::getOwner() const {
     return owner;
+}
+const std::string Entity::getName() const{
+    return name;
+}
+const int Entity::getHP() const{
+    return hp;
+}
+const AssetId Entity::getAssetId()const{
+    return assetId;
 }

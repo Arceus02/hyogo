@@ -22,8 +22,7 @@ private:
                Action &action, const Map &map, int &mineralQuantity, int &gasQuantity);
 
     bool
-    move(const Vect2D &position, Player player, Unit *&unitToMove, UnitStore &unitStore, BuildingStore &buildingStore,
-         const Map &map);
+    move(const Vect2D &position, Unit *&unitToMove, BuildingStore &buildingStore);
 
 public:
     void clickMap(const Vect2D &pixelposition, Action &currentAction, const Player playerTurn, Entity *&selectedEntity,

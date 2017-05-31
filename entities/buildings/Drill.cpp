@@ -1,8 +1,8 @@
 #include "Drill.h"
 
-Drill::Drill() : Building(INCONSTRUCTION_DRILL, "Drill", 20, 3) {}
+Drill::Drill() : Building(BUILDING_DRILL, "Drill", 20, 3,1,1) {}
 
-int Drill::getProduction() {
+int Drill::getProduction() const{
 	switch (level) {
 		case 2:
 			return 700;
@@ -11,8 +11,4 @@ int Drill::getProduction() {
 		default:
             return 350;
 	}
-}
-void Drill::build(){
-    isUnderConstruction = false;
-    assetId = BUILDING_DRILL;
 }

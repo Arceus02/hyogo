@@ -1,6 +1,6 @@
 #pragma once
 
-
+#include <sstream>
 #include <vector>
 #include "UIComponent.h"
 #include "buttons/AttackButton.h"
@@ -16,6 +16,8 @@
 #include "../stores/BuildingStore.h"
 #include "../stores/UnitStore.h"
 #include "buttons/EndTurnButton.h"
+#include "buttons/UnitIconButton.h"
+#include "buttons/upgradebutton.h"
 
 
 class UIManager {
@@ -27,7 +29,7 @@ public:
 
     /// Draw UI
     /// \param resourceManager
-    void draw(const ResourceManager &resourceManager) const;
+    void draw(const ResourceManager &resourceManager, const int mineralQuantity, const int gasQuantity, Player player, const Entity *selectedEntity) const;
 
     /// Handle click on an action button
     /// \param position
@@ -36,7 +38,10 @@ public:
 
     /// Activate right buttons depending on entity clicked
     /// \param type of clicked entity
-    void displayButton(EntityType type);
+    void displayButton(const Entity *selectedEntity);
+
+    /// Display the attributes of the selected entity
+    void displayAttributes(const Entity *selectedEntity) const;
 
     void clearUi();
 

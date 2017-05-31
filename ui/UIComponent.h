@@ -14,6 +14,7 @@ protected:
 public:
     UIComponent(const int width, const int height, const Vect2D &position);
 
+    virtual ~UIComponent();
     /// Draw component in place
     virtual void draw(const ResourceManager &resourceManager) const = 0;
 
@@ -30,4 +31,7 @@ public:
     /// Set if the component should be drawn and handle clicks
     /// \param activate
     void setActivated(bool activate);
+
+    ///Set the assetId for the UnitIconButton
+    virtual void setIconAssetId(AssetId assetId);
 };

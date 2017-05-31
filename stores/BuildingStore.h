@@ -2,6 +2,8 @@
 
 #include "Store.h"
 #include "../entities/buildings/Building.h"
+#include "../entities/buildings/Drill.h"
+#include "../entities/buildings/Extractor.h"
 
 class BuildingStore : public Store<Building> {
 private:
@@ -13,13 +15,13 @@ public:
     /// \param viewOffset map view render offset
     /// \param minRender min point to render
     /// \param maxRender max point to render
-    void draw(int player, const ResourceManager &resourceManager, const Vect2D &viewOffset, const Vect2D &minRender,
+    void draw(Player player, const ResourceManager &resourceManager, const Vect2D &viewOffset, const Vect2D &minRender,
               const Vect2D &maxRender) const;
 
     /// Add a building to a player
     /// \param player
     /// \param building
-    void add(int player, Building &building);
+    void add(Player player, Building &building);
 
     /// Select a building at specified coordinates
     /// \param coordCase
@@ -38,5 +40,9 @@ public:
     /// \param player
     /// \return
     Building &getBuilding(const Vect2D &coordCase, Player &player);
+
+    void buildBuildingUnderConstruction(const Player player);
+
+    void collectRessources(const Player player, int &mineralQuantity, int &gasQuantity);
     // TODO remove dead buildings
 };
