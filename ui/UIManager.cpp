@@ -17,8 +17,6 @@ UIManager::UIManager() {
     components[SELECT_UNIT_3] = new UnitIconButton(Vect2D(400, MAP_VIEW_HEIGHT + 50));
     components[SELECT_UNIT_4] = new UnitIconButton(Vect2D(400, MAP_VIEW_HEIGHT + 75));
     components[UPGRADE] = new UpgradeButton();
-
-
 }
 
 void
@@ -48,18 +46,20 @@ UIManager::draw(const ResourceManager &resourceManager, const int mineralQuantit
 }
 
 
-void UIManager::clickActionButton(const Vect2D position, Action &action) {
+bool UIManager::clickActionButton(const Vect2D position, Action &action) {
     // End turn button
     if (inside(position, endTurnButton.getPosition(), endTurnButton.getPosition() + endTurnButton.getSize())) {
         action = ENDTURN;
     }
     // Other components
+    bool clicked = false;
     for (std::map<Action, UIComponent *>::iterator it = components.begin(); it != components.end(); ++it) {
         if (it->second->isActivated()) {
             Vect2D leftCornerButton = it->second->getPosition();
             Vect2D rightCornerButton = it->second->getPosition() + it->second->getSize();
             if (inside(position, leftCornerButton, rightCornerButton)) {
                 action = it->first;
+                clicked = true;
                 if (action == BUILD) {
                     components[MOVE]->setActivated(false);
                     components[BUILD]->setActivated(false);
@@ -69,15 +69,12 @@ void UIManager::clickActionButton(const Vect2D position, Action &action) {
                     components[BUILD_DRILL]->setActivated(true);
                     components[BUILD_EXTRACTOR]->setActivated(true);
                 }
-
                 // TODO build building buttons
                 // TODO fighting unit attack
-                return;
             }
         }
     }
-
-
+    return clicked;
 }
 
 void UIManager::displayButton(const Entity *selectedEntity) {
@@ -96,7 +93,7 @@ void UIManager::displayButton(const Entity *selectedEntity) {
             int garrisonSize = building->getGarrisonSize();
             for (int i = 0; i < garrisonSize; i++) {
                 components[selectUnit.at(i)]->setActivated(true);
-                components[selectUnit.at(i)]->setIconAssetId(building->getGarrisonUnit(i)->getAssetId());
+                components[selectUnit.at(i)]->setUnit(building->getGarrisonUnit(i));
             }
             if (building->canLevelUp()) {
                 components[UPGRADE]->setActivated(true);
@@ -119,10 +116,10 @@ void UIManager::displayAttributes(const Entity *selectedEntity) const {
             ssAttackRange << fightingUnit->getAttackRange();
             ssDamage << fightingUnit->getDamage();
 
-            drawString(195, MAP_VIEW_HEIGHT + 30, "HP : " + sshp.str(), BLACK, 10);
-            drawString(195, MAP_VIEW_HEIGHT + 45, "Moving range : " + ssMovingRange.str(), BLACK, 10);
-            drawString(195, MAP_VIEW_HEIGHT + 60, "Attack range : " + ssAttackRange.str(), BLACK, 10);
-            drawString(195, MAP_VIEW_HEIGHT + 75, "Damage : " + ssDamage.str(), BLACK, 10);
+            drawString(195, MAP_VIEW_HEIGHT + 30, "HP  " + sshp.str(), BLACK, 10);
+            drawString(195, MAP_VIEW_HEIGHT + 45, "MVT " + ssMovingRange.str(), BLACK, 10);
+            drawString(195, MAP_VIEW_HEIGHT + 60, "RNG " + ssAttackRange.str(), BLACK, 10);
+            drawString(195, MAP_VIEW_HEIGHT + 75, "DMG " + ssDamage.str(), BLACK, 10);
             break;
         }
         case BUILDINGUNIT: {
@@ -130,34 +127,32 @@ void UIManager::displayAttributes(const Entity *selectedEntity) const {
             stringstream sshp, ssMovingRange;
             sshp << worker->getHP();
             ssMovingRange << worker->getSpeed();
-            drawString(195, MAP_VIEW_HEIGHT + 30, "HP : " + sshp.str(), BLACK, 10);
-            drawString(195, MAP_VIEW_HEIGHT + 45, "Moving range : " + ssMovingRange.str(), BLACK, 10);
+            drawString(195, MAP_VIEW_HEIGHT + 30, "HP  " + sshp.str(), BLACK, 10);
+            drawString(195, MAP_VIEW_HEIGHT + 45, "MVT " + ssMovingRange.str(), BLACK, 10);
             break;
         }
         case BUILDING: {
             const Building *building = dynamic_cast<const Building *>(selectedEntity);
             stringstream sshp, ssgarnison, sslevel, ssmaxlevel;
             sshp << building->getHP();
-            drawString(195, MAP_VIEW_HEIGHT + 30, "HP : " + sshp.str(), BLACK, 10);
+            drawString(195, MAP_VIEW_HEIGHT + 30, "HP  " + sshp.str(), BLACK, 10);
             ssgarnison << building->getMaxGarrison();
-            drawString(195, MAP_VIEW_HEIGHT + 45, "Number max of unit in garrison : " + ssgarnison.str(), BLACK, 10);
-            sslevel << building->getLevel();
-            drawString(195, MAP_VIEW_HEIGHT + 60, "Level : " + sslevel.str(), BLACK, 10);
-            ssmaxlevel << building->getMaxlevel();
-            drawString(195, MAP_VIEW_HEIGHT + 75, "Max level : " + ssmaxlevel.str(), BLACK, 10);
+            drawString(195, MAP_VIEW_HEIGHT + 45, "GAR " + ssgarnison.str(), BLACK, 10);
+            sslevel << building->getLevel() << " / " << building->getMaxlevel();
+            drawString(195, MAP_VIEW_HEIGHT + 60, "LVL " + sslevel.str(), BLACK, 10);
             int height = 90;
             if (building->getAssetId() == BUILDING_DRILL) {
                 stringstream ssproduction;
                 const Drill *drill = dynamic_cast<const Drill *>(building);
                 ssproduction << drill->getProduction();
-                drawString(195, MAP_VIEW_HEIGHT + height, "Production of mineral by turn : " + ssproduction.str(),
+                drawString(195, MAP_VIEW_HEIGHT + height, "PROD " + ssproduction.str(),
                            BLACK, 10);
                 height += 15;
             } else if (building->getAssetId() == BUILDING_EXTRACTOR) {
                 stringstream ssproduction;
                 const Extractor *extractor = dynamic_cast<const Extractor *>(building);
                 ssproduction << extractor->getProduction();
-                drawString(195, MAP_VIEW_HEIGHT + height, "Production of gas by turn : " + ssproduction.str(), BLACK,
+                drawString(195, MAP_VIEW_HEIGHT + height, "PROD " + ssproduction.str(), BLACK,
                            10);
                 height += 15;
             }

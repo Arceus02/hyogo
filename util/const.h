@@ -12,7 +12,10 @@ enum Action {NONE,ENDTURN, MOVE, ATTACK, BUILD, BUILD_BARRACK, BUILD_DEFENSE_TUR
             RECRUIT_SCOUT,RECRUIT_INFANTRY_MELEE,RECRUIT_INFRANTRY_DISTANCE,RECRUIT_CAVALRY,RECRUIT_HEAVY,RECRUIT_BALISTIC,
             RECRUIT_WORKER, SELECT_UNIT_1, SELECT_UNIT_2, SELECT_UNIT_3, SELECT_UNIT_4, UPGRADE};
 
-const std::map<int,Action> selectUnit= {{0,SELECT_UNIT_1}, {1,SELECT_UNIT_2}, {2,SELECT_UNIT_3}, {3,SELECT_UNIT_4}};
+const std::map<int, Action> selectUnit = {{0, SELECT_UNIT_1},
+                                          {1, SELECT_UNIT_2},
+                                          {2, SELECT_UNIT_3},
+                                          {3, SELECT_UNIT_4}};
 
 enum EntityType {BUILDING, FIGHTINGUNIT, BUILDINGUNIT};
 

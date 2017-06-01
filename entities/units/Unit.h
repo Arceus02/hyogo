@@ -16,7 +16,7 @@ public:
 
     virtual ~Unit();
 
-    void draw(const ResourceManager &resourceManager, const Vect2D &viewOffset) const;
+    void draw(const ResourceManager &resourceManager, const Vect2D &viewOffset, Player currentTurn) const;
 
     void drawPossibleMoves(Vect2D viewOffset, Vect2D minRender, Vect2D maxRender) const;
 
@@ -33,4 +33,6 @@ public:
     void setInGarrison(bool inGarrison);
 
     bool getIsInGarrison() const;
+
+    void damage(int damage);
 };

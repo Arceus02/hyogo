@@ -3,6 +3,7 @@
 #include <vector>
 #include "../util/Vect2D.h"
 #include "../util/ResourceManager.h"
+#include "../util/const.h"
 
 using namespace std;
 
@@ -12,7 +13,7 @@ protected:
     vector<T> list;
 public:
     virtual void draw(const ResourceManager &resourceManager, const Vect2D &viewOffset, const Vect2D &minRender,
-                      const Vect2D &maxRender) const = 0;
+                      const Vect2D &maxRender, Player currentTurn) const = 0;
 
     void add(T a);
 

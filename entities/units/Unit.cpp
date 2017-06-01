@@ -15,11 +15,11 @@ Unit::Unit(AssetId assetId,
 
 Unit::~Unit(){}
 
-void Unit::draw(const ResourceManager &resourceManager, const Vect2D &viewOffset) const {
+void Unit::draw(const ResourceManager &resourceManager, const Vect2D &viewOffset, Player currentTurn) const {
     if(!isInGarrison){
         Vect2D renderPosition = position * MAP_SQUARE_PIXEL_SIZE + viewOffset;
         resourceManager.getResource(assetId).draw(renderPosition);
-        AlphaColor c = (owner == PLAYER1) ? ACYAN : AMAGENTA;
+        AlphaColor c = (owner == currentTurn) ? ACYAN : AMAGENTA;
         Imagine::drawRect(renderPosition, MAP_SQUARE_PIXEL_SIZE - 1, MAP_SQUARE_PIXEL_SIZE - 1, c);
     }
 }
@@ -65,4 +65,8 @@ void Unit::setInGarrison(bool inGarrison){
 }
 bool Unit::getIsInGarrison() const{
     return isInGarrison;
+}
+
+void Unit::damage(int damage) {
+    this->hp -= damage;
 }

@@ -26,24 +26,6 @@ TerrainType Map::getTerrainType(int x, int y) const {
 	return this->terrainType[x + y * this->width];
 }
 
-void Map::addField(Field &field) {
-	this->fields.push_back(field);
-}
-
-bool Map::isField(int x, int y) {
-	for (std::vector<Field>::iterator field = this->fields.begin(); field != this->fields.end(); field++)
-		if ((*field).getX() == x && (*field).getY() == y)
-			return true;
-	return false;
-}
-
-Field &Map::getField(int x, int y) {
-	for (std::vector<Field>::iterator field = this->fields.begin(); field != this->fields.end(); field++)
-		if ((*field).getX() == x && (*field).getY() == y)
-			return *field;
-	throw "No field found";
-}
-
 void Map::draw(const ResourceManager &resourceManager, const Vect2D &viewOffset, const Vect2D &minRender,
 			   const Vect2D &maxRender) const {
 	// draw terrain

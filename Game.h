@@ -51,4 +51,6 @@ public:
 
     /// Main function to call once
     void play();
+
+    void endTurn();
 };

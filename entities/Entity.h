@@ -22,7 +22,8 @@ public:
 
     virtual ~Entity();
 
-    virtual void draw(const ResourceManager &resourceManager, const Vect2D &viewOffset) const = 0;
+    virtual void
+    draw(const ResourceManager &resourceManager, const Vect2D &viewOffset, const Player currentTurn) const = 0;
 
     void drawSelectionBox(const Vect2D &viewOffset) const;
 

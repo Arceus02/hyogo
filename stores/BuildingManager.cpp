@@ -1,9 +1,9 @@
 #include "BuildingManager.h"
 
-void BuildingManager::draw(Player player, const ResourceManager &resourceManager, const Vect2D &viewOffset,
+void BuildingManager::draw(Player currentTurn, const ResourceManager &resourceManager, const Vect2D &viewOffset,
                            const Vect2D &minRender, const Vect2D &maxRender) const {
-    player1Buildings.draw(resourceManager, viewOffset, minRender, maxRender);
-    player2Buildings.draw(resourceManager, viewOffset, minRender, maxRender);
+    player1Buildings.draw(resourceManager, viewOffset, minRender, maxRender, currentTurn);
+    player2Buildings.draw(resourceManager, viewOffset, minRender, maxRender, currentTurn);
 }
 
 void BuildingManager::add(Player player, Building *building) {

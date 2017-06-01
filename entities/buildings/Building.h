@@ -15,7 +15,7 @@ public :
 
     virtual ~Building();
 
-    void draw(const ResourceManager &resourceManager, const Vect2D &viewOffset) const;
+    void draw(const ResourceManager &resourceManager, const Vect2D &viewOffset, const Player currentTurn) const;
 
     bool canLevelUp()const;
 

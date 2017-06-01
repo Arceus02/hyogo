@@ -5,6 +5,7 @@
 #include "../util/const.h"
 #include "../util/Vect2D.h"
 #include "../util/ResourceManager.h"
+#include "../entities/units/Unit.h"
 
 class UIComponent {
 protected:
@@ -33,5 +34,5 @@ public:
     void setActivated(bool activate);
 
     ///Set the assetId for the UnitIconButton
-    virtual void setIconAssetId(AssetId assetId);
+    virtual void setUnit(Unit *unit);
 };

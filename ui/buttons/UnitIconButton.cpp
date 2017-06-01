@@ -5,8 +5,13 @@ UnitIconButton::UnitIconButton(const Vect2D &position): UIComponent(25,25,positi
 void UnitIconButton::draw(const ResourceManager &resourceManager) const{
     AssetId correspondingAsset = resourceManager.correspondingIcon(iconAssetId);
     resourceManager.getResource(correspondingAsset).draw(position);
+    if (unit->isFinishedTurn()) {
+        AlphaColor c(255, 0, 0, 30);
+        Imagine::fillRect(position, 25, 25, c);
+    }
 }
 
-void UnitIconButton::setIconAssetId(AssetId assetId){
-    iconAssetId = assetId;
+void UnitIconButton::setUnit(Unit *unit) {
+    this->unit = unit;
+    this->iconAssetId = unit->getAssetId();
 }

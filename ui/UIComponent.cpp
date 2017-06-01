@@ -22,4 +22,4 @@ Vect2D UIComponent::getSize() const {
     return Vect2D(width, height);
 }
 
-void UIComponent::setIconAssetId(AssetId assetId){}
+void UIComponent::setUnit(Unit *unit) {}

@@ -6,10 +6,10 @@ Building::Building(AssetId assetId, std::string name, int maxHp, int maxLevel, i
 
 Building::~Building(){}
 
-void Building::draw(const ResourceManager &resourceManager, const Vect2D &viewOffset) const {
+void Building::draw(const ResourceManager &resourceManager, const Vect2D &viewOffset, const Player currentTurn) const {
     Vect2D renderPosition = position * MAP_SQUARE_PIXEL_SIZE + viewOffset;
     resourceManager.getResource(assetId).draw(renderPosition);
-    AlphaColor c = (owner == PLAYER1) ? ACYAN : AMAGENTA;
+    AlphaColor c = (owner == currentTurn) ? ACYAN : AMAGENTA;
     Imagine::drawRect(renderPosition, MAP_SQUARE_PIXEL_SIZE - 1, MAP_SQUARE_PIXEL_SIZE - 1, c);
     if(turnNumberToBeBuilt >=1){
         AlphaColor c2(255,0,0,100);
@@ -17,11 +17,11 @@ void Building::draw(const ResourceManager &resourceManager, const Vect2D &viewOf
     }
 }
 void Building::levelUp() {
-	level++;
+    level++;
 }
 
 const int Building::getLevel() const {
-	return level;
+    return getTurnNumberToBeBuilt() == 0 && level;
 }
 
 bool Building::canLevelUp() const {
@@ -60,7 +60,7 @@ const int Building::getTurnNumberToBeBuilt()const{
     return turnNumberToBeBuilt;
 }
 void Building::build(){
-    if(turnNumberToBeBuilt !=0){
+    if (turnNumberToBeBuilt > 0) {
         turnNumberToBeBuilt--;
     }
 }
