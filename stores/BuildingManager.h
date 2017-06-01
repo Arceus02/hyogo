@@ -42,7 +42,7 @@ public:
     /// \return
     Building &getBuilding(const Vect2D &coordCase, Player &player);
 
-    void buildBuildingUnderConstruction(const Player player);
+    void buildBuildings(const Player player);
 
     void collectRessources(const Player player, int &mineralQuantity, int &gasQuantity);
     // TODO remove dead buildings

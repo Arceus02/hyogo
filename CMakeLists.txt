@@ -26,7 +26,12 @@ add_executable(Hyogo main.cpp Game.h Game.cpp
         util/const.h util/Asset.h util/Asset.cpp util/Vect2D.h util/Vect2D.cpp util/ResourceManager.cpp util/ResourceManager.h
         util/fastMarching/pointDist.h util/fastMarching/priorite.h util/fastMarching/priorite.cpp
         util/fastMarching/fastMarching.h util/fastMarching/fastMarching.cpp ui/buttons/EndTurnButton.cpp ui/buttons/EndTurnButton.h
-        ui/buttons/UnitIconButton.h ui/buttons/UnitIconButton.cpp ui/buttons/UpgradeButton.h ui/buttons/UpgradeButton.cpp stores/UnitStore.cpp stores/UnitStore.h stores/BuildingStore.cpp stores/BuildingStore.h)
+        ui/buttons/RecruitButton.h ui/buttons/RecruitButton.cpp ui/buttons/RecruitWorkerButton.h  ui/buttons/RecruitWorkerButton.cpp
+        ui/buttons/RecruitScoutButton.h ui/buttons/RecruitScoutButton.cpp ui/buttons/RecruitInfantryMeleeButton.h ui/buttons/RecruitInfantryMeleeButton.cpp
+        ui/buttons/RecruitInfantryDistanceButton.h ui/buttons/RecruitInfantryDistanceButton.cpp ui/buttons/RecruitCavalryButton.h ui/buttons/RecruitCavalryButton.cpp
+        ui/buttons/RecruitHeavyButton.h ui/buttons/RecruitHeavyButton.cpp ui/buttons/RecruitBalisticButton.h ui/buttons/RecruitBalisticButton.cpp
+        ui/buttons/UnitIconButton.h ui/buttons/UnitIconButton.cpp ui/buttons/UpgradeButton.h ui/buttons/UpgradeButton.cpp stores/UnitStore.h stores/UnitStore.cpp
+        stores/BuildingStore.h stores/BuildingStore.cpp)
 
 ImagineUseModules(Hyogo Graphics)
 ImagineUseModules(Hyogo Images)

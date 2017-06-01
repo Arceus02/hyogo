@@ -5,13 +5,14 @@ FightingUnit::FightingUnit(const FightingUnitData &unitData, const Vect2D &posit
         : Unit(unitData.assetId,
                unitData.name,
                FIGHTINGUNIT,
-               unitData.maxHp,
-               unitData.viewRange,
-               unitData.speed),
-          damage(unitData.damage),
-          attackRange(unitData.attackRange) {
-    this->position = position;
-    if (unitData.assetId == UNIT_SCOUT) {
+			   unitData.maxHp,
+			   unitData.viewRange,
+               unitData.speed,
+               unitData.turnNumberToBeBuilt),
+		  damage(unitData.damage),
+		  attackRange(unitData.attackRange) {
+	this->position = position;
+    if(unitData.assetId == UNIT_SCOUT){
         setCanWalkThroughRiver(true);
     }
 }

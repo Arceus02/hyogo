@@ -5,12 +5,14 @@ Unit::Unit(AssetId assetId,
            EntityType type,
            int maxHp,
            int viewRange,
-           int speed)
+           int speed,
+           int turnNumberToBeBuilt)
         : Entity(assetId,
                  name,
                  type,
                  maxHp,
-                 viewRange),
+                 viewRange,
+                 turnNumberToBeBuilt),
           speed(speed) {}
 
 Unit::~Unit(){}

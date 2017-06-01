@@ -1,13 +1,14 @@
 #include "Entity.h"
 
-Entity::Entity(AssetId assetId, const std::string &name, EntityType type, int maxHp, int viewRange)
+Entity::Entity(AssetId assetId, const std::string &name, EntityType type, int maxHp, int viewRange, int turnNumberToBeBuilt)
         : assetId(assetId),
           name(name),
           type(type),
           maxHp(maxHp),
           hp(maxHp),
           viewRange(viewRange),
-          position(Vect2D(0, 0)) {}
+          position(Vect2D(0, 0)),
+          turnNumberToBeBuilt(turnNumberToBeBuilt){}
 
 Entity::~Entity(){}
 
@@ -58,4 +59,12 @@ const int Entity::getHP() const{
 }
 const AssetId Entity::getAssetId()const{
     return assetId;
+}
+const int Entity::getTurnNumberToBeBuilt()const{
+    return turnNumberToBeBuilt;
+}
+void Entity::build(){
+    if(turnNumberToBeBuilt !=0){
+        turnNumberToBeBuilt--;
+    }
 }

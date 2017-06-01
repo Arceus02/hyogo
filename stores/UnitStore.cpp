@@ -11,4 +11,6 @@ void UnitStore::draw(const ResourceManager &resourceManager, const Vect2D &viewO
             unit->drawIsFinishedTurnBox(viewOffset);
         }
     }
+
 }
+

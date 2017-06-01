@@ -49,6 +49,8 @@ public:
 
     void updatePossibleAttacks(const Map &map, BuildingManager &buildingStore, Player player);
 
+    void buildUnits(const Player player);
+
     void clearFinishedTurn();
 
     void updateLivingEntities();

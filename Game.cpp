@@ -5,6 +5,8 @@ Game::Game() : map(MapGen::uniformRandomMapGenerator(50, 50)), viewOffset(Vect2D
     resourceManager.initResources();
     // TODO change map generation
     // TODO REMOVE
+    CommandCenter* commandCenter = new CommandCenter();
+    buildingStore.add(PLAYER1,commandCenter);
     FightingUnit *unitTest0 = new FightingUnit(FightingUnits::INFANTRY_MELEE, Vect2D(3, 5));
     unitStore.add(PLAYER1, unitTest0);
     FightingUnit *unitTest1 = new FightingUnit(FightingUnits::SCOUT, Vect2D(5, 3));
@@ -99,7 +101,6 @@ void Game::clickManager(const Vect2D &position) {
             actionManager.click(selectedEntity->getPosition(), currentAction, playerTurn, selectedEntity, unitStore,
                                 buildingStore, map, uiManager, mineralQuantity[playerTurn], gasQuantity[playerTurn]);
         }
-
     }
 
 }

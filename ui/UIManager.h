@@ -17,6 +17,14 @@
 #include "../stores/UnitManager.h"
 #include "buttons/EndTurnButton.h"
 #include "buttons/UnitIconButton.h"
+#include "buttons/RecruitButton.h"
+#include "buttons/RecruitWorkerButton.h"
+#include "buttons/RecruitScoutButton.h"
+#include "buttons/RecruitInfantryMeleeButton.h"
+#include "buttons/RecruitInfantryDistanceButton.h"
+#include "buttons/RecruitCavalryButton.h"
+#include "buttons/RecruitHeavyButton.h"
+#include "buttons/RecruitBalisticButton.h"
 #include "buttons/UpgradeButton.h"
 
 

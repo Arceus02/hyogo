@@ -17,8 +17,10 @@ protected:
     Vect2D position;
     bool finishedTurn = false;
     Player owner;
+    int turnNumberToBeBuilt;
 public:
-    Entity(AssetId assetId, const std::string &name, EntityType type, int maxHp, int viewRange);
+    Entity(AssetId assetId, const std::string &name, EntityType type, int maxHp, int viewRange,
+           int turnNumberToBeBuilt);
 
     virtual ~Entity();
 
@@ -48,4 +50,8 @@ public:
     const int getHP() const;
 
     const AssetId getAssetId()const;
+
+    const int getTurnNumberToBeBuilt()const;
+
+    void build();
 };

@@ -8,3 +8,7 @@ void BuildingStore::draw(const ResourceManager &resourceManager, const Vect2D &v
         }
     }
 }
+
+
+
+
