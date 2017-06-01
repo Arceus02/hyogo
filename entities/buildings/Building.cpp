@@ -22,7 +22,7 @@ void Building::levelUp() {
 }
 
 const int Building::getLevel() const {
-    return getTurnNumberToBeBuilt() == 0 && level;
+    return level;
 }
 
 bool Building::canLevelUp(int mineralQuantity, int gasQuantity) const {
@@ -63,7 +63,7 @@ const int Building::getMaxGarrison() const {
 }
 
 const int Building::getGarrisonSize() const {
-    return garnison.size();
+    return (const int) garnison.size();
 }
 
 const int Building::getTurnNumberToBeBuilt() const {

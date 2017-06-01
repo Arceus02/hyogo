@@ -83,17 +83,16 @@ void UIManager::clickActionButton(const Vect2D position, Action &action, int lev
         components[BUILD_BRIDGE]->setActivated(true);
         components[BUILD_DRILL]->setActivated(true);
         components[BUILD_EXTRACTOR]->setActivated(true);
-    }
-    else if(action == RECRUIT){
+    } else if (action == RECRUIT) {
         components[UPGRADE]->setActivated(false);
         components[RECRUIT]->setActivated(false);
         components[RECRUIT_SCOUT]->setActivated(true);
         components[RECRUIT_INFANTRY_MELEE]->setActivated(true);
         components[RECRUIT_INFANTRY_DISTANCE]->setActivated(true);
-        if(level==2){
+        if (level == 2) {
             components[RECRUIT_CAVALRY]->setActivated(true);
         }
-        if(level==3){
+        if (level == 3) {
             components[RECRUIT_HEAVY]->setActivated(true);
             components[RECRUIT_BALISTIC]->setActivated(true);
         }
@@ -108,16 +107,16 @@ void UIManager::displayButton(const Entity *selectedEntity) {
     EntityType type = selectedEntity->getType();
     switch (type) {
         case FIGHTINGUNIT:
-            if(selectedEntity->getTurnNumberToBeBuilt() ==0){
+            if (selectedEntity->getTurnNumberToBeBuilt() == 0) {
                 components[MOVE]->setActivated(true);
                 components[ATTACK]->setActivated(true);
             }
             break;
         case BUILDINGUNIT:
-        if(selectedEntity->getTurnNumberToBeBuilt() ==0){
-            components[MOVE]->setActivated(true);
-            components[BUILD]->setActivated(true);
-        }
+            if (selectedEntity->getTurnNumberToBeBuilt() == 0) {
+                components[MOVE]->setActivated(true);
+                components[BUILD]->setActivated(true);
+            }
             break;
         case BUILDING:
             const Building *building = dynamic_cast<const Building *>(selectedEntity);
@@ -126,97 +125,104 @@ void UIManager::displayButton(const Entity *selectedEntity) {
                 components[selectUnit.at(i)]->setActivated(true);
                 components[selectUnit.at(i)]->setUnit(building->getGarrisonUnit(i));
             }
-            if(selectedEntity->getTurnNumberToBeBuilt() ==0){
+            if (selectedEntity->getTurnNumberToBeBuilt() == 0) {
                 AssetId assetId = building->getAssetId();
-                if(assetId == BUILDING_BARRACK || assetId == BUILDING_DRILL || assetId == BUILDING_EXTRACTOR
-                        || assetId == BUILDING_TURRET)
+                if (assetId == BUILDING_BARRACK || assetId == BUILDING_DRILL || assetId == BUILDING_EXTRACTOR
+                    || assetId == BUILDING_TURRET)
                     components[UPGRADE]->setActivated(true);
-                if(assetId == BUILDING_BARRACK)
+                if (assetId == BUILDING_BARRACK)
                     components[RECRUIT]->setActivated(true);
-                if(assetId == BUILDING_COMMAND_CENTER)
+                if (assetId == BUILDING_COMMAND_CENTER)
                     components[RECRUIT_WORKER]->setActivated(true);
             }
             break;
     }
 }
-void UIManager::displayAttributes(const Entity* selectedEntity) const{
-    int currentHeight =14;
-    drawString(195, MAP_VIEW_HEIGHT+currentHeight, "Selected entity : "+selectedEntity->getName(),BLACK,9);
-    currentHeight+=14;
-    switch(selectedEntity->getType()){
-    case FIGHTINGUNIT:
-    {
-        const FightingUnit* fightingUnit = static_cast<const FightingUnit*>(selectedEntity);
-        stringstream sshp, ssMovingRange, ssAttackRange, ssDamage;
-        sshp <<fightingUnit->getHP();ssMovingRange << fightingUnit->getSpeed();
-        ssAttackRange << fightingUnit->getAttackRange(); ssDamage << fightingUnit->getDamage();
-        drawString(195, MAP_VIEW_HEIGHT+currentHeight,"HP : "+sshp.str(),BLACK,9);
-        currentHeight+=14;
-        drawString(195, MAP_VIEW_HEIGHT+currentHeight, "Moving range : "+ssMovingRange.str(),BLACK,9);
-        currentHeight+=14;
-        drawString(195, MAP_VIEW_HEIGHT+currentHeight, "Attack range : "+ssAttackRange.str(),BLACK,9);
-        currentHeight+=14;
-        drawString(195, MAP_VIEW_HEIGHT+currentHeight, "Damage : "+ssDamage.str(),BLACK,9);
-        currentHeight+=14;
-        break;
-    }
-    case BUILDINGUNIT:
-    {
-        const Worker* worker = static_cast<const Worker*>(selectedEntity);
-        stringstream sshp, ssMovingRange;
-        sshp <<worker->getHP();ssMovingRange << worker->getSpeed();
-        drawString(195, MAP_VIEW_HEIGHT+currentHeight,"HP : "+sshp.str(),BLACK,9);
-        currentHeight+=14;
-        drawString(195, MAP_VIEW_HEIGHT+currentHeight, "Moving range : "+ssMovingRange.str(),BLACK,9);
-        currentHeight+=14;
-        break;
-    }
-    case BUILDING:
-    {
-        const Building* building = static_cast<const Building*>(selectedEntity);
-        stringstream sshp,ssgarnison,sslevel,ssmaxlevel;
-        sshp << building->getHP();
-        drawString(195, MAP_VIEW_HEIGHT+currentHeight,"HP : "+sshp.str(),BLACK,9);
-        currentHeight+=14;
-        ssgarnison << building->getMaxGarrison();
-        drawString(195, MAP_VIEW_HEIGHT + currentHeight, "Number max of unit in garnison : " + ssgarnison.str(), BLACK,
-                   9);
-        currentHeight+=14;
-        sslevel << building->getLevel();
-        drawString(195, MAP_VIEW_HEIGHT+currentHeight,"Level : "+sslevel.str(),BLACK,9);
-        currentHeight+=14;
-        ssmaxlevel << building->getMaxlevel();
-        drawString(195, MAP_VIEW_HEIGHT+currentHeight,"Max level : "+ssmaxlevel.str(),BLACK,9);
-        currentHeight+=14;
-        if(building->getAssetId() == BUILDING_DRILL){
-            stringstream ssproduction;
-            const Drill* drill = static_cast<const Drill*>(building);
-            ssproduction << drill->getProduction();
-            drawString(195, MAP_VIEW_HEIGHT+currentHeight,"Production of mineral by turn : "+ssproduction.str(),BLACK,9);
-            currentHeight+=14;
+
+void UIManager::displayAttributes(const Entity *selectedEntity) const {
+    int currentHeight = 14;
+    drawString(195, MAP_VIEW_HEIGHT + currentHeight, "Type : " + selectedEntity->getName(), BLACK, 9);
+    currentHeight += 18;
+    switch (selectedEntity->getType()) {
+        case FIGHTINGUNIT: {
+            const FightingUnit *fightingUnit = static_cast<const FightingUnit *>(selectedEntity);
+            stringstream sshp, ssMovingRange, ssAttackRange, ssDamage;
+            sshp << fightingUnit->getHP();
+            ssMovingRange << fightingUnit->getSpeed();
+            ssAttackRange << fightingUnit->getAttackRange();
+            ssDamage << fightingUnit->getDamage();
+            drawString(195, MAP_VIEW_HEIGHT + currentHeight, "HP  " + sshp.str(), BLACK, 9);
+            currentHeight += 14;
+            drawString(195, MAP_VIEW_HEIGHT + currentHeight, "MVT " + ssMovingRange.str(), BLACK, 9);
+            currentHeight += 14;
+            drawString(195, MAP_VIEW_HEIGHT + currentHeight, "RNG " + ssAttackRange.str(), BLACK, 9);
+            currentHeight += 14;
+            drawString(195, MAP_VIEW_HEIGHT + currentHeight, "DMG " + ssDamage.str(), BLACK, 9);
+            currentHeight += 14;
+            break;
         }
-        else if(building->getAssetId() == BUILDING_EXTRACTOR){
-            stringstream ssproduction;
-            const Extractor* extractor = static_cast<const Extractor*>(building);
-            ssproduction << extractor->getProduction();
-            drawString(195, MAP_VIEW_HEIGHT+currentHeight,"Production of gas by turn : "+ssproduction.str(),BLACK,9);
-            currentHeight+=14;
+        case BUILDINGUNIT: {
+            const Worker *worker = static_cast<const Worker *>(selectedEntity);
+            stringstream sshp, ssMovingRange;
+            sshp << worker->getHP();
+            ssMovingRange << worker->getSpeed();
+            drawString(195, MAP_VIEW_HEIGHT + currentHeight, "HP  " + sshp.str(), BLACK, 9);
+            currentHeight += 14;
+            drawString(195, MAP_VIEW_HEIGHT + currentHeight, "MVT " + ssMovingRange.str(), BLACK, 9);
+            currentHeight += 14;
+            break;
         }
-        std::vector<Unit*> garrison = building->getGarrison();
-        Vect2D position(411,MAP_VIEW_HEIGHT+20);
-        for(std::vector<Unit*>::iterator it = garrison.begin();it!=garrison.end();++it){
-            drawString(position,(*it)->getName(),BLACK,10);
-            position+=Vect2D(0,25);
+        case BUILDING: {
+            const Building *building = static_cast<const Building *>(selectedEntity);
+            stringstream sshp, ssgarnison, sslevel, ssmaxlevel;
+            sshp << building->getHP();
+            drawString(195, MAP_VIEW_HEIGHT + currentHeight, "HP  " + sshp.str(), BLACK, 9);
+            currentHeight += 14;
+            ssgarnison << building->getMaxGarrison();
+            drawString(195, MAP_VIEW_HEIGHT + currentHeight, "CAP " + ssgarnison.str(),
+                       BLACK,
+                       9);
+            currentHeight += 14;
+            sslevel << building->getLevel();
+            ssmaxlevel << building->getMaxlevel();
+            drawString(195, MAP_VIEW_HEIGHT + currentHeight, "LVL " + sslevel.str() + "/" + ssmaxlevel.str(), BLACK, 9);
+            currentHeight += 14;
+            if (building->getAssetId() == BUILDING_DRILL) {
+                stringstream ssproduction;
+                const Drill *drill = static_cast<const Drill *>(building);
+                ssproduction << drill->getProduction();
+                drawString(195, MAP_VIEW_HEIGHT + currentHeight,
+                           "MIN PROD " + ssproduction.str(), BLACK, 9);
+                currentHeight += 14;
+            } else if (building->getAssetId() == BUILDING_EXTRACTOR) {
+                stringstream ssproduction;
+                const Extractor *extractor = static_cast<const Extractor *>(building);
+                ssproduction << extractor->getProduction();
+                drawString(195, MAP_VIEW_HEIGHT + currentHeight, "GAS PROD " + ssproduction.str(),
+                           BLACK, 9);
+                currentHeight += 14;
+            }
+            std::vector<Unit *> garrison = building->getGarrison();
+            Vect2D position(411, MAP_VIEW_HEIGHT + 20);
+            for (std::vector<Unit *>::iterator it = garrison.begin(); it != garrison.end(); ++it) {
+                drawString(position, (*it)->getName(), BLACK, 10);
+                position += Vect2D(0, 25);
+            }
+            break;
         }
-        break;
     }
+    if (selectedEntity->getTurnNumberToBeBuilt() > 0) {
+        stringstream ssnumber;
+        ssnumber << selectedEntity->getTurnNumberToBeBuilt();
+        stringstream ssbuildtype;
+        if (selectedEntity->getType() == BUILDING)
+            ssbuildtype << "built";
+        else
+            ssbuildtype << "ready";
+        drawString(195, MAP_VIEW_HEIGHT + currentHeight,
+                   "The " + selectedEntity->getName() + " will be " + ssbuildtype.str() + " in " + ssnumber.str() +
+                   " turns", BLACK, 9);
     }
-        if(selectedEntity->getTurnNumberToBeBuilt() > 0){
-            stringstream ssnumber;
-            ssnumber << selectedEntity->getTurnNumberToBeBuilt();
-            drawString(195, MAP_VIEW_HEIGHT+currentHeight,"The "+selectedEntity->getName()+" will be built in "+ssnumber.str()+" turn(s)",BLACK,9);
-            currentHeight+=14;
-        }
 }
 
 void UIManager::clearUi() {
