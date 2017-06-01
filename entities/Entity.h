@@ -49,9 +49,9 @@ public:
 
     const int getHP() const;
 
-    const AssetId getAssetId()const;
+    const AssetId getAssetId() const;
 
-    const int getTurnNumberToBeBuilt()const;
+    const int getTurnNumberToBeBuilt() const;
 
     void build();
 };

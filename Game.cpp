@@ -5,8 +5,8 @@ Game::Game() : map(MapGen::uniformRandomMapGenerator(50, 50)), viewOffset(Vect2D
     resourceManager.initResources();
     // TODO change map generation
     // TODO REMOVE
-    CommandCenter* commandCenter = new CommandCenter();
-    buildingStore.add(PLAYER1,commandCenter);
+    CommandCenter *commandCenter = new CommandCenter();
+    buildingStore.add(PLAYER1, commandCenter);
     FightingUnit *unitTest0 = new FightingUnit(FightingUnits::INFANTRY_MELEE, Vect2D(3, 5));
     unitStore.add(PLAYER1, unitTest0);
     FightingUnit *unitTest1 = new FightingUnit(FightingUnits::SCOUT, Vect2D(5, 3));
@@ -14,6 +14,7 @@ Game::Game() : map(MapGen::uniformRandomMapGenerator(50, 50)), viewOffset(Vect2D
     FightingUnit *unitTest2 = new FightingUnit(FightingUnits::INFANTRY_MELEE, Vect2D(2, 1));
     unitStore.add(PLAYER2, unitTest2);
     Worker *unitTest3 = new Worker(Vect2D(1, 3));
+    unitTest3->build();
     unitStore.add(PLAYER1, unitTest3);
     mineralQuantity[PLAYER1] = 5000;
     gasQuantity[PLAYER1] = 0;
@@ -93,13 +94,21 @@ void Game::clickManager(const Vect2D &position) {
                             uiManager, mineralQuantity[playerTurn], gasQuantity[playerTurn]);
     } else {
         // click on ui panel
-        uiManager.clickActionButton(position, currentAction);
-        if (currentAction == BUILD_BARRACK || currentAction == BUILD_BRIDGE || currentAction == BUILD_DEFENSE_TURRET ||
-            currentAction == BUILD_DRILL || currentAction == BUILD_EXTRACTOR || currentAction == UPGRADE ||
-            currentAction == SELECT_UNIT_1) {
+        uiManager.clickActionButton(position, currentAction, 0);
+        if (currentAction != ENDTURN && currentAction != BUILD && currentAction != RECRUIT && currentAction != MOVE &&
+            currentAction != ATTACK) {
             // we don't need to click on map to build a building or to select a unit thanks to the ui
-            actionManager.click(selectedEntity->getPosition(), currentAction, playerTurn, selectedEntity, unitStore,
-                                buildingStore, map, uiManager, mineralQuantity[playerTurn], gasQuantity[playerTurn]);
+            if (selectedEntity != NULL) {
+                actionManager.click(selectedEntity->getPosition(), currentAction, playerTurn, selectedEntity, unitStore,
+                                    buildingStore, map, uiManager, mineralQuantity[playerTurn],
+                                    gasQuantity[playerTurn]);
+            } else {
+                Vect2D v(0, 0);
+                actionManager.click(v, currentAction, playerTurn, selectedEntity, unitStore,
+                                    buildingStore, map, uiManager, mineralQuantity[playerTurn],
+                                    gasQuantity[playerTurn]);
+            }
+
         }
     }
 
@@ -159,7 +168,8 @@ void Game::endTurn() {
     unitStore.updatePossibleMoves(map, buildingStore, playerTurn);
     unitStore.updatePossibleAttacks(map, buildingStore, playerTurn);
     buildingStore.collectRessources(playerTurn, mineralQuantity[playerTurn], gasQuantity[playerTurn]);
-    buildingStore.buildBuildingUnderConstruction(playerTurn);
+    buildingStore.buildBuildings(playerTurn);
+    unitStore.buildUnits(playerTurn);
     selectedEntity = NULL;
     Imagine::click();
 }

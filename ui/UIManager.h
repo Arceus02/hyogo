@@ -42,7 +42,7 @@ public:
     /// Handle click on an action button
     /// \param position
     /// \param action
-    bool clickActionButton(const Vect2D position, Action &action);
+    void clickActionButton(const Vect2D position, Action &action, int level);
 
     /// Activate right buttons depending on entity clicked
     /// \param type of clicked entity

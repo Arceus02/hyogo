@@ -8,7 +8,7 @@ class Building : public Entity {
 protected:
     int level, maxLevel;
     int maxGarrison;
-    std::vector<Unit*> garrison;
+    std::vector<Unit *> garnison;
 public :
     Building(AssetId assetId, std::string name, int maxHp, int maxLevel, int turnNumberToBeBuilt, int maxGarrison);
 
@@ -26,7 +26,7 @@ public :
 
     Unit *getGarrisonUnit(int number) const;
 
-    void addGarrisonUnit(Unit &garrison);
+    void addGarnisonUnit(Unit *garnison);
 
     void removeUnitGarrison(AssetId assetId);
 
@@ -36,5 +36,7 @@ public :
 
     const int getGarrisonSize()const;
 
+    const int getTurnNumberToBeBuilt() const;
 
+    void build();
 };

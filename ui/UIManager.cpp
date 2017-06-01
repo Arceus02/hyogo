@@ -57,7 +57,7 @@ UIManager::draw(const ResourceManager &resourceManager, const int mineralQuantit
 }
 
 
-void UIManager::clickActionButton(const Vect2D position, Action &action) {
+void UIManager::clickActionButton(const Vect2D position, Action &action, int level) {
     // End turn button
     if (inside(position, endTurnButton.getPosition(), endTurnButton.getPosition() + endTurnButton.getSize())) {
         action = ENDTURN;
@@ -179,7 +179,8 @@ void UIManager::displayAttributes(const Entity* selectedEntity) const{
         drawString(195, MAP_VIEW_HEIGHT+currentHeight,"HP : "+sshp.str(),BLACK,9);
         currentHeight+=14;
         ssgarnison << building->getMaxGarrison();
-        drawString(195, MAP_VIEW_HEIGHT+currentHeight,"Number max of unit in garrison : "+ssgarnison.str(),BLACK,9);
+        drawString(195, MAP_VIEW_HEIGHT + currentHeight, "Number max of unit in garnison : " + ssgarnison.str(), BLACK,
+                   9);
         currentHeight+=14;
         sslevel << building->getLevel();
         drawString(195, MAP_VIEW_HEIGHT+currentHeight,"Level : "+sslevel.str(),BLACK,9);

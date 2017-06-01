@@ -57,6 +57,7 @@ public:
 
     // TODO remove dead entities
     // TODO update entities' logic
+    void updatePossibleAttacks(const Map &map, BuildingManager &buildingStore);
 };
 
 

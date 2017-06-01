@@ -1,6 +1,7 @@
 #include "Entity.h"
 
-Entity::Entity(AssetId assetId, const std::string &name, EntityType type, int maxHp, int viewRange, int turnNumberToBeBuilt)
+Entity::Entity(AssetId assetId, const std::string &name, EntityType type, int maxHp, int viewRange,
+               int turnNumberToBeBuilt)
         : assetId(assetId),
           name(name),
           type(type),
@@ -8,9 +9,9 @@ Entity::Entity(AssetId assetId, const std::string &name, EntityType type, int ma
           hp(maxHp),
           viewRange(viewRange),
           position(Vect2D(0, 0)),
-          turnNumberToBeBuilt(turnNumberToBeBuilt){}
+          turnNumberToBeBuilt(turnNumberToBeBuilt) {}
 
-Entity::~Entity(){}
+Entity::~Entity() {}
 
 void Entity::drawSelectionBox(const Vect2D &viewOffset) const {
     AlphaColor c(0, 0, 255, 100);
@@ -51,20 +52,25 @@ void Entity::setOwner(Player player) {
 const Player Entity::getOwner() const {
     return owner;
 }
-const std::string Entity::getName() const{
+
+const std::string Entity::getName() const {
     return name;
 }
-const int Entity::getHP() const{
+
+const int Entity::getHP() const {
     return hp;
 }
-const AssetId Entity::getAssetId()const{
+
+const AssetId Entity::getAssetId() const {
     return assetId;
 }
-const int Entity::getTurnNumberToBeBuilt()const{
+
+const int Entity::getTurnNumberToBeBuilt() const {
     return turnNumberToBeBuilt;
 }
-void Entity::build(){
-    if(turnNumberToBeBuilt !=0){
+
+void Entity::build() {
+    if (turnNumberToBeBuilt != 0) {
         turnNumberToBeBuilt--;
     }
 }

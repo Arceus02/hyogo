@@ -138,20 +138,6 @@ void UnitManager::updatePossibleMoves(const Map &map, BuildingManager &buildingS
         unitToMove.setPossibleMoves(possibleMoves);
     }
 }
-void UnitManager::buildUnits(const Player player){
-    if(player == PLAYER1){
-        for (std::vector<Unit*>::iterator it = player1Units.getList().begin();
-             it != player1Units.getList().end(); ++it) {
-            (*it)->build();
-        }
-    }
-    else{
-        for (std::vector<Unit*>::iterator it = player2Units.getList().begin();
-             it != player2Units.getList().end(); ++it) {
-            (*it)->build();
-        }
-    }
-}
 
 void UnitManager::updatePossibleAttacks(const Map &map, BuildingManager &buildingStore, Player player) {
     Store<Unit *> *playerUnitStore = (player == PLAYER1) ? &player1Units : &player2Units;
@@ -186,6 +172,25 @@ void UnitManager::updatePossibleAttacks(const Map &map, BuildingManager &buildin
     }
 }
 
+void UnitManager::updatePossibleAttacks(const Map &map, BuildingManager &buildingStore) {
+    updatePossibleAttacks(map, buildingStore, PLAYER1);
+    updatePossibleAttacks(map, buildingStore, PLAYER2);
+}
+
+void UnitManager::buildUnits(const Player player) {
+    if (player == PLAYER1) {
+        for (std::vector<Unit *>::iterator it = player1Units.getList().begin();
+             it != player1Units.getList().end(); ++it) {
+            (*it)->build();
+        }
+    } else {
+        for (std::vector<Unit *>::iterator it = player2Units.getList().begin();
+             it != player2Units.getList().end(); ++it) {
+            (*it)->build();
+        }
+    }
+}
+
 void UnitManager::clearFinishedTurn() {
     for (std::vector<Unit *>::iterator it = player1Units.getList().begin();
          it != player1Units.getList().end(); ++it) {
@@ -203,6 +208,15 @@ void UnitManager::updateLivingEntities() {
         if (unit->getHP() <= 0) {
             delete unit;
             player1Units.getList().erase(it);
+        } else {
+            it++;
+        }
+    }
+    for (std::vector<Unit *>::iterator it = player2Units.getList().begin(); it != player2Units.getList().end();) {
+        Unit *unit = (*it);
+        if (unit->getHP() <= 0) {
+            delete unit;
+            player2Units.getList().erase(it);
         } else {
             it++;
         }

@@ -18,7 +18,7 @@ private:
     bool attack(const Vect2D &position, const Player player, FightingUnit *&selectedFU, UnitManager &unitStore,
                 BuildingManager &buildingStore);
 
-    bool build(const Vect2D &position, const Player player, Entity *&selectedFU, BuildingManager &buildingStore,
+    bool build(const Vect2D &position, const Player player, Entity *&selectedBU, BuildingManager &buildingStore,
                Action &action, const Map &map, int &mineralQuantity, int &gasQuantity);
 
     bool
