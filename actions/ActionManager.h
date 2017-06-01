@@ -1,8 +1,8 @@
 #pragma once
 
 #include "../ui/UIManager.h"
-#include "../stores/BuildingStore.h"
-#include "../stores/UnitStore.h"
+#include "../stores/BuildingManager.h"
+#include "../stores/UnitManager.h"
 #include "../util/const.h"
 #include "../util/Vect2D.h"
 #include "../entities/Entity.h"
@@ -15,17 +15,17 @@
 
 class ActionManager {
 private:
-    void attack(const Vect2D &position, const Player player, FightingUnit *&selectedFU, UnitStore &unitStore,
-                BuildingStore &buildingStore);
+    void attack(const Vect2D &position, const Player player, FightingUnit *&selectedFU, UnitManager &unitStore,
+                BuildingManager &buildingStore);
 
-    bool build(const Vect2D &position, const Player player, Entity *&selectedFU, BuildingStore &buildingStore,
+    bool build(const Vect2D &position, const Player player, Entity *&selectedFU, BuildingManager &buildingStore,
                Action &action, const Map &map, int &mineralQuantity, int &gasQuantity);
 
     bool
-    move(const Vect2D &position, Unit *&unitToMove, BuildingStore &buildingStore);
+    move(const Vect2D &position, Unit *&unitToMove, BuildingManager &buildingStore);
 
 public:
     void clickMap(const Vect2D &pixelposition, Action &currentAction, const Player playerTurn, Entity *&selectedEntity,
-                  UnitStore &unitStore, BuildingStore &buildingStore, const Map &map, UIManager &uiManager,
+                  UnitManager &unitStore, BuildingManager &buildingStore, const Map &map, UIManager &uiManager,
                   int &mineralQuantity, int &gasQuantity);
 };

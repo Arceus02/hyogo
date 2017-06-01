@@ -21,4 +21,5 @@ void UIComponent::setActivated(bool activate) {
 Vect2D UIComponent::getSize() const {
     return Vect2D(width, height);
 }
+
 void UIComponent::setIconAssetId(AssetId assetId){}

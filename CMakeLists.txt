@@ -17,7 +17,7 @@ add_executable(Hyogo main.cpp Game.h Game.cpp
         entities/units/fightingUnits/FightingUnit.h entities/units/fightingUnits/FightingUnit.cpp
         map/Map.h map/Map.cpp map/Field.h map/Field.cpp map/MapGen.h map/MapGen.cpp
         stores/Store.h actions/ActionManager.h actions/ActionManager.cpp
-        stores/BuildingStore.h stores/BuildingStore.cpp stores/UnitStore.h stores/UnitStore.cpp
+        stores/BuildingManager.h stores/BuildingManager.cpp stores/UnitManager.h stores/UnitManager.cpp
         ui/UIManager.h ui/UIManager.cpp ui/UIComponent.h ui/UIComponent.cpp
         ui/buttons/MoveButton.cpp ui/buttons/MoveButton.h ui/buttons/AttackButton.cpp ui/buttons/AttackButton.h ui/buttons/BuildButton.cpp ui/buttons/BuildButton.h
         ui/buttons/BuildBarrackButton.cpp ui/buttons/BuildBarrackButton.h ui/buttons/BuildDrillButton.cpp ui/buttons/BuildDrillButton.h
@@ -26,7 +26,7 @@ add_executable(Hyogo main.cpp Game.h Game.cpp
         util/const.h util/Asset.h util/Asset.cpp util/Vect2D.h util/Vect2D.cpp util/ResourceManager.cpp util/ResourceManager.h
         util/fastMarching/pointDist.h util/fastMarching/priorite.h util/fastMarching/priorite.cpp
         util/fastMarching/fastMarching.h util/fastMarching/fastMarching.cpp ui/buttons/EndTurnButton.cpp ui/buttons/EndTurnButton.h
-        ui/buttons/UnitIconButton.h ui/buttons/UnitIconButton.cpp ui/buttons/UpgradeButton.h ui/buttons/UpgradeButton.cpp)
+        ui/buttons/UnitIconButton.h ui/buttons/UnitIconButton.cpp ui/buttons/UpgradeButton.h ui/buttons/UpgradeButton.cpp stores/UnitStore.cpp stores/UnitStore.h stores/BuildingStore.cpp stores/BuildingStore.h)
 
 ImagineUseModules(Hyogo Graphics)
 ImagineUseModules(Hyogo Images)

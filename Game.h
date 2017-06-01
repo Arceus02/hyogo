@@ -3,8 +3,8 @@
 #include <Imagine/Graphics.h>
 #include "util/const.h"
 #include "util/Vect2D.h"
-#include "stores/BuildingStore.h"
-#include "stores/UnitStore.h"
+#include "stores/BuildingManager.h"
+#include "stores/UnitManager.h"
 #include "map/Map.h"
 #include "map/MapGen.h"
 #include "ui/UIManager.h"
@@ -20,16 +20,15 @@ private:
     ResourceManager resourceManager;
     UIManager uiManager;
     ActionManager actionManager;
-    BuildingStore buildingStore;
-    UnitStore unitStore;
+    BuildingManager buildingStore;
+    UnitManager unitStore;
     Map map;
     bool playing;
     Player playerTurn = PLAYER1;
-    bool isEntitySelected = false;
     Entity *selectedEntity = NULL;
     Action currentAction = NONE;
-    std::map<Player,int> mineralQuantity;
-    std::map<Player,int> gasQuantity;
+    std::map<Player, int> mineralQuantity;
+    std::map<Player, int> gasQuantity;
 
     /// Move map view offset
     /// \param v deplacement vector

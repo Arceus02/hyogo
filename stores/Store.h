@@ -8,36 +8,33 @@ using namespace std;
 
 template<typename T>
 class Store {
-private:
+protected:
     vector<T> list;
 public:
-    void draw(const ResourceManager &resourceManager, const Vect2D &viewOffset, const Vect2D &minXRender,
-              const Vect2D &maxXRender) const;
+    virtual void draw(const ResourceManager &resourceManager, const Vect2D &viewOffset, const Vect2D &minRender,
+                      const Vect2D &maxRender) const = 0;
 
-    void add(T &a);
+    void add(T a);
 
     vector<T> &getList();
 
-
+    ~Store();
 };
 
 template<typename T>
-void Store<T>::draw(const ResourceManager &resourceManager, const Vect2D &viewOffset, const Vect2D &minRender,
-                    const Vect2D &maxRender) const {
-    for (typename vector<T>::const_iterator k = list.begin(); k != list.end(); k++) {
-        if (inside((*k).getPosition(), minRender, maxRender)) {
-            (*k).draw(resourceManager, viewOffset);
-        }
-    }
-}
-
-template<typename T>
-void Store<T>::add(T &a) {
+void Store<T>::add(T a) {
     list.push_back(a);
 }
 
 template<typename T>
 vector<T> &Store<T>::getList() {
     return list;
+}
+
+template<typename T>
+Store<T>::~Store() {
+    for (typename vector<T>::iterator k = list.begin(); k != list.end(); k++) {
+        delete (*k);
+    }
 }
 
