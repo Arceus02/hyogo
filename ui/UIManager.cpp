@@ -12,10 +12,12 @@ UIManager::UIManager() {
     components[BUILD_DEFENSE_TURRET] = new BuildDefenseTurretButton();
     components[BUILD_DRILL] = new BuildDrillButton();
     components[BUILD_EXTRACTOR] = new BuildExtractorButton();
-    components[SELECT_UNIT_1] = new UnitIconButton(Vect2D(385,MAP_VIEW_HEIGHT));
-    components[SELECT_UNIT_2] = new UnitIconButton(Vect2D(385,MAP_VIEW_HEIGHT+25));
-    components[SELECT_UNIT_3] = new UnitIconButton(Vect2D(385,MAP_VIEW_HEIGHT+50));
-    components[SELECT_UNIT_4] = new UnitIconButton(Vect2D(385,MAP_VIEW_HEIGHT+75));
+
+    components[SELECT_UNIT_1] = new UnitIconButton(Vect2D(385, MAP_VIEW_HEIGHT));
+    components[SELECT_UNIT_2] = new UnitIconButton(Vect2D(385, MAP_VIEW_HEIGHT + 25));
+    components[SELECT_UNIT_3] = new UnitIconButton(Vect2D(385, MAP_VIEW_HEIGHT + 50));
+    components[SELECT_UNIT_4] = new UnitIconButton(Vect2D(385, MAP_VIEW_HEIGHT + 75));
+
     components[UPGRADE] = new UpgradeButton();
     components[RECRUIT] = new RecruitButton();
     components[RECRUIT_WORKER] = new RecruitWorkerButton();
@@ -28,20 +30,21 @@ UIManager::UIManager() {
 
 }
 
-void UIManager::draw(const ResourceManager &resourceManager, const int mineralQuantity, const int gasQuantity, Player player,
-                     const Entity *selectedEntity) const {
+void
+UIManager::draw(const ResourceManager &resourceManager, const int mineralQuantity, const int gasQuantity, Player player,
+                const Entity *selectedEntity) const {
     resourceManager.getResource(UI_PANEL_BOTTOM).draw(PANEL_BOTTOM_POSITION);
-    string playerNumber = (player == PLAYER1)?"1":"2";
-    string playerString = "Turn of player "+playerNumber;
-    drawString(10,MAP_VIEW_HEIGHT + 7 + 10,playerString,BLACK,10);
-    stringstream ss1,ss2;
+    string playerNumber = (player == PLAYER1) ? "1" : "2";
+    string playerString = "Turn of player " + playerNumber;
+    drawString(10, MAP_VIEW_HEIGHT + 7 + 10, playerString, BLACK, 10);
+    stringstream ss1, ss2;
     ss1 << mineralQuantity;
     ss2 << gasQuantity;
-    string mineral = "Mineral quantity : "+ss1.str();
-    string gas = "Gas quantity : "+ss2.str();
-    drawString(10,MAP_VIEW_HEIGHT +14+20,mineral,BLACK,10);
-    drawString(10,MAP_VIEW_HEIGHT +21+30,gas,BLACK,10);
-    if(selectedEntity!=NULL){
+    string mineral = "Mineral quantity : " + ss1.str();
+    string gas = "Gas quantity : " + ss2.str();
+    drawString(10, MAP_VIEW_HEIGHT + 14 + 20, mineral, BLACK, 10);
+    drawString(10, MAP_VIEW_HEIGHT + 21 + 30, gas, BLACK, 10);
+    if (selectedEntity != NULL) {
         displayAttributes(selectedEntity);
     }
 
@@ -117,9 +120,9 @@ void UIManager::displayButton(const Entity *selectedEntity) {
         }
             break;
         case BUILDING:
-            const Building* building = static_cast<const Building*>(selectedEntity);
+            const Building *building = dynamic_cast<const Building *>(selectedEntity);
             int garrisonSize = building->getGarrisonSize();
-            for(int i=0; i<garrisonSize;i++){
+            for (int i = 0; i < garrisonSize; i++) {
                 components[selectUnit.at(i)]->setActivated(true);
                 components[selectUnit.at(i)]->setIconAssetId(building->getGarrisonUnit(i)->getAssetId());
             }
@@ -198,7 +201,6 @@ void UIManager::displayAttributes(const Entity* selectedEntity) const{
             drawString(195, MAP_VIEW_HEIGHT+currentHeight,"Production of gas by turn : "+ssproduction.str(),BLACK,9);
             currentHeight+=14;
         }
-
         std::vector<Unit*> garrison = building->getGarrison();
         Vect2D position(411,MAP_VIEW_HEIGHT+20);
         for(std::vector<Unit*>::iterator it = garrison.begin();it!=garrison.end();++it){
@@ -208,12 +210,12 @@ void UIManager::displayAttributes(const Entity* selectedEntity) const{
         break;
     }
     }
-    if(selectedEntity->getTurnNumberToBeBuilt() > 0){
-        stringstream ssnumber;
-        ssnumber << selectedEntity->getTurnNumberToBeBuilt();
-        drawString(195, MAP_VIEW_HEIGHT+currentHeight,"The "+selectedEntity->getName()+" will be built in "+ssnumber.str()+" turn(s)",BLACK,9);
-        currentHeight+=14;
-    }
+        if(selectedEntity->getTurnNumberToBeBuilt() > 0){
+            stringstream ssnumber;
+            ssnumber << selectedEntity->getTurnNumberToBeBuilt();
+            drawString(195, MAP_VIEW_HEIGHT+currentHeight,"The "+selectedEntity->getName()+" will be built in "+ssnumber.str()+" turn(s)",BLACK,9);
+            currentHeight+=14;
+        }
 }
 
 void UIManager::clearUi() {

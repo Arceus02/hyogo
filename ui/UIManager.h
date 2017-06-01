@@ -13,11 +13,10 @@
 #include "buttons/BuildBridgeButton.h"
 #include "../util/const.h"
 #include "../util/ResourceManager.h"
-#include "../stores/BuildingStore.h"
-#include "../stores/UnitStore.h"
+#include "../stores/BuildingManager.h"
+#include "../stores/UnitManager.h"
 #include "buttons/EndTurnButton.h"
 #include "buttons/UnitIconButton.h"
-#include "buttons/upgradebutton.h"
 #include "buttons/RecruitButton.h"
 #include "buttons/RecruitWorkerButton.h"
 #include "buttons/RecruitScoutButton.h"
@@ -26,6 +25,7 @@
 #include "buttons/RecruitCavalryButton.h"
 #include "buttons/RecruitHeavyButton.h"
 #include "buttons/RecruitBalisticButton.h"
+#include "buttons/UpgradeButton.h"
 
 
 class UIManager {
