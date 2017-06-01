@@ -155,3 +155,17 @@ void UnitStore::clearFinishedTurn() {
         (*it).setFinishedTurn(false);
     }
 }
+void UnitStore::buildUnits(const Player player){
+    if(player == PLAYER1){
+        for (std::vector<Unit>::iterator it = player1Units.getList().begin();
+             it != player1Units.getList().end(); ++it) {
+            (*it).build();
+        }
+    }
+    else{
+        for (std::vector<Unit>::iterator it = player2Units.getList().begin();
+             it != player2Units.getList().end(); ++it) {
+            (*it).build();
+        }
+    }
+}

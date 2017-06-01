@@ -9,7 +9,6 @@ protected:
     int level, maxLevel;
     int maxGarrison;
     std::vector<Unit*> garrison;
-    int turnNumberToBeBuilt;
 public :
     Building(AssetId assetId, std::string name, int maxHp, int maxLevel, int turnNumberToBeBuilt, int maxGarrison);
 
@@ -17,7 +16,7 @@ public :
 
     void draw(const ResourceManager &resourceManager, const Vect2D &viewOffset) const;
 
-    bool canLevelUp()const;
+    bool canLevelUp(int mineralQuantity, int gasQuantity)const;
 
     void levelUp();
 
@@ -27,7 +26,7 @@ public :
 
     Unit *getGarrisonUnit(int number) const;
 
-    void addGarrisonUnit(Unit *garrison);
+    void addGarrisonUnit(Unit &garrison);
 
     void removeUnitGarrison(AssetId assetId);
 
@@ -37,8 +36,5 @@ public :
 
     const int getGarrisonSize()const;
 
-    const int getTurnNumberToBeBuilt()const;
-
-    void build();
 
 };

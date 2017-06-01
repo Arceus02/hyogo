@@ -18,6 +18,14 @@
 #include "buttons/EndTurnButton.h"
 #include "buttons/UnitIconButton.h"
 #include "buttons/upgradebutton.h"
+#include "buttons/RecruitButton.h"
+#include "buttons/RecruitWorkerButton.h"
+#include "buttons/RecruitScoutButton.h"
+#include "buttons/RecruitInfantryMeleeButton.h"
+#include "buttons/RecruitInfantryDistanceButton.h"
+#include "buttons/RecruitCavalryButton.h"
+#include "buttons/RecruitHeavyButton.h"
+#include "buttons/RecruitBalisticButton.h"
 
 
 class UIManager {
@@ -34,7 +42,7 @@ public:
     /// Handle click on an action button
     /// \param position
     /// \param action
-    void clickActionButton(const Vect2D position, Action &action);
+    void clickActionButton(const Vect2D position, Action &action, int level=1);
 
     /// Activate right buttons depending on entity clicked
     /// \param type of clicked entity

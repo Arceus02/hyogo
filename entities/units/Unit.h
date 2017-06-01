@@ -12,7 +12,7 @@ protected:
     std::vector<Vect2D> possibleMoves;
     bool isInGarrison = false;
 public:
-    Unit(AssetId assetId, std::string name, EntityType type, int maxHp, int viewRange, int speed);
+    Unit(AssetId assetId, std::string name, EntityType type, int maxHp, int viewRange, int speed, int turnNumberToBeBuilt);
 
     virtual ~Unit();
 

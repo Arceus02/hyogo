@@ -7,7 +7,8 @@ FightingUnit::FightingUnit(const FightingUnitData &unitData, const Vect2D &posit
                FIGHTINGUNIT,
 			   unitData.maxHp,
 			   unitData.viewRange,
-			   unitData.speed),
+               unitData.speed,
+               unitData.turnNumberToBeBuilt),
 		  damage(unitData.damage),
 		  attackRange(unitData.attackRange) {
 	this->position = position;

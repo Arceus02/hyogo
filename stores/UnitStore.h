@@ -48,6 +48,7 @@ public:
 
     void clearFinishedTurn();
 
+    void buildUnits(const Player player);
     // TODO remove dead entities
     // TODO update entities' logic
 };

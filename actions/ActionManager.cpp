@@ -11,7 +11,7 @@ bool ActionManager::move(const Vect2D &position,Unit *&unitToMove, BuildingStore
         if(buildingStore.isBuilding(position)){
             unitToMove->setInGarrison(true);
             Player unitOwner = unitToMove->getOwner();
-            buildingStore.getBuilding(unitToMove->getPosition(),unitOwner).addGarrisonUnit(unitToMove);
+            buildingStore.getBuilding(unitToMove->getPosition(),unitOwner).addGarrisonUnit(*unitToMove);
         }
         unitToMove->setFinishedTurn(true);
         return true;
@@ -70,7 +70,8 @@ ActionManager::build(const Vect2D &position, const Player player, Entity *&selec
         }
         if(buildingToBuild!=0 && mineralQuantity >= BUILDING_MINERAL_COST.at(action)
                 && gasQuantity >=BUILDING_GAS_COST.at(action)){//if the construction has been possible
-            buildingToBuild->addGarrisonUnit(static_cast<Worker*>(selectedFU));
+            Worker* worker = static_cast<Worker*>(selectedFU);
+            buildingToBuild->addGarrisonUnit(*worker);
             buildingToBuild->setPosition(position);
             buildingStore.add(player,*buildingToBuild);
             mineralQuantity -= BUILDING_MINERAL_COST.at(action);
@@ -105,8 +106,6 @@ ActionManager::clickMap(const Vect2D &coordPos, Action &currentAction, const Pla
             attack(coordPos, playerTurn, selectedFightingUnit, unitStore, buildingStore);
         }
             break;
-        case BUILD:
-            break;
         case SELECT_UNIT_1:case SELECT_UNIT_2:case SELECT_UNIT_3:case SELECT_UNIT_4:
         {
             Building *currentBuilding = static_cast<Building*>(selectedEntity);
@@ -118,14 +117,39 @@ ActionManager::clickMap(const Vect2D &coordPos, Action &currentAction, const Pla
             selectedEntity = currentBuilding->getGarrisonUnit(unitIndex);
             uiManager.clearUi();
             uiManager.displayButton(selectedEntity);
+            currentAction = NONE;
             break;
         }
         case UPGRADE:
         {
             Building *currentBuilding = static_cast<Building*>(selectedEntity);
-            currentBuilding->levelUp();
+            if(currentBuilding->canLevelUp(mineralQuantity,gasQuantity)){
+                mineralQuantity -= UPGRADE_MINERAL_COST.at(currentBuilding->getAssetId()).at(currentBuilding->getLevel()-1);
+                gasQuantity -= UPGRADE_GAS_COST.at(currentBuilding->getAssetId()).at(currentBuilding->getLevel()-1);
+                currentBuilding->levelUp();
+            }
+            currentAction = NONE;
+            break;
         }
-        case NONE: {
+        case RECRUIT_WORKER:
+        {
+        Building *currentBuilding = static_cast<Building*>(selectedEntity);
+            if(mineralQuantity >= UNIT_MINERAL_COST.at(currentAction) && gasQuantity >=UNIT_GAS_COST.at(currentAction)
+                    && currentBuilding->getGarrisonSize()<currentBuilding->getMaxGarrison()){
+                Worker* worker =new Worker(currentBuilding->getPosition());
+                worker->setInGarrison(true);
+                currentBuilding->addGarrisonUnit(*worker);
+                unitStore.add(playerTurn,*worker);
+                mineralQuantity-= UNIT_MINERAL_COST.at(currentAction);
+                gasQuantity -= UNIT_GAS_COST.at(currentAction);
+                uiManager.clearUi();
+                uiManager.displayButton(selectedEntity);
+
+            }
+            currentAction = NONE;
+            break;
+        }
+    case NONE: case BUILD: case RECRUIT:{
             if (unitStore.selectUnit(coordPos, playerTurn, selectedEntity) ||
                 buildingStore.selectBuilding(coordPos, playerTurn, selectedEntity)) {
                 uiManager.clearUi();
@@ -137,7 +161,8 @@ ActionManager::clickMap(const Vect2D &coordPos, Action &currentAction, const Pla
         }
             break;
         default://build case
-            bool successfulBuild = build(coordPos,playerTurn,selectedEntity,buildingStore,currentAction,map,mineralQuantity,gasQuantity);
+            bool successfulBuild = build(coordPos,playerTurn,selectedEntity,buildingStore,currentAction,
+                                         map,mineralQuantity,gasQuantity);
             if(successfulBuild){
                 currentAction = NONE;
                 selectedEntity->setFinishedTurn(true);

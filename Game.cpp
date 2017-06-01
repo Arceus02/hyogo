@@ -5,6 +5,8 @@ Game::Game() : map(MapGen::uniformRandomMapGenerator(50, 50)), viewOffset(Vect2D
     resourceManager.initResources();
     // TODO change map generation
     // TODO REMOVE
+    CommandCenter commandCenter1;
+    buildingStore.add(PLAYER1,commandCenter1);
     FightingUnit unitTest0(FightingUnits::INFANTRY_MELEE, Vect2D(3, 5));
     unitStore.add(PLAYER1, unitTest0);
     FightingUnit unitTest1(FightingUnits::SCOUT, Vect2D(5, 3));
@@ -84,7 +86,8 @@ void Game::logic() {
         unitStore.clearFinishedTurn();
         unitStore.updatePossibleMoves(map, buildingStore, playerTurn);
         buildingStore.collectRessources(playerTurn,mineralQuantity[playerTurn],gasQuantity[playerTurn]);
-        buildingStore.buildBuildingUnderConstruction(playerTurn);
+        buildingStore.buildBuildings(playerTurn);
+        unitStore.buildUnits(playerTurn);
         Imagine::fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, ABLACK);
         string msg = (playerTurn == PLAYER1) ? "Player 1 turn" : "Player 2 turn";
         Imagine::drawString(WINDOW_WIDTH / 2 - 35, WINDOW_HEIGHT / 2, msg, AWHITE);
@@ -102,12 +105,17 @@ void Game::clickManager(const Vect2D &position) {
     }
         // click on ui panel
     else {
-        uiManager.clickActionButton(position, currentAction);
+        if(selectedEntity!=NULL && selectedEntity->getAssetId() == BUILDING_BARRACK){
+            Building* barrack = static_cast<Building*>(selectedEntity);
+            uiManager.clickActionButton(position, currentAction,barrack->getLevel());
+        }
+        else
+           uiManager.clickActionButton(position, currentAction);
         if(currentAction == BUILD_BARRACK || currentAction == BUILD_BRIDGE || currentAction == BUILD_DEFENSE_TURRET
                 || currentAction == BUILD_DRILL || currentAction == BUILD_EXTRACTOR || currentAction == SELECT_UNIT_1
                 || currentAction == SELECT_UNIT_2 || currentAction == SELECT_UNIT_3 || currentAction == SELECT_UNIT_4
-                || currentAction == UPGRADE){
-            //we don't need to click on map to build a building or to select a unit thanks to the ui
+                || currentAction == UPGRADE || currentAction == RECRUIT_WORKER){
+            //we don't need to click on map to build a building,to select a unit thanks to the ui, to upgrade a building or to recruit units
             actionManager.clickMap(selectedEntity->getPosition(),currentAction,playerTurn,selectedEntity,unitStore,
                                    buildingStore, map,uiManager,mineralQuantity[playerTurn],gasQuantity[playerTurn]);
         }

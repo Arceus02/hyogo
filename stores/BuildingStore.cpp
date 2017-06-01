@@ -63,7 +63,7 @@ Building &BuildingStore::getBuilding(const Vect2D &coordCase, Player &player) {
         }
     }
 }
-void BuildingStore::buildBuildingUnderConstruction(const Player player){
+void BuildingStore::buildBuildings(const Player player){
     if(player == PLAYER1){
         for (std::vector<Building>::iterator it = player1Buildings.getList().begin();
              it != player1Buildings.getList().end(); ++it) {

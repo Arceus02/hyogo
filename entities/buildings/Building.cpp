@@ -1,8 +1,8 @@
 #include "Building.h"
 
 Building::Building(AssetId assetId, std::string name, int maxHp, int maxLevel, int turnNumberToBeBuilt, int maxGarrison)
-        : Entity(assetId, name,BUILDING, maxHp, 4), level(1), maxLevel(maxLevel),
-        turnNumberToBeBuilt(turnNumberToBeBuilt), maxGarrison(maxGarrison){}
+        : Entity(assetId, name,BUILDING, maxHp, 4,turnNumberToBeBuilt), level(1), maxLevel(maxLevel),
+         maxGarrison(maxGarrison){}
 
 Building::~Building(){}
 
@@ -24,8 +24,9 @@ const int Building::getLevel() const {
 	return level;
 }
 
-bool Building::canLevelUp() const {
-	return level < maxLevel;
+bool Building::canLevelUp(int mineralQuantity, int gasQuantity) const {
+    return level < maxLevel && turnNumberToBeBuilt ==0 && mineralQuantity >= UPGRADE_MINERAL_COST.at(assetId).at(level-1)
+            && gasQuantity >= UPGRADE_GAS_COST.at(assetId).at(level-1);
 }
 const int Building::getMaxlevel()const{
     return maxLevel;
@@ -34,10 +35,10 @@ Unit *Building::getGarrisonUnit(int number) const{
     return garrison[number];
 }
 
-void Building::addGarrisonUnit(Unit *garrison){
+void Building::addGarrisonUnit(Unit &garrison){
     assert(this->garrison.size() <= maxGarrison);
-    this->garrison.push_back(garrison);
-    garrison->setInGarrison(true);
+    this->garrison.push_back(&garrison);
+    garrison.setInGarrison(true);
 }
 void Building::removeUnitGarrison(AssetId assetId){
     for(std::vector<Unit*>::iterator it = garrison.begin();it!=garrison.end();++it){
@@ -56,11 +57,4 @@ const int Building::getMaxGarrison()const{
 const int Building::getGarrisonSize()const{
     return garrison.size();
 }
-const int Building::getTurnNumberToBeBuilt()const{
-    return turnNumberToBeBuilt;
-}
-void Building::build(){
-    if(turnNumberToBeBuilt !=0){
-        turnNumberToBeBuilt--;
-    }
-}
+
