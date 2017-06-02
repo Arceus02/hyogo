@@ -21,11 +21,11 @@ Map MapGen::uniformRandomMapGenerator(int width, int height) {
 	Map map = Map(width, height);
 	for (int x = 0; x < width; x++) {
 		for (int y = 0; y < height; y++) {
-			int rNum = rand() % 10;
+            int rNum = rand() % 100;
 			TerrainType terrainType;
-			if (rNum < 3)
+            if (rNum < 70)
 				terrainType = MEADOW;
-			else if (rNum < 8)
+            else if (rNum < 90)
 				terrainType = FOREST;
 			else
 				terrainType = RIVER;

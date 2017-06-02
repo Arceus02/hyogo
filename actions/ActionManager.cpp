@@ -38,8 +38,7 @@ ActionManager::attack(const Vect2D &position, const Player player, FightingUnit 
                 unitStore.updateLivingEntities();
                 return true;
             }
-        }
-        else if (buildingStore.isBuilding(position)) {
+        } else if (buildingStore.isBuilding(position)) {
             Player targetOwner;
             Building &target = buildingStore.getBuilding(position, targetOwner);
             if (targetOwner != player) {
@@ -106,46 +105,49 @@ ActionManager::build(const Vect2D &position, const Player player, Entity *&selec
     return false;
 }
 
-bool ActionManager::recruit(Player player,Action &currentAction, UnitManager &unitStore, Building*&currentBuilding,int &mineralQuantity, int &gasQuantity){
+bool ActionManager::recruit(Player player, Action &currentAction, UnitManager &unitStore, Building *&currentBuilding,
+                            int &mineralQuantity, int &gasQuantity) {
     if (mineralQuantity >= UNIT_MINERAL_COST.at(currentAction) && gasQuantity >= UNIT_GAS_COST.at(currentAction)
         && currentBuilding->getGarrisonSize() < currentBuilding->getMaxGarrison()) {
-        Unit* unitToRecruit =0;
-        switch(currentAction){
-        case RECRUIT_WORKER:{
-            Worker *worker = new Worker(currentBuilding->getPosition());
-            unitToRecruit = worker;
-            break;
-        }
-        case RECRUIT_SCOUT:{
-            FightingUnit * scout = new FightingUnit(FightingUnits::SCOUT,currentBuilding->getPosition());
-            unitToRecruit = scout;
-            break;
-        }
-        case RECRUIT_INFANTRY_MELEE:{
-            FightingUnit * infantryMelee = new FightingUnit(FightingUnits::INFANTRY_MELEE,currentBuilding->getPosition());
-            unitToRecruit = infantryMelee;
-            break;
-        }
-        case RECRUIT_INFANTRY_DISTANCE:{
-            FightingUnit * infantryDistance = new FightingUnit(FightingUnits::INFANTRY_MELEE,currentBuilding->getPosition());
-            unitToRecruit = infantryDistance;
-            break;
-        }
-        case RECRUIT_CAVALRY:{
-            FightingUnit * cavalry = new FightingUnit(FightingUnits::CAVALRY,currentBuilding->getPosition());
-            unitToRecruit = cavalry;
-            break;
-        }
-        case RECRUIT_HEAVY:{
-            FightingUnit * heavy= new FightingUnit(FightingUnits::HEAVY,currentBuilding->getPosition());
-            unitToRecruit = heavy;
-            break;
-        }
-        case RECRUIT_BALISTIC:{
-            FightingUnit * balistic= new FightingUnit(FightingUnits::BALLISTIC,currentBuilding->getPosition());
-            unitToRecruit = balistic;
-            break;
-        }
+        Unit *unitToRecruit = 0;
+        switch (currentAction) {
+            case RECRUIT_WORKER: {
+                Worker *worker = new Worker(currentBuilding->getPosition());
+                unitToRecruit = worker;
+                break;
+            }
+            case RECRUIT_SCOUT: {
+                FightingUnit *scout = new FightingUnit(FightingUnits::SCOUT, currentBuilding->getPosition());
+                unitToRecruit = scout;
+                break;
+            }
+            case RECRUIT_INFANTRY_MELEE: {
+                FightingUnit *infantryMelee = new FightingUnit(FightingUnits::INFANTRY_MELEE,
+                                                               currentBuilding->getPosition());
+                unitToRecruit = infantryMelee;
+                break;
+            }
+            case RECRUIT_INFANTRY_DISTANCE: {
+                FightingUnit *infantryDistance = new FightingUnit(FightingUnits::INFANTRY_DISTANCE,
+                                                                  currentBuilding->getPosition());
+                unitToRecruit = infantryDistance;
+                break;
+            }
+            case RECRUIT_CAVALRY: {
+                FightingUnit *cavalry = new FightingUnit(FightingUnits::CAVALRY, currentBuilding->getPosition());
+                unitToRecruit = cavalry;
+                break;
+            }
+            case RECRUIT_HEAVY: {
+                FightingUnit *heavy = new FightingUnit(FightingUnits::HEAVY, currentBuilding->getPosition());
+                unitToRecruit = heavy;
+                break;
+            }
+            case RECRUIT_BALISTIC: {
+                FightingUnit *balistic = new FightingUnit(FightingUnits::BALLISTIC, currentBuilding->getPosition());
+                unitToRecruit = balistic;
+                break;
+            }
 
         }
         unitToRecruit->setInGarrison(true);
@@ -231,10 +233,11 @@ ActionManager::click(const Vect2D &coordPos, Action &currentAction, const Player
         }
     }
     if (currentAction == RECRUIT_WORKER || currentAction == RECRUIT_SCOUT || currentAction == RECRUIT_BALISTIC ||
-            currentAction == RECRUIT_CAVALRY || currentAction == RECRUIT_HEAVY || currentAction == RECRUIT_INFANTRY_DISTANCE
-            || currentAction == RECRUIT_INFANTRY_DISTANCE) {
+        currentAction == RECRUIT_CAVALRY || currentAction == RECRUIT_HEAVY ||
+        currentAction == RECRUIT_INFANTRY_DISTANCE || currentAction == RECRUIT_INFANTRY_MELEE
+        || currentAction == RECRUIT_INFANTRY_DISTANCE) {
         Building *currentBuilding = static_cast<Building *>(selectedEntity);
-        if(recruit(playerTurn,currentAction,unitStore,currentBuilding,mineralQuantity,gasQuantity)){
+        if (recruit(playerTurn, currentAction, unitStore, currentBuilding, mineralQuantity, gasQuantity)) {
             uiManager.clearUi();
             uiManager.displayButton(currentBuilding);
             currentAction = NONE;

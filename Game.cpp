@@ -12,10 +12,18 @@ Game::Game() : map(MapGen::uniformRandomMapGenerator(MAP_WIDTH, MAP_HEIGHT)), vi
     commandCenter2->setPosition(Vect2D(MAP_WIDTH - 3, MAP_HEIGHT - 3));
     buildingStore.add(PLAYER1, commandCenter1);
     buildingStore.add(PLAYER2, commandCenter2);
-    mineralQuantity[PLAYER1] = 5000;
+    mineralQuantity[PLAYER1] = 10000;
     gasQuantity[PLAYER1] = 0;
-    mineralQuantity[PLAYER2] = 5000;
+    mineralQuantity[PLAYER2] = 10000;
     gasQuantity[PLAYER2] = 0;
+    //*
+    Worker *worker1 = new Worker(Vect2D(3, 3));
+    worker1->build();
+    unitStore.add(PLAYER1, worker1);
+    Worker *worker2 = new Worker(Vect2D(MAP_WIDTH - 4, MAP_HEIGHT - 4));
+    worker2->build();
+    unitStore.add(PLAYER2, worker2);
+    //*/
     unitStore.updatePossibleMoves(map, buildingStore, PLAYER1);
     unitStore.updatePossibleAttacks(map, buildingStore);
     viewOffset = &viewOffset1;
@@ -99,7 +107,15 @@ void Game::clickManager(const Vect2D &position) {
                             uiManager, mineralQuantity[playerTurn], gasQuantity[playerTurn]);
     } else {
         // click on ui panel
-        uiManager.clickActionButton(position, currentAction, 0);
+        int level = 0;
+        if (selectedEntity != NULL) {
+            EntityType type = selectedEntity->getType();
+            if (type == BUILDING) {
+                Building *building = dynamic_cast<Building *>(selectedEntity);
+                level = building->getLevel();
+            }
+        }
+        uiManager.clickActionButton(position, currentAction, level);
         if (currentAction != ENDTURN && currentAction != BUILD && currentAction != RECRUIT && currentAction != MOVE &&
             currentAction != ATTACK) {
             // we don't need to click on map to build a building or to select a unit thanks to the ui

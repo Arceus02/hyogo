@@ -34,6 +34,7 @@ void ResourceManager::initResources() {
     loadResource(UI_BUILD_BRIDGE, srcPath("assets/ui/buttons/buildbridge.png"));
     loadResource(UI_SCOUT, srcPath("assets/units/scout_icon.png"));
     loadResource(UI_INFANTRY_MELEE, srcPath("assets/units/infantry_melee_icon.png"));
+    loadResource(UI_INFANTRY_DISTANCE, srcPath("assets/units/infantry_distance_icon.png"));
     loadResource(UI_CAVALRY, srcPath("assets/units/cavalry_icon.png"));
     loadResource(UI_HEAVY, srcPath("assets/units/heavy_icon.png"));
     loadResource(UI_BALLISTIC, srcPath("assets/units/ballistic_icon.png"));

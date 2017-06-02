@@ -89,6 +89,9 @@ void UnitManager::updatePossibleMoves(const Map &map, BuildingManager &buildingS
         for (int x = 0; x < w; x++) {
             for (int y = 0; y < h; y++) {
                 Vect2D pos(x + minXPos, y + minYPos);
+                if (map.getTerrainType(pos.x(), pos.y()) == RIVER && !unitToMove.getCanWalkThroughRiver()) {
+                    W(x, y) = INF;
+                }
                 if (buildingStore.isBuilding(pos)) {
                     Player buildingOwner;
                     Building &building = buildingStore.getBuilding(pos, buildingOwner);
@@ -97,6 +100,8 @@ void UnitManager::updatePossibleMoves(const Map &map, BuildingManager &buildingS
                     } else {
                         if (building.getMaxGarrison() == building.getGarrisonSize()) {
                             W(x, y) = INF;
+                        } else {
+                            W(x, y) = 1;
                         }
                     }
                 } else if (isUnit(pos)) {
@@ -105,9 +110,6 @@ void UnitManager::updatePossibleMoves(const Map &map, BuildingManager &buildingS
                     if (player != unitOwner) {
                         W(x, y) = INF;
                     }
-                }
-                if (map.getTerrainType(pos.x(), pos.y()) == RIVER && !unitToMove.getCanWalkThroughRiver()) {
-                    W(x, y) = INF;
                 }
             }
         }
