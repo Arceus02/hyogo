@@ -38,7 +38,6 @@ void Map::draw(const ResourceManager &resourceManager, const Vect2D &viewOffset,
 			resourceManager.getResource(tempAssetId).draw(rPos);
 		}
 	}
-	// TODO draw fields
 }
 
 const int Map::getWidth() const {

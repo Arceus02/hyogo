@@ -65,13 +65,3 @@ const int Building::getMaxGarrison() const {
 const int Building::getGarrisonSize() const {
     return (const int) garnison.size();
 }
-
-const int Building::getTurnNumberToBeBuilt() const {
-    return turnNumberToBeBuilt;
-}
-
-void Building::build() {
-    if (turnNumberToBeBuilt > 0) {
-        turnNumberToBeBuilt--;
-    }
-}

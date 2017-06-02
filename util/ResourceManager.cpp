@@ -11,7 +11,6 @@ void ResourceManager::initResources() {
     loadResource(BUILDING_BRIDGE, srcPath("assets/buildings/bridge.png"));
     loadResource(BUILDING_DRILL, srcPath("assets/buildings/drill.png"));
     loadResource(BUILDING_EXTRACTOR, srcPath("assets/buildings/extractor.png"));
-    loadResource(BUILDING_TURRET, srcPath("assets/buildings/defenseturret.png"));
     // TERRAIN
     loadResource(TERRAIN_MEADOW, srcPath("assets/terrain/meadow.png"));
     loadResource(TERRAIN_FOREST, srcPath("assets/terrain/forest.png"));
@@ -30,7 +29,6 @@ void ResourceManager::initResources() {
     loadResource(UI_MOVE_BUTTON, srcPath("assets/ui/buttons/move.png"));
     loadResource(UI_BUILD_BUTTON, srcPath("assets/ui/buttons/build.png"));
     loadResource(UI_BUILD_BARRACK, srcPath("assets/ui/buttons/buildbarrack.png"));
-    loadResource(UI_BUILD_DEFENSETURRET, srcPath("assets/ui/buttons/builddefenseturret.png"));
     loadResource(UI_BUILD_DRILL, srcPath("assets/ui/buttons/builddrill.png"));
     loadResource(UI_BUILD_EXTRACTOR, srcPath("assets/ui/buttons/buildextractor.png"));
     loadResource(UI_BUILD_BRIDGE, srcPath("assets/ui/buttons/buildbridge.png"));

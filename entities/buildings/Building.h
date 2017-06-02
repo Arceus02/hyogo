@@ -35,8 +35,4 @@ public :
     const int getMaxGarrison()const;
 
     const int getGarrisonSize()const;
-
-    const int getTurnNumberToBeBuilt() const;
-
-    void build();
 };

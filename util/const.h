@@ -8,6 +8,8 @@ const int WINDOW_WIDTH = 640, WINDOW_HEIGHT = 496;
 const int ACTION_BAR_HEIGHT = 100;
 const int MAP_VIEW_WIDTH = WINDOW_WIDTH, MAP_VIEW_HEIGHT = WINDOW_HEIGHT - ACTION_BAR_HEIGHT;
 
+const int MAP_WIDTH = 30, MAP_HEIGHT = 20;
+
 enum Player {
     PLAYER1, PLAYER2
 };
@@ -19,7 +21,6 @@ enum Action {
     ATTACK,
     BUILD,
     BUILD_BARRACK,
-    BUILD_DEFENSE_TURRET,
     BUILD_BRIDGE,
     BUILD_DRILL,
     BUILD_EXTRACTOR,
@@ -47,25 +48,23 @@ enum EntityType {
     BUILDING, FIGHTINGUNIT, BUILDINGUNIT
 };
 
-const std::map<Action, int> BUILDING_MINERAL_COST = {{BUILD_DRILL,          1000},
-                                                     {BUILD_EXTRACTOR,      3000},
-                                                     {BUILD_BARRACK,        2000},
-                                                     {BUILD_BRIDGE,         500},
-                                                     {BUILD_DEFENSE_TURRET, 1500}};
-const std::map<Action, int> BUILDING_GAS_COST = {{BUILD_DRILL,          0},
-                                                 {BUILD_EXTRACTOR,      0},
-                                                 {BUILD_BARRACK,        0},
-                                                 {BUILD_BRIDGE,         0},
-                                                 {BUILD_DEFENSE_TURRET, 5}};
+const std::map<Action, int> BUILDING_MINERAL_COST = {{BUILD_DRILL,     1000},
+                                                     {BUILD_EXTRACTOR, 3000},
+                                                     {BUILD_BARRACK,   2000},
+                                                     {BUILD_BRIDGE,    500}};
+
+const std::map<Action, int> BUILDING_GAS_COST = {{BUILD_DRILL,     0},
+                                                 {BUILD_EXTRACTOR, 0},
+                                                 {BUILD_BARRACK,   0},
+                                                 {BUILD_BRIDGE,    0}};
 
 const std::map<AssetId, std::vector<int>> UPGRADE_MINERAL_COST = {{BUILDING_DRILL,     {2000, 3000}},
                                                                   {BUILDING_EXTRACTOR, {5000, 7000}},
                                                                   {BUILDING_BARRACK,   {3000, 4000}},
                                                                   {BUILDING_TURRET,    {3000}}};
-const std::map<AssetId, std::vector<int>> UPGRADE_GAS_COST = {{BUILDING_DRILL,     {0,  20}},
-                                                              {BUILDING_EXTRACTOR, {10, 50}},
-                                                              {BUILDING_BARRACK,   {0,  30}},
-                                                              {BUILDING_TURRET,    {20}}};
+const std::map<AssetId, std::vector<int>> UPGRADE_GAS_COST = {{BUILDING_DRILL,     {0,   200}},
+                                                              {BUILDING_EXTRACTOR, {100, 500}},
+                                                              {BUILDING_BARRACK,   {0,   300}}};
 
 const std::map<Action, int> UNIT_MINERAL_COST = {{RECRUIT_WORKER,            20},
                                                  {RECRUIT_SCOUT,             50},

@@ -49,15 +49,13 @@ public:
 
     void updatePossibleAttacks(const Map &map, BuildingManager &buildingStore, Player player);
 
+    void updatePossibleAttacks(const Map &map, BuildingManager &buildingStore);
+
     void buildUnits(const Player player);
 
     void clearFinishedTurn();
 
     void updateLivingEntities();
-
-    // TODO remove dead entities
-    // TODO update entities' logic
-    void updatePossibleAttacks(const Map &map, BuildingManager &buildingStore);
 };
 
 

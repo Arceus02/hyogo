@@ -6,10 +6,10 @@ Extractor::Extractor() :
 int Extractor::getProduction() const{
 	switch (level) {
 		case 2:
-			return 10;
+            return 100;
 		case 3:
-			return 50;
+            return 300;
 		default:
-			return 5;
+            return 50;
 	}
 }

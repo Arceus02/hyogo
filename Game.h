@@ -16,7 +16,8 @@ using namespace Imagine;
 class Game {
 private:
     Window window;
-    Vect2D viewOffset;
+    Vect2D *viewOffset;
+    Vect2D viewOffset1, viewOffset2;
     ResourceManager resourceManager;
     UIManager uiManager;
     ActionManager actionManager;
@@ -38,7 +39,6 @@ private:
 
     /// Logic handler for the game (event handling and animation)
     void logic();
-    // TODO update fog of war
 
     /// Handle click
     /// \param position pixel position
@@ -52,7 +52,9 @@ private:
 
 public:
     Game();
+
     ~Game();
+
     /// Main function to call once
     void play();
 

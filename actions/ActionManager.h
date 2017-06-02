@@ -9,7 +9,6 @@
 #include "../entities/buildings/Barrack.h"
 #include "../entities/buildings/Bridge.h"
 #include "../entities/buildings/CommandCenter.h"
-#include "../entities/buildings/DefenseTurret.h"
 #include "../entities/buildings/Drill.h"
 #include "../entities/buildings/Extractor.h"
 

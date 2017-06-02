@@ -73,11 +73,6 @@ ActionManager::build(const Vect2D &position, const Player player, Entity *&selec
                         buildingToBuild = barrack;
                         break;
                     }
-                    case BUILD_DEFENSE_TURRET: {
-                        DefenseTurret *defenseTurret = new DefenseTurret();
-                        buildingToBuild = defenseTurret;
-                        break;
-                    }
                     case BUILD_DRILL: {
                         Drill *drill = new Drill();
                         buildingToBuild = drill;
@@ -178,7 +173,7 @@ ActionManager::click(const Vect2D &coordPos, Action &currentAction, const Player
             uiManager.clearUi();
             selectedEntity = NULL;
             unitStore.updatePossibleMoves(map, buildingStore, playerTurn);
-            unitStore.updatePossibleAttacks(map, buildingStore, playerTurn);
+            unitStore.updatePossibleAttacks(map, buildingStore);
             return;
         }
     }
@@ -191,7 +186,7 @@ ActionManager::click(const Vect2D &coordPos, Action &currentAction, const Player
             currentAction = NONE;
             selectedEntity = NULL;
             unitStore.updatePossibleMoves(map, buildingStore, playerTurn);
-            unitStore.updatePossibleAttacks(map, buildingStore, playerTurn);
+            unitStore.updatePossibleAttacks(map, buildingStore);
             return;
         }
     }
@@ -224,7 +219,7 @@ ActionManager::click(const Vect2D &coordPos, Action &currentAction, const Player
             return;
         }
     }
-    if (currentAction == BUILD_BARRACK || currentAction == BUILD_BRIDGE || currentAction == BUILD_DEFENSE_TURRET ||
+    if (currentAction == BUILD_BARRACK || currentAction == BUILD_BRIDGE ||
         currentAction == BUILD_DRILL || currentAction == BUILD_EXTRACTOR) {
         bool successfulBuild = build(coordPos, playerTurn, selectedEntity, buildingStore, currentAction, map,
                                      mineralQuantity, gasQuantity);

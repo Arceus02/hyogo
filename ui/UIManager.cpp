@@ -9,7 +9,6 @@ UIManager::UIManager() {
     components[MOVE] = new MoveButton();
     components[BUILD_BARRACK] = new BuildBarrackButton();
     components[BUILD_BRIDGE] = new BuildBridgeButton();
-    components[BUILD_DEFENSE_TURRET] = new BuildDefenseTurretButton();
     components[BUILD_DRILL] = new BuildDrillButton();
     components[BUILD_EXTRACTOR] = new BuildExtractorButton();
 
@@ -69,9 +68,6 @@ void UIManager::clickActionButton(const Vect2D position, Action &action, int lev
             Vect2D rightCornerButton = it->second->getPosition() + it->second->getSize();
             if (inside(position, leftCornerButton, rightCornerButton)) {
                 action = it->first;
-
-                // TODO build building buttons
-                // TODO fighting unit attack
             }
         }
     }
@@ -79,7 +75,6 @@ void UIManager::clickActionButton(const Vect2D position, Action &action, int lev
         components[MOVE]->setActivated(false);
         components[BUILD]->setActivated(false);
         components[BUILD_BARRACK]->setActivated(true);
-        components[BUILD_DEFENSE_TURRET]->setActivated(true);
         components[BUILD_BRIDGE]->setActivated(true);
         components[BUILD_DRILL]->setActivated(true);
         components[BUILD_EXTRACTOR]->setActivated(true);
@@ -228,5 +223,11 @@ void UIManager::displayAttributes(const Entity *selectedEntity) const {
 void UIManager::clearUi() {
     for (std::map<Action, UIComponent *>::iterator it = components.begin(); it != components.end(); ++it) {
         it->second->setActivated(false);
+    }
+}
+
+UIManager::~UIManager() {
+    for (std::map<Action, UIComponent *>::iterator it = components.begin(); it != components.end(); it++) {
+        delete (*it).second;
     }
 }

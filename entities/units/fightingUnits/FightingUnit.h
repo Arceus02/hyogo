@@ -25,7 +25,6 @@ struct FightingUnitData {
 			  damage(damage),
               attackRange(attackRange),
               turnNumberToBeBuilt(turnNumberToBeBuilt){
-		// TODO add costs
 	}
 };
 
