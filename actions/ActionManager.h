@@ -24,6 +24,8 @@ private:
     bool
     move(const Vect2D &position, Unit *&unitToMove, BuildingManager &buildingStore);
 
+    bool recruit(Player player, Action &currentAction, UnitManager &unitStore, Building*&selectedBuilding, int &mineralQuantity, int &gasQuantity);
+
 public:
     void click(const Vect2D &coordPosition, Action &currentAction, const Player playerTurn, Entity *&selectedEntity,
                UnitManager &unitStore, BuildingManager &buildingStore, const Map &map, UIManager &uiManager,

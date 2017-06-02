@@ -54,4 +54,6 @@ public:
     const int getTurnNumberToBeBuilt() const;
 
     void build();
+
+    void damage(int damage);
 };

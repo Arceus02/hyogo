@@ -74,3 +74,6 @@ void Entity::build() {
         turnNumberToBeBuilt--;
     }
 }
+void Entity::damage(int damage) {
+    this->hp -= damage;
+}

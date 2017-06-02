@@ -45,5 +45,6 @@ public:
     void buildBuildings(const Player player);
 
     void collectRessources(const Player player, int &mineralQuantity, int &gasQuantity);
-    // TODO remove dead buildings
+
+    void updateLivingEntities();
 };

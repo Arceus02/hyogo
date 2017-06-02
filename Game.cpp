@@ -5,17 +5,13 @@ Game::Game() : map(MapGen::uniformRandomMapGenerator(50, 50)), viewOffset(Vect2D
     resourceManager.initResources();
     // TODO change map generation
     // TODO REMOVE
-    CommandCenter *commandCenter = new CommandCenter();
-    buildingStore.add(PLAYER1, commandCenter);
-    FightingUnit *unitTest0 = new FightingUnit(FightingUnits::INFANTRY_MELEE, Vect2D(3, 5));
-    unitStore.add(PLAYER1, unitTest0);
-    FightingUnit *unitTest1 = new FightingUnit(FightingUnits::SCOUT, Vect2D(5, 3));
-    unitStore.add(PLAYER1, unitTest1);
-    FightingUnit *unitTest2 = new FightingUnit(FightingUnits::INFANTRY_MELEE, Vect2D(2, 1));
-    unitStore.add(PLAYER2, unitTest2);
-    Worker *unitTest3 = new Worker(Vect2D(1, 3));
-    unitTest3->build();
-    unitStore.add(PLAYER1, unitTest3);
+    commandCenter1 = new CommandCenter();
+    buildingStore.add(PLAYER1, commandCenter1);
+    commandCenter2 = new CommandCenter();
+    FightingUnit *fightingUnit = new FightingUnit(FightingUnits::INFANTRY_MELEE,Vect2D(2,2));
+    unitStore.add(PLAYER2,fightingUnit);
+    commandCenter2->setPosition(Vect2D(49,49));
+    buildingStore.add(PLAYER2,commandCenter2);
     mineralQuantity[PLAYER1] = 5000;
     gasQuantity[PLAYER1] = 0;
     mineralQuantity[PLAYER2] = 5000;
@@ -23,6 +19,11 @@ Game::Game() : map(MapGen::uniformRandomMapGenerator(50, 50)), viewOffset(Vect2D
     // end REMOVE
     unitStore.updatePossibleMoves(map, buildingStore, PLAYER1);
     unitStore.updatePossibleAttacks(map, buildingStore, PLAYER1);
+}
+Game::~Game(){
+    delete commandCenter1;
+    delete commandCenter2;
+    delete selectedEntity;
 }
 
 void Game::addViewOffset(const Vect2D &v) {
@@ -158,7 +159,7 @@ void Game::draw(const ResourceManager &resourceManager) const {
 
 void Game::endTurn() {
     Imagine::fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, ABLACK);
-    string msg = (playerTurn == PLAYER1) ? "Player 1 turn" : "Player 2 turn";
+    string msg = (playerTurn == PLAYER1) ? "Player 2 turn" : "Player 1 turn";
     Imagine::drawString(WINDOW_WIDTH / 2 - 35, WINDOW_HEIGHT / 2, msg, AWHITE);
     viewOffset -= viewOffset;
     playerTurn = (playerTurn == PLAYER1) ? PLAYER2 : PLAYER1;
@@ -172,4 +173,9 @@ void Game::endTurn() {
     unitStore.buildUnits(playerTurn);
     selectedEntity = NULL;
     Imagine::click();
+}
+void Game::testGameFinished(){
+    if(commandCenter1->getHP() ==0 || commandCenter2->getHP()==0){
+        playing=false;
+    }
 }

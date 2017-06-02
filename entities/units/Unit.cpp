@@ -69,6 +69,3 @@ bool Unit::getIsInGarrison() const{
     return isInGarrison;
 }
 
-void Unit::damage(int damage) {
-    this->hp -= damage;
-}

@@ -34,5 +34,4 @@ public:
 
     bool getIsInGarrison() const;
 
-    void damage(int damage);
 };

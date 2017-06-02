@@ -90,5 +90,25 @@ void BuildingManager::collectRessources(const Player player, int &mineralQuantit
         }
     }
 }
+void BuildingManager::updateLivingEntities() {
+    for (std::vector<Building *>::iterator it = player1Buildings.getList().begin(); it != player1Buildings.getList().end();) {
+        Building *building = (*it);
+        if (building->getHP() <= 0) {
+            delete building;
+            player1Buildings.getList().erase(it);
+        } else {
+            it++;
+        }
+    }
+    for (std::vector<Building *>::iterator it = player2Buildings.getList().begin(); it != player2Buildings.getList().end();) {
+        Building *building = (*it);
+        if (building->getHP() <= 0) {
+            delete building;
+            player2Buildings.getList().erase(it);
+        } else {
+            it++;
+        }
+    }
+}
 
 

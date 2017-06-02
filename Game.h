@@ -29,6 +29,8 @@ private:
     Action currentAction = NONE;
     std::map<Player, int> mineralQuantity;
     std::map<Player, int> gasQuantity;
+    CommandCenter *commandCenter1;
+    CommandCenter *commandCenter2;
 
     /// Move map view offset
     /// \param v deplacement vector
@@ -46,9 +48,11 @@ private:
     /// \param resourceManager
     void draw(const ResourceManager &resourceManager) const;
 
+    void testGameFinished();
+
 public:
     Game();
-
+    ~Game();
     /// Main function to call once
     void play();
 
